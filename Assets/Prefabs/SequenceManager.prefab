@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1171720790129827411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6203241791256589966}
+  - component: {fileID: 8736671706226491282}
+  m_Layer: 0
+  m_Name: SequenceManager
+  m_TagString: SequenceManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6203241791256589966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171720790129827411}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 284.10364, y: 176.51204, z: -0.49039465}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8736671706226491282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171720790129827411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27dc6ac5bba9f6b449cb85e7f38c0131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSequence: {fileID: 6865599292156882282, guid: 891ccadc3cb910b44afbf416ed65a543, type: 3}
+  issue: {fileID: 0}
+  sequences:
+  - {fileID: 6865599292156882282, guid: 891ccadc3cb910b44afbf416ed65a543, type: 3}
+  - {fileID: 6865599292156882282, guid: 5cbca4ee101895a4a9d2b9edc87d2607, type: 3}
+  - {fileID: 6865599292156882282, guid: ccd2c03e4c0185145ac98db0ca060d2c, type: 3}
+  - {fileID: 6865599292156882282, guid: 8990915f7ad5e1b4ba65185a5003bb9b, type: 3}
+  - {fileID: 6865599292156882282, guid: 9eb244984b3f9bc4bb753a57f36069d0, type: 3}
+  buttons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerResponses: []
+  gameManager: {fileID: 0}

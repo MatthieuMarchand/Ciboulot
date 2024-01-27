@@ -14,7 +14,7 @@ public class ButtonBehavior : MonoBehaviour
     {
         if (sequenceManager == null)
         {
-            sequenceManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SequenceManager>();
+            sequenceManager = GameObject.FindGameObjectWithTag("SequenceManager").GetComponent<SequenceManager>();
         }
     }
 
