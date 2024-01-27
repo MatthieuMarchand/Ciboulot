@@ -26,7 +26,7 @@ public class ButtonBehavior : MonoBehaviour
 
     public void ChoiceSelected()
     {
-        sequenceManager.validSequence(choice);
+        sequenceManager.AddChoiceToPlayerResponses(choice);
     }
 
     public void SetChoice(GameObject newChoice)

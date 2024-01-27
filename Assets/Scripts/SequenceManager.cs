@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SequenceManager : MonoBehaviour
 {
     [SerializeField] GameObject currentSequence;
+    [SerializeField] GameObject issue;
     [SerializeField] GameObject[] sequences;
     [SerializeField] GameObject[] buttons;
     [SerializeField] GameObject[] playerResponses;
@@ -38,8 +40,6 @@ public class SequenceManager : MonoBehaviour
         {
             currentSequence = sequences[0];
         }
-
-        SetButtonsChoices();
     }
 
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class SequenceManager : MonoBehaviour
         
     }
 
-    public void validSequence(GameObject choice)
+    public void AddChoiceToPlayerResponses(GameObject choice)
     {
         List<GameObject> listeResponses = new List<GameObject>(playerResponses);
 
@@ -80,7 +80,13 @@ public class SequenceManager : MonoBehaviour
             gameManager.WinSequence();
     }
 
-    private void SetButtonsChoices()
+    public void SetIssueText()
+    {
+        string text = currentSequence.GetComponent<Sequence>().GetIssue();
+        issue.GetComponentInChildren<TMP_Text>().text = text;
+
+    }
+    public void SetButtonsChoices()
     {
         for (int i = 0; i < buttons.Length; i++)
         {
