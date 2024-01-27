@@ -19,6 +19,10 @@ public class Sequence : MonoBehaviour
     {
         return validChoices;
     }
+    public GameObject[] GetFirstChoices()
+    {
+        return firstChoices;
+    }
 
 
 

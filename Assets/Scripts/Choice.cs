@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Choice : MonoBehaviour
 {
-    [SerializeField] string text;
+    [SerializeField] public string text;
     [SerializeField] GameObject[] choices;
 
     // Start is called before the first frame update

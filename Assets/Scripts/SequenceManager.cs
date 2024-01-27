@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SequenceManager : MonoBehaviour
 {
@@ -33,6 +34,12 @@ public class SequenceManager : MonoBehaviour
         {
             gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         }
+        if (currentSequence == null)
+        {
+            currentSequence = sequences[0];
+        }
+
+        SetButtonsChoices();
     }
 
     // Update is called once per frame
@@ -71,5 +78,22 @@ public class SequenceManager : MonoBehaviour
         }
         else
             gameManager.WinSequence();
+    }
+
+    private void SetButtonsChoices()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            ButtonBehavior buttonBehavior = buttons[i].GetComponent<ButtonBehavior>();
+            if (buttonBehavior != null)
+            {
+                buttonBehavior.SetChoice(currentSequence.GetComponent<Sequence>().GetFirstChoices()[i]);
+                Debug.Log("Button behavior found");
+            }
+            else
+                Debug.Log("ButtonBehaviorNotFound");
+           // Text textButton = buttons[i].GetComponentInChildren<Text>(); Texte du bouton
+           // textButton.text = currentSequence.GetComponent<Sequence>().GetFirstChoices()[i].GetComponent<Choice>().text;  Texte à remplir
+        }
     }
 }

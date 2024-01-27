@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonBehavior : MonoBehaviour
 {
     [SerializeField] GameObject choice;
     [SerializeField] SequenceManager sequenceManager;
 
-    public void SetChoice(GameObject newChoice)
-    {
-        choice = newChoice;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         if (sequenceManager == null)
         {
-            sequenceManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SequenceManager>();
+            sequenceManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SequenceManager>();
         }
     }
 
@@ -30,5 +27,13 @@ public class ButtonBehavior : MonoBehaviour
     public void ChoiceSelected()
     {
         sequenceManager.validSequence(choice);
+    }
+
+    public void SetChoice(GameObject newChoice)
+    {
+        choice = newChoice;
+        Debug.Log(gameObject.GetComponentInChildren<TMP_Text>().text);
+        Choice choiceBehavior = choice.GetComponent<Choice>();
+        gameObject.GetComponentInChildren<TMP_Text>().text = choiceBehavior.text;
     }
 }
