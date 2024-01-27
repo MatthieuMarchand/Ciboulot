@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +22,16 @@ public class SequenceManager : MonoBehaviour
     {
         return timer;
     }
+
+    public GameObject GetCurrentSequence()
+    {
+        return currentSequence;
+    }
+    public void SetCurrentSequence(int sequenceNumber)
+    {
+        currentSequence = sequences[sequenceNumber];
+    }
+
     public void SetTimer(float newTimer)
     {
         timer = newTimer;
@@ -57,7 +69,19 @@ public class SequenceManager : MonoBehaviour
 
         // Reconvertir la liste en tableau
         playerResponses = listeResponses.ToArray();
+    }
 
+    public void CheckIfResponseIsComplete(GameObject choice)
+    {
+        if (playerResponses.Length == 3)
+        {
+            CheckChoices();
+            Debug.Log("CheckChoices");
+        }
+        else
+        {
+            SetButtonsChoices(choice.GetComponent<Choice>().GetChoices());
+        }
 
     }
 
@@ -66,7 +90,7 @@ public class SequenceManager : MonoBehaviour
         int badAnswers = 0;
         for (int i = 0; i < playerResponses.Length; i++)
         {
-            if (playerResponses[i] == currentSequence.GetComponent<Sequence>().GetValidChoices()[i])
+            if (playerResponses[i] != currentSequence.GetComponent<Sequence>().GetValidChoices()[i])
             {
                 badAnswers++;
             }
@@ -75,9 +99,12 @@ public class SequenceManager : MonoBehaviour
         if (badAnswers > 1)
         {
             gameManager.LoseSequence();
+            Debug.Log("loseSequence");
         }
         else
             gameManager.WinSequence();
+
+        Array.Clear(playerResponses, 0, playerResponses.Length) ;
     }
 
     public void SetIssueText()
@@ -86,20 +113,18 @@ public class SequenceManager : MonoBehaviour
         issue.GetComponentInChildren<TMP_Text>().text = text;
 
     }
-    public void SetButtonsChoices()
+    public void SetButtonsChoices(GameObject[] choices)
     {
         for (int i = 0; i < buttons.Length; i++)
         {
             ButtonBehavior buttonBehavior = buttons[i].GetComponent<ButtonBehavior>();
             if (buttonBehavior != null)
             {
-                buttonBehavior.SetChoice(currentSequence.GetComponent<Sequence>().GetFirstChoices()[i]);
-                Debug.Log("Button behavior found");
+                buttonBehavior.SetChoice(choices[i]);
             }
             else
                 Debug.Log("ButtonBehaviorNotFound");
-           // Text textButton = buttons[i].GetComponentInChildren<Text>(); Texte du bouton
-           // textButton.text = currentSequence.GetComponent<Sequence>().GetFirstChoices()[i].GetComponent<Choice>().text;  Texte à remplir
+           
         }
     }
 }

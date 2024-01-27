@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     public void LoseSequence()
     {
+        fingers--;
         if (fingers == 0) {
             //loseScript
         }
@@ -48,12 +49,13 @@ public class GameManager : MonoBehaviour
 
     public void StartSequence()
     {
-        
+        sequenceManager.SetCurrentSequence(score);
+        Init();
     }
 
     private void Init()
     {
         sequenceManager.SetIssueText();
-        sequenceManager.SetButtonsChoices();
+        sequenceManager.SetButtonsChoices(sequenceManager.GetCurrentSequence().GetComponent<Sequence>().GetFirstChoices());
     }
 }

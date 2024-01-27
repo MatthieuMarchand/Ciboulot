@@ -7,6 +7,11 @@ public class Choice : MonoBehaviour
     [SerializeField] public string text;
     [SerializeField] GameObject[] choices;
 
+    public GameObject[] GetChoices()
+    {
+        return choices;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

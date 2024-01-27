@@ -27,12 +27,12 @@ public class ButtonBehavior : MonoBehaviour
     public void ChoiceSelected()
     {
         sequenceManager.AddChoiceToPlayerResponses(choice);
+        sequenceManager.CheckIfResponseIsComplete(choice);
     }
 
     public void SetChoice(GameObject newChoice)
     {
         choice = newChoice;
-        Debug.Log(gameObject.GetComponentInChildren<TMP_Text>().text);
         Choice choiceBehavior = choice.GetComponent<Choice>();
         gameObject.GetComponentInChildren<TMP_Text>().text = choiceBehavior.text;
     }

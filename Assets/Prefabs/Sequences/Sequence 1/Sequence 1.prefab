@@ -52,4 +52,4 @@ MonoBehaviour:
   validChoices:
   - {fileID: 6842635912354232211, guid: fa10ef5994728964b9587e02582d089c, type: 3}
   - {fileID: 7879736948317001459, guid: d2e2457311eb8e549ac0d4ce9486b018, type: 3}
-  - {fileID: 7039761720221442971, guid: f9f319e0f3fa90e47a987a0aaf911d3f, type: 3}
+  - {fileID: 7039761720221442971, guid: 1bcb255f7a4e3c84e8741798b4bc1ea9, type: 3}

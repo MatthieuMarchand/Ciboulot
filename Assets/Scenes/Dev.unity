@@ -1888,7 +1888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fingers: 3
   score: 0
-  sequenceManager: {fileID: 0}
+  sequenceManager: {fileID: 279287649}
 --- !u!4 &1676332575
 Transform:
   m_ObjectHideFlags: 0

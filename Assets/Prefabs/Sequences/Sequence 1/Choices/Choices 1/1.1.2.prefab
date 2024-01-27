@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Chat
   choices:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7879736948317001459, guid: 1d2c271524a729c4ca4e33a69ce17952, type: 3}
+  - {fileID: 7879736948317001459, guid: 38c91e53141f9164bbf0e963c45d363d, type: 3}
+  - {fileID: 7879736948317001459, guid: 1a2932acdd5677342a3d14d6bd14cc30, type: 3}
