@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6865599292156882282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6702991178808546060}
+  - component: {fileID: 8268721058668761777}
+  m_Layer: 0
+  m_Name: Sequence 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6702991178808546060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6865599292156882282}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 284.10364, y: 176.51204, z: -0.49039465}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8268721058668761777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6865599292156882282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cedabe1e65855940b86b33a4d8289ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  issue: Fais moi rire. Chien Mort Femme
+  firstChoices:
+  - {fileID: 6842635912354232211, guid: fa10ef5994728964b9587e02582d089c, type: 3}
+  - {fileID: 6842635912354232211, guid: e2cbdab0a4ce1c6439bfbf0b54a2ede1, type: 3}
+  - {fileID: 6842635912354232211, guid: f4e24d355b4abb643bef3dff749e9ea5, type: 3}
+  validChoices:
+  - {fileID: 6842635912354232211, guid: fa10ef5994728964b9587e02582d089c, type: 3}
+  - {fileID: 7879736948317001459, guid: d2e2457311eb8e549ac0d4ce9486b018, type: 3}
+  - {fileID: 7039761720221442971, guid: f9f319e0f3fa90e47a987a0aaf911d3f, type: 3}
