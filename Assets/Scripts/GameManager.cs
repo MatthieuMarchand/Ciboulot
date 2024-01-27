@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] int lives;
+    [SerializeField] int score;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Win(int fingers)
+    {
+        
+    }
+
+    public void Lose()
+    {
+
     }
 }
