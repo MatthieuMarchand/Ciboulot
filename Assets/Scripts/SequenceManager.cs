@@ -44,6 +44,8 @@ public class SequenceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
+
         if (gameManager == null)
         {
             gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();

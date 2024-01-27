@@ -58,4 +58,5 @@ public class GameManager : MonoBehaviour
         sequenceManager.SetIssueText();
         sequenceManager.SetButtonsChoices(sequenceManager.GetCurrentSequence().GetComponent<Sequence>().GetFirstChoices());
     }
+
 }
