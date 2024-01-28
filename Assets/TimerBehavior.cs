@@ -8,7 +8,7 @@ public class TimerBehavior : MonoBehaviour
     [SerializeField] SequenceManager sequenceManager;
     float fillAmount;
     [SerializeField] Image timerImage;
-    [SerializeField] float thinkTime;
+    public float thinkTime;
     public float GetThinkTime()
     {
         return thinkTime;
@@ -32,6 +32,5 @@ public class TimerBehavior : MonoBehaviour
     void Update()
     {
         timerImage.fillAmount = sequenceManager.GetTimer()/thinkTime;
-        Debug.Log(GetComponentInChildren<Image>().fillAmount);
     }
 }
