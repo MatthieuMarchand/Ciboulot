@@ -47,5 +47,5 @@ MonoBehaviour:
   text: Parce que sinon ils tombent toujours dans le bateau !
   choices:
   - {fileID: 0}
-  - {fileID: 7879736948317001459, guid: 38c91e53141f9164bbf0e963c45d363d, type: 3}
+  - {fileID: 0}
   - {fileID: 7879736948317001459, guid: 913d15c8e5b9d9245920402b7565edd2, type: 3}

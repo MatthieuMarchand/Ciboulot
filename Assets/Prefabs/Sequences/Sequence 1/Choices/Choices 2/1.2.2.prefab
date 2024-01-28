@@ -52,6 +52,18 @@ PrefabInstance:
       propertyPath: text
       value: Vivant
       objectReference: {fileID: 0}
+    - target: {fileID: 5424140329692011007, guid: fa10ef5994728964b9587e02582d089c, type: 3}
+      propertyPath: choices.Array.data[0]
+      value: 
+      objectReference: {fileID: 7039761720221442971, guid: 1bcb255f7a4e3c84e8741798b4bc1ea9, type: 3}
+    - target: {fileID: 5424140329692011007, guid: fa10ef5994728964b9587e02582d089c, type: 3}
+      propertyPath: choices.Array.data[1]
+      value: 
+      objectReference: {fileID: 7039761720221442971, guid: 7c257fb56ae6755498bb3702e8cece27, type: 3}
+    - target: {fileID: 5424140329692011007, guid: fa10ef5994728964b9587e02582d089c, type: 3}
+      propertyPath: choices.Array.data[2]
+      value: 
+      objectReference: {fileID: 7039761720221442971, guid: f9f319e0f3fa90e47a987a0aaf911d3f, type: 3}
     - target: {fileID: 6842635912354232211, guid: fa10ef5994728964b9587e02582d089c, type: 3}
       propertyPath: m_Name
       value: 1.2.2

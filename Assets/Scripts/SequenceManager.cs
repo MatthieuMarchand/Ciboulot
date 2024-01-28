@@ -13,7 +13,9 @@ public class SequenceManager : MonoBehaviour
     [SerializeField] GameObject[] sequences;
     [SerializeField] GameObject[] buttons;
     [SerializeField] GameObject[] playerResponses;
+    [SerializeField] GameObject defaultAnswer;
     [SerializeField] float timer;
+
 
 
     [SerializeField] GameManager gameManager;
@@ -58,7 +60,7 @@ public class SequenceManager : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            //Cancel Answer 
+            //CancelChoice();
         }
     }
 
@@ -123,10 +125,24 @@ public class SequenceManager : MonoBehaviour
             if (buttonBehavior != null)
             {
                 buttonBehavior.SetChoice(choices[i]);
+                StartCoroutine(SetTimer());
             }
             else
                 Debug.Log("ButtonBehaviorNotFound");
            
         }
+    }
+
+    IEnumerator SetTimer()
+    {
+        float animationTime = 10f;
+        gameManager.timer.GetComponent<TimerBehavior>().thinkTime = animationTime;
+        timer = animationTime;
+        yield return new WaitForSeconds(animationTime);
+    }
+
+    void CancelChoice()
+    {
+        //defaultAnswer.GetComponent<ButtonBehavior>().ChoiceSelected();
     }
 }

@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: "\u2026 sont-ils de si bons danseurs ?"
   choices:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6842635912354232211, guid: b1b2fa3e59ba455429bd1592b1ff459e, type: 3}
+  - {fileID: 6842635912354232211, guid: 20ab6b3d713c1ee478a02a1cce9ac08d, type: 3}
+  - {fileID: 6842635912354232211, guid: 62d08f1b56cf3924391bf55ef32ff422, type: 3}

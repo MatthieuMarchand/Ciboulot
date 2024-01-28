@@ -50,11 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5424140329692011007, guid: fa10ef5994728964b9587e02582d089c, type: 3}
       propertyPath: text
-      value: a fait caca
+      value: a bu de l'eau
       objectReference: {fileID: 0}
     - target: {fileID: 6842635912354232211, guid: fa10ef5994728964b9587e02582d089c, type: 3}
       propertyPath: m_Name
-      value: 1.2.5
+      value: 1.2.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

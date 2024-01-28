@@ -148,7 +148,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Boss_grrrr
+    m_ConditionEvent: Boss_angry
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7511166523586778925}
@@ -242,7 +242,7 @@ AnimatorController:
   m_Name: Boss
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Boss_grrrr
+  - m_Name: Boss_angry
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -468,7 +468,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Boss_grrrr
+    m_ConditionEvent: Boss_angry
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1947326489495669988}

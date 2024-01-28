@@ -46,23 +46,27 @@ public class GameManager : MonoBehaviour
     public void WinSequence()
     {
         score++;
-        if (score == WIN_SCORE) { }
+        if (score == WIN_SCORE) 
+        {
+            StartCoroutine(Happy());
+        }
         //Appelle WinScript de fin
         else 
         {
             StartCoroutine(Satisfy());
-            StartSequence();
         }
     }
 
     public void LoseSequence()
     {
         fingers--;
-        if (fingers == 0) {
+        if (fingers == 0) 
+        {
+            StartCoroutine(Angry());
             //loseScript
         }
         else
-            StartSequence();
+            StartCoroutine(Frappe());
     }
 
     public void StartSequence()
@@ -97,6 +101,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2.14f);
         boss.GetComponent<Animator>().SetBool("boss_satisfy", false);
 
+        StartSequence();
+
     }
 
     IEnumerator Frappe()
@@ -104,6 +110,8 @@ public class GameManager : MonoBehaviour
         boss.GetComponent<Animator>().SetBool("boss_frappe", true);
         yield return new WaitForSeconds(2.22f);
         boss.GetComponent<Animator>().SetBool("boss_frappe", false);
+        StartSequence();
+
     }
     IEnumerator Happy()
     {
