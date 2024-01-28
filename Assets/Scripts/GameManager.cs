@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         //Appelle WinScript de fin
         else 
         {
-            
+            StartCoroutine(Satisfy());
             StartSequence();
         }
     }
@@ -89,5 +89,33 @@ public class GameManager : MonoBehaviour
         sequenceManager.SetIssueText();
         sequenceManager.SetButtonsChoices(sequenceManager.GetCurrentSequence().GetComponent<Sequence>().GetFirstChoices());
 
+    }
+
+    IEnumerator Satisfy() //quand tu gagnes une séquence
+    {
+        boss.GetComponent<Animator>().SetBool("boss_satisfy", true);
+        yield return new WaitForSeconds(2.14f);
+        boss.GetComponent<Animator>().SetBool("boss_satisfy", false);
+
+    }
+
+    IEnumerator Frappe()
+    {
+        boss.GetComponent<Animator>().SetBool("boss_frappe", true);
+        yield return new WaitForSeconds(2.22f);
+        boss.GetComponent<Animator>().SetBool("boss_frappe", false);
+    }
+    IEnumerator Happy()
+    {
+        boss.GetComponent<Animator>().SetBool("boss_happy", true);
+        yield return new WaitForSeconds(6.0f);
+        boss.GetComponent<Animator>().SetBool("boss_happy", false);
+    }
+
+    IEnumerator Angry()
+    {
+        boss.GetComponent<Animator>().SetBool("boss_angry", true);
+        yield return new WaitForSeconds(1.02f);
+        boss.GetComponent<Animator>().SetBool("boss_angry", false);
     }
 }
