@@ -8,6 +8,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] int score;
     const int WIN_SCORE = 5;
     [SerializeField] SequenceManager sequenceManager;
+    [SerializeField] public GameObject boss;
+    [SerializeField] public Animator bossAnimator;
+    [SerializeField] public GameObject timer;
+    [SerializeField] public GameObject choiceContainer;
+    [SerializeField] public GameObject issueContainer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +23,18 @@ public class GameManager : MonoBehaviour
         {
             sequenceManager = GameObject.FindGameObjectWithTag("SequenceManager").GetComponent<SequenceManager>();
         }
-        Init();
+        if (boss == null || bossAnimator == null)
+        {
+            boss = GameObject.FindGameObjectWithTag("Boss");
+            bossAnimator = boss.GetComponent<Animator>();
+        }
+        if (timer == null)
+        {
+            timer = GameObject.FindGameObjectWithTag("Timer");
+        }
+        StartCoroutine(Init());
+
+
     }
 
     // Update is called once per frame
@@ -51,13 +68,26 @@ public class GameManager : MonoBehaviour
     public void StartSequence()
     {
         sequenceManager.SetCurrentSequence(score);
-        Init();
+        StartCoroutine(Init());
     }
 
-    private void Init()
+    IEnumerator Init()
     {
+        //choiceContainer = GameObject.FindGameObjectWithTag("ChoiceContainer");
+        choiceContainer.SetActive(false);
+        //issueContainer = GameObject.FindGameObjectWithTag("IssueContainer");
+        issueContainer.SetActive(true);
+
+        float animationTime = 2f;
+        timer.GetComponent<TimerBehavior>().thinkTime = animationTime;
+        sequenceManager.SetTimer(animationTime);
+        yield return new WaitForSeconds(animationTime);
+
+        //Logique
+        choiceContainer.SetActive(true);
+        issueContainer.SetActive(false);
         sequenceManager.SetIssueText();
         sequenceManager.SetButtonsChoices(sequenceManager.GetCurrentSequence().GetComponent<Sequence>().GetFirstChoices());
-    }
 
+    }
 }
