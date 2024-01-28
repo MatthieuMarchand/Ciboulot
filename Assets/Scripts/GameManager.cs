@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
         score++;
         if (score == WIN_SCORE) { }
         //Appelle WinScript de fin
-        else {
+        else 
+        {
             
             StartSequence();
         }

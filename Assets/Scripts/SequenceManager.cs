@@ -13,7 +13,7 @@ public class SequenceManager : MonoBehaviour
     [SerializeField] GameObject[] sequences;
     [SerializeField] GameObject[] buttons;
     [SerializeField] GameObject[] playerResponses;
-    float timer = 0;
+    [SerializeField] float timer;
 
 
     [SerializeField] GameManager gameManager;
@@ -36,10 +36,6 @@ public class SequenceManager : MonoBehaviour
     {
         timer = newTimer;
     }
-    public void IncreaseTimer()
-    {
-        timer += 5;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +55,11 @@ public class SequenceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            //Cancel Answer 
+        }
     }
 
     public void AddChoiceToPlayerResponses(GameObject choice)
@@ -106,7 +106,7 @@ public class SequenceManager : MonoBehaviour
         else
             gameManager.WinSequence();
 
-        Array.Clear(playerResponses, 0, playerResponses.Length) ;
+        playerResponses = new GameObject[0];
     }
 
     public void SetIssueText()
