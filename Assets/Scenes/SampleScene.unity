@@ -1173,6 +1173,14 @@ PrefabInstance:
       propertyPath: sequenceManager
       value: 
       objectReference: {fileID: 1397649853}
+    - target: {fileID: 4762510015684543199, guid: 006622c773d3e304495952cf8dd4a654, type: 3}
+      propertyPath: loseGame.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762510015684543199, guid: 006622c773d3e304495952cf8dd4a654, type: 3}
+      propertyPath: loseGame.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7144356283615832562, guid: 006622c773d3e304495952cf8dd4a654, type: 3}
       propertyPath: m_LocalPosition.x
       value: 284.10364
@@ -3881,6 +3889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sequenceManager: {fileID: 0}
+  fillAmount: 0
   timerImage: {fileID: 953775749}
   thinkTime: 10
 --- !u!1 &2046041778
