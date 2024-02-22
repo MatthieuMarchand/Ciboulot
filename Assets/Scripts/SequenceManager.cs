@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 
 public class SequenceManager : MonoBehaviour
 {
     
-    [SerializeField] private UnityEvent EndSequence;
-
+    public UnityEvent endSequence;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,4 +21,10 @@ public class SequenceManager : MonoBehaviour
     {
         
     }
+
+    public void EndSequence()
+    {
+        endSequence.Invoke();
+    }
+    
 }

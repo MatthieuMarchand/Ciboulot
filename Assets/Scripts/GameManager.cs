@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int lives;
     [SerializeField] private int sequenceNumber = 0;
-    [SerializeField] private UnityEvent LoseGame;
     [SerializeField] private SequenceManager _sequenceManager;
+    [SerializeField] private UnityEvent LoseGame;
+    [SerializeField] private UnityEvent StartNewSequence;
     
 
     // Start is called before the first frame update
@@ -18,8 +19,10 @@ public class GameManager : MonoBehaviour
     {
         if (_sequenceManager == null)
         {
-            
+            _sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
         }
+        
+        _sequenceManager.endSequence.AddListener(OnSequenceEnd);
     }
 
     // Update is called once per frame
@@ -34,11 +37,16 @@ public class GameManager : MonoBehaviour
     }
 
     
-    void CheckGameState()
+    void OnSequenceEnd()
     {
         if (lives < 1)
         {
             LoseGame.Invoke();
+        }
+        else
+        {
+            sequenceNumber += 1;
+            StartNewSequence.Invoke();
         }
     }
 }
