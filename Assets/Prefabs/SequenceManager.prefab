@@ -44,17 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dc6ac5bba9f6b449cb85e7f38c0131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSequence: {fileID: 6865599292156882282, guid: 891ccadc3cb910b44afbf416ed65a543, type: 3}
-  issue: {fileID: 0}
-  sequences:
-  - {fileID: 6865599292156882282, guid: 891ccadc3cb910b44afbf416ed65a543, type: 3}
-  - {fileID: 6865599292156882282, guid: 5cbca4ee101895a4a9d2b9edc87d2607, type: 3}
-  - {fileID: 6865599292156882282, guid: ccd2c03e4c0185145ac98db0ca060d2c, type: 3}
-  - {fileID: 6865599292156882282, guid: 8990915f7ad5e1b4ba65185a5003bb9b, type: 3}
-  - {fileID: 6865599292156882282, guid: 9eb244984b3f9bc4bb753a57f36069d0, type: 3}
-  buttons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  TimerUI: {fileID: 0}
+  endSequence:
+    m_PersistentCalls:
+      m_Calls: []
   playerResponses: []
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 4762510015684543199, guid: 006622c773d3e304495952cf8dd4a654, type: 3}
+  CurrentIssue: {fileID: 0}
+  CurrentStep: {fileID: 0}
