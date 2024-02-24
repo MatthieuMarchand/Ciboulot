@@ -1,8 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using UnityEngine.Serialization;
+using TMPro;
 
 
 public class SequenceManager : MonoBehaviour
@@ -12,20 +16,29 @@ public class SequenceManager : MonoBehaviour
     [SerializeField] private GameObject TimerUI;
     public UnityEvent endSequence;
 
-    [SerializeField]
-    private GameObject[] playerResponses;
+    [SerializeField] private GameObject[] playerResponses;
+    [SerializeField] private GameObject[] firstIssues;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private GameObject CurrentIssue;
-    [SerializeField] private GameObject CurrentStep;
+    [FormerlySerializedAs("CurrentIssue")] [SerializeField] private GameObject currentIssue;
 
-    void Start()
+    [SerializeField] private GameObject issueContainer;
+
+    private void Awake()
     {
         if (gameManager == null)
         {
             gameManager = FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
         }
-        
+        if (issueContainer == null)
+        {
+            issueContainer = GameObject.FindGameObjectWithTag("IssueContainer");
+        }
         gameManager.startNewSequence.AddListener(OnStartNewSequence);
+    }
+
+    void Start()
+    {
+        
     }
 
     void Update()
@@ -51,7 +64,7 @@ public class SequenceManager : MonoBehaviour
     {
         
     }
-
+    
     public void CheckNumberOfResponses()
     {
         
@@ -59,15 +72,31 @@ public class SequenceManager : MonoBehaviour
 
     public void OnStartNewSequence()
     {
-        switch (gameManager.GetSequenceNumber())
-        {
-            case 1:
-                
-                break;
-        }
-        
+        currentIssue = firstIssues[gameManager.GetSequenceNumber()];
         _timer = 5f;
         isTimerActivated = true;
+        SetUpUI();
     }
-    
+
+    void SetUpUI()
+    {
+        if (playerResponses.Length < 3)
+        {
+            issueContainer.SetActive(true);
+            for (int i = 0; i < issueContainer.transform.childCount; i++)
+            {
+                if (issueContainer.transform.GetChild(i).gameObject.name == "Question 1")
+                {
+                    issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
+                        currentIssue.GetComponent<IssueBehavior>().GetissueText(1);
+                }
+                else if (issueContainer.transform.GetChild(i).gameObject.name == "Question 2")
+                {
+                    issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
+                        currentIssue.GetComponent<IssueBehavior>().GetissueText(2);
+                }
+                
+            }
+        }
+    }
 }

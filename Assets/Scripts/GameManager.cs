@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
 
     [SerializeField] private int lives;
-    [SerializeField] private int sequenceNumber = 0;
+    [SerializeField] private int sequenceNumber = 1;
     [SerializeField] private SequenceManager _sequenceManager;
     public UnityEvent loseGame;
     public UnityEvent winGame;
@@ -20,8 +21,14 @@ public class GameManager : MonoBehaviour
     {
         return sequenceNumber;
     }
-    
-    
+
+    private void Awake()
+    {
+        loseGame.AddListener(LoseGameHandler);
+        winGame.AddListener(WinGameHandler);
+        startNewSequence.AddListener(StartNewSequenceHandler);
+    }
+
     void Start()
     {
         if (_sequenceManager == null)
@@ -30,6 +37,8 @@ public class GameManager : MonoBehaviour
         }
         
         _sequenceManager.endSequence.AddListener(OnSequenceEnd);
+        startNewSequence.Invoke();
+        
     }
 
 
@@ -53,5 +62,21 @@ public class GameManager : MonoBehaviour
             else
                 startNewSequence.Invoke();
         }
+    }
+    
+    // Handlers pour les événements
+    private void LoseGameHandler()
+    {
+        Debug.Log("Game Over");
+    }
+
+    private void WinGameHandler()
+    {
+        Debug.Log("You Win!");
+    }
+
+    private void StartNewSequenceHandler()
+    {
+        Debug.Log("Starting new sequence...");
     }
 }

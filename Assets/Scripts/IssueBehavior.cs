@@ -10,6 +10,18 @@ public class IssueBehavior : MonoBehaviour
     [SerializeField] private GameObject defaultChoice;
     [SerializeField] private GameObject[] choices;
 
+    //Setter and getter
+    public string GetissueText(int part)
+    {
+        string textToReturn = "";
+        if (part == 1)
+            textToReturn = issueText1;
+        if (part == 2)
+            textToReturn = issueText2;
+
+        return textToReturn;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
