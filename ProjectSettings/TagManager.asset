@@ -9,6 +9,8 @@ TagManager:
   - IssueContainer
   - Boss
   - Timer
+  - Ciboulot
+  - AnimationManager
   layers:
   - Default
   - TransparentFX
