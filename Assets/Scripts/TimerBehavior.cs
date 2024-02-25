@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
 
 public class TimerBehavior : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class TimerBehavior : MonoBehaviour
 
     [SerializeField] private Image UIAmount;
     [SerializeField] private TextMeshProUGUI UIText;
+
     
     // Start is called before the first frame update
     void Start()

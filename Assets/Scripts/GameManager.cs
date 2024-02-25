@@ -11,9 +11,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int lives;
     [SerializeField] private int sequenceNumber = 1;
     [SerializeField] private SequenceManager _sequenceManager;
+    
+    
     public UnityEvent loseGame;
     public UnityEvent winGame;
     public UnityEvent startNewSequence;
+    public UnityEvent startGame;
     
 //Getter and setter
 
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour
         loseGame.AddListener(LoseGameHandler);
         winGame.AddListener(WinGameHandler);
         startNewSequence.AddListener(StartNewSequenceHandler);
+        startGame.AddListener(StartGamehandler);
     }
 
     void Start()
@@ -37,7 +41,8 @@ public class GameManager : MonoBehaviour
         }
         
         _sequenceManager.endSequence.AddListener(OnSequenceEnd);
-        startNewSequence.Invoke();
+        startGame.Invoke();
+        //startNewSequence.Invoke();
         
     }
 
@@ -78,5 +83,10 @@ public class GameManager : MonoBehaviour
     private void StartNewSequenceHandler()
     {
         Debug.Log("Starting new sequence...");
+    }
+    
+    private void StartGamehandler()
+    {
+        Debug.Log("Starting Game...");
     }
 }

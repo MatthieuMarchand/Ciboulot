@@ -26,7 +26,6 @@ public class IssueContainerBehavior : MonoBehaviour
 
     public void SwitchUI()
     {
-        Debug.Log("SwitchUI");
         if (question1.activeSelf)
         {
             question1.SetActive(false);
