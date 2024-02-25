@@ -22,6 +22,13 @@ public class SequenceManager : MonoBehaviour
 
     [SerializeField] private GameObject issueContainer;
 
+    //Getter and setter
+    public float GetTimer()
+    {
+        return _timer;
+    }
+    
+    
     private void Awake()
     {
         if (gameManager == null)
@@ -97,5 +104,11 @@ public class SequenceManager : MonoBehaviour
                 
             }
         }
+
+        for (int i = 0; i < 3; i++)
+        {
+            
+        }
+        
     }
 }
