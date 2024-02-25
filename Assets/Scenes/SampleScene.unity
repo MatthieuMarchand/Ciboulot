@@ -632,8 +632,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 171, y: 20.005}
-  m_SizeDelta: {x: 527.3765, y: 253.34}
+  m_AnchoredPosition: {x: 217.7, y: 16.86}
+  m_SizeDelta: {x: 188.248, y: 53.2148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &251204655
 MonoBehaviour:
@@ -730,7 +730,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 262636191}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 251204655}
+        m_TargetAssemblyTypeName: IssueContainerBehavior, Assembly-CSharp
+        m_MethodName: SwitchUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &262636191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3879,9 +3891,9 @@ RectTransform:
   - {fileID: 1446462622}
   - {fileID: 1382947944}
   - {fileID: 1150021094}
-  - {fileID: 1199864649}
   - {fileID: 813948469}
   - {fileID: 28747282}
+  - {fileID: 1199864649}
   - {fileID: 1021273752}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4441,7 +4453,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1743766269}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 251204655}
+        m_TargetAssemblyTypeName: IssueContainerBehavior, Assembly-CSharp
+        m_MethodName: SwitchUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1743766269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4489,6 +4513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1767482032}
+  - component: {fileID: 1767482033}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Timer
@@ -4518,6 +4543,21 @@ RectTransform:
   m_AnchoredPosition: {x: -75.111435, y: 15.200317}
   m_SizeDelta: {x: 53.171997, y: 49.894806}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1767482033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767482031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977fe207f787d48f4a23b44ab77ed549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sequenceManager: {fileID: 0}
+  UIAmount: {fileID: 0}
+  UIText: {fileID: 0}
 --- !u!1 &1919958669
 GameObject:
   m_ObjectHideFlags: 0
