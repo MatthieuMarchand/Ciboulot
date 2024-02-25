@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
-using TMPro;
 
 
 public class SequenceManager : MonoBehaviour
