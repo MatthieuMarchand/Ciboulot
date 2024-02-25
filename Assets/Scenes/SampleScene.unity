@@ -611,7 +611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &251204654
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1978,6 +1978,7 @@ GameObject:
   - component: {fileID: 813948471}
   - component: {fileID: 813948470}
   - component: {fileID: 813948472}
+  - component: {fileID: 813948473}
   m_Layer: 5
   m_Name: Boss
   m_TagString: Boss
@@ -2063,6 +2064,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &813948473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813948468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a66517c86c9fb4f988902c9b1d2de685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationManager: {fileID: 0}
 --- !u!1 &843405219
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,7 +2155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 875432427}
   m_Layer: 5
-  m_Name: TimelinceSequence
+  m_Name: TimelineSequence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2721,7 +2735,7 @@ GameObject:
   - component: {fileID: 1150021095}
   m_Layer: 5
   m_Name: Ciboulotmirror
-  m_TagString: Untagged
+  m_TagString: Ciboulot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3303,7 +3317,7 @@ GameObject:
   - component: {fileID: 1341306944}
   m_Layer: 0
   m_Name: AnimationManager
-  m_TagString: Untagged
+  m_TagString: AnimationManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3321,6 +3335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  bossAnimation: {fileID: 0}
+  ciboulotAnimation: {fileID: 0}
 --- !u!4 &1341306945
 Transform:
   m_ObjectHideFlags: 0

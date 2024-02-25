@@ -44,13 +44,15 @@ public class SequenceManager : MonoBehaviour
             timerUI = GameObject.FindGameObjectWithTag("Timer").gameObject;
         }
         gameManager.startNewSequence.AddListener(OnStartNewSequence);
+        gameManager.startIntro.AddListener(OnStartGame);
+
     }
 
     void Start()
     {
         
     }
-
+    
     void Update()
     {
         if (_isTimerActivated == false)
@@ -63,6 +65,12 @@ public class SequenceManager : MonoBehaviour
             OnTimerOver();
         }
                 
+    }
+
+    void OnStartGame()
+    {
+        choiceContainer.SetActive(false);
+        timerUI.SetActive(false);
     }
     
     private void OnTimerOver()

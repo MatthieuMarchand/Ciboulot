@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,12 +12,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int lives;
     [SerializeField] private int sequenceNumber = 1;
     [SerializeField] private SequenceManager _sequenceManager;
+    [SerializeField] private AnimationManager _animationManager;
     
     
     public UnityEvent loseGame;
     public UnityEvent winGame;
     public UnityEvent startNewSequence;
-    public UnityEvent startGame;
+    [FormerlySerializedAs("startGame")] public UnityEvent startIntro;
     
 //Getter and setter
 
@@ -27,23 +29,26 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        loseGame.AddListener(LoseGameHandler);
-        winGame.AddListener(WinGameHandler);
-        startNewSequence.AddListener(StartNewSequenceHandler);
-        startGame.AddListener(StartGamehandler);
-    }
-
-    void Start()
-    {
         if (_sequenceManager == null)
         {
             _sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
         }
+        if (_animationManager == null)
+        {
+            _animationManager = GameObject.FindWithTag("AnimationManager").GetComponent<AnimationManager>();
+        }
         
+        loseGame.AddListener(LoseGameHandler);
+        winGame.AddListener(WinGameHandler);
+        startNewSequence.AddListener(StartNewSequenceHandler);
+        startIntro.AddListener(StartIntroHandler);
+    }
+
+    void Start()
+    {
+        _animationManager.introIsOver.AddListener(StartGamehandler);
         _sequenceManager.endSequence.AddListener(OnSequenceEnd);
-        startGame.Invoke();
-        //startNewSequence.Invoke();
-        
+        startIntro.Invoke();
     }
 
 
@@ -85,8 +90,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("Starting new sequence...");
     }
     
+    private void StartIntroHandler()
+    {
+        Debug.Log("Starting Intro...");
+        
+    }
     private void StartGamehandler()
     {
         Debug.Log("Starting Game...");
+        startNewSequence.Invoke();
     }
 }
