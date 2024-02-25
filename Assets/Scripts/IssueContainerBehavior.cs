@@ -17,6 +17,11 @@ public class IssueContainerBehavior : MonoBehaviour
     void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Space)) return;
+        SwitchUI();
+    }
+
+    public void SwitchUI()
+    {
         if (question1.activeSelf == true)
         {
             question1.SetActive(false);
