@@ -44,6 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db62dd6b87131a4bb898b61ae2be418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingers: 3
-  score: 0
-  sequenceManager: {fileID: 0}
+  lives: 0
+  sequenceNumber: 0
+  _sequenceManager: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
+  loseGame:
+    m_PersistentCalls:
+      m_Calls: []
+  winGame:
+    m_PersistentCalls:
+      m_Calls: []
+  startNewSequence:
+    m_PersistentCalls:
+      m_Calls: []

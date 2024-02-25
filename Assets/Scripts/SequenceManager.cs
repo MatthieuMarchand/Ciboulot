@@ -2,131 +2,113 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.Serialization;
+
 
 public class SequenceManager : MonoBehaviour
 {
-    [SerializeField] GameObject currentSequence;
-    [SerializeField] GameObject issue;
-    [SerializeField] GameObject[] sequences;
-    [SerializeField] GameObject[] buttons;
-    [SerializeField] GameObject[] playerResponses;
-    [SerializeField] float timer;
+    private float _timer;
+    private bool isTimerActivated;
+    [SerializeField] private GameObject TimerUI;
+    public UnityEvent endSequence;
 
+    [SerializeField] private GameObject[] playerResponses;
+    [SerializeField] private GameObject[] firstIssues;
+    [SerializeField] private GameManager gameManager;
+    [FormerlySerializedAs("CurrentIssue")] [SerializeField] private GameObject currentIssue;
 
-    [SerializeField] GameManager gameManager;
+    [SerializeField] private GameObject issueContainer;
 
+    //Getter and setter
     public float GetTimer()
     {
-        return timer;
+        return _timer;
     }
-
-    public GameObject GetCurrentSequence()
+    
+    
+    private void Awake()
     {
-        return currentSequence;
-    }
-    public void SetCurrentSequence(int sequenceNumber)
-    {
-        currentSequence = sequences[sequenceNumber];
-    }
-
-    public void SetTimer(float newTimer)
-    {
-        timer = newTimer;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-
         if (gameManager == null)
         {
-            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            gameManager = FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
         }
-        if (currentSequence == null)
+        if (issueContainer == null)
         {
-            currentSequence = sequences[0];
+            issueContainer = GameObject.FindGameObjectWithTag("IssueContainer");
         }
+        gameManager.startNewSequence.AddListener(OnStartNewSequence);
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0)
+        if (isTimerActivated == false)
+            return;
+        
+        _timer -= Time.deltaTime;
+
+        if (_timer <= 0)
         {
-            //Cancel Answer 
+            //todo
         }
+                
     }
 
-    public void AddChoiceToPlayerResponses(GameObject choice)
+    public void EndSequence()
     {
-        List<GameObject> listeResponses = new List<GameObject>(playerResponses);
-
-        // Ajouter un élément à la liste
-        listeResponses.Add(choice);
-
-        // Reconvertir la liste en tableau
-        playerResponses = listeResponses.ToArray();
+        endSequence.Invoke();
     }
 
-    public void CheckIfResponseIsComplete(GameObject choice)
+    public void CheckResponses()
     {
-        if (playerResponses.Length == 3)
-        {
-            CheckChoices();
-            Debug.Log("CheckChoices");
-        }
-        else
-        {
-            SetButtonsChoices(choice.GetComponent<Choice>().GetChoices());
-        }
-
+        
+    }
+    
+    public void CheckNumberOfResponses()
+    {
+        
     }
 
-    public void CheckChoices()
+    public void OnStartNewSequence()
     {
-        int badAnswers = 0;
-        for (int i = 0; i < playerResponses.Length; i++)
+        currentIssue = firstIssues[gameManager.GetSequenceNumber()];
+        _timer = 5f;
+        isTimerActivated = true;
+        SetUpUI();
+    }
+
+    void SetUpUI()
+    {
+        if (playerResponses.Length < 3)
         {
-            if (playerResponses[i] != currentSequence.GetComponent<Sequence>().GetValidChoices()[i])
+            issueContainer.SetActive(true);
+            for (int i = 0; i < issueContainer.transform.childCount; i++)
             {
-                badAnswers++;
+                if (issueContainer.transform.GetChild(i).gameObject.name == "Question 1")
+                {
+                    issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
+                        currentIssue.GetComponent<IssueBehavior>().GetissueText(1);
+                }
+                else if (issueContainer.transform.GetChild(i).gameObject.name == "Question 2")
+                {
+                    issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
+                        currentIssue.GetComponent<IssueBehavior>().GetissueText(2);
+                }
+                
             }
         }
 
-        if (badAnswers > 1)
+        for (int i = 0; i < 3; i++)
         {
-            gameManager.LoseSequence();
-            Debug.Log("loseSequence");
+            
         }
-        else
-            gameManager.WinSequence();
-
-        playerResponses = new GameObject[0];
-    }
-
-    public void SetIssueText()
-    {
-        string text = currentSequence.GetComponent<Sequence>().GetIssue();
-        issue.GetComponentInChildren<TMP_Text>().text = text;
-
-    }
-    public void SetButtonsChoices(GameObject[] choices)
-    {
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            ButtonBehavior buttonBehavior = buttons[i].GetComponent<ButtonBehavior>();
-            if (buttonBehavior != null)
-            {
-                buttonBehavior.SetChoice(choices[i]);
-            }
-            else
-                Debug.Log("ButtonBehaviorNotFound");
-           
-        }
+        
     }
 }

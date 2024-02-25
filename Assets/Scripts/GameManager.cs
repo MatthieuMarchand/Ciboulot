@@ -1,93 +1,82 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] int fingers;
-    [SerializeField] int score;
-    const int WIN_SCORE = 5;
-    [SerializeField] SequenceManager sequenceManager;
-    [SerializeField] public GameObject boss;
-    [SerializeField] public Animator bossAnimator;
-    [SerializeField] public GameObject timer;
-    [SerializeField] public GameObject choiceContainer;
-    [SerializeField] public GameObject issueContainer;
 
+    [SerializeField] private int lives;
+    [SerializeField] private int sequenceNumber = 1;
+    [SerializeField] private SequenceManager _sequenceManager;
+    public UnityEvent loseGame;
+    public UnityEvent winGame;
+    public UnityEvent startNewSequence;
+    
+//Getter and setter
 
-    // Start is called before the first frame update
+    public int GetSequenceNumber()
+    {
+        return sequenceNumber;
+    }
+
+    private void Awake()
+    {
+        loseGame.AddListener(LoseGameHandler);
+        winGame.AddListener(WinGameHandler);
+        startNewSequence.AddListener(StartNewSequenceHandler);
+    }
+
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        if (sequenceManager == null)
+        if (_sequenceManager == null)
         {
-            sequenceManager = GameObject.FindGameObjectWithTag("SequenceManager").GetComponent<SequenceManager>();
+            _sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
         }
-        if (boss == null || bossAnimator == null)
-        {
-            boss = GameObject.FindGameObjectWithTag("Boss");
-            bossAnimator = boss.GetComponent<Animator>();
-        }
-        if (timer == null)
-        {
-            timer = GameObject.FindGameObjectWithTag("Timer");
-        }
-        StartCoroutine(Init());
-
-
+        
+        _sequenceManager.endSequence.AddListener(OnSequenceEnd);
+        startNewSequence.Invoke();
+        
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void RemoveLife()
     {
-           
+        lives -= 1;
     }
 
-    public void WinSequence()
+    
+    void OnSequenceEnd()
     {
-        score++;
-        if (score == WIN_SCORE) { }
-        //Appelle WinScript de fin
-        else 
+        if (lives < 1)
         {
-            
-            StartSequence();
-        }
-    }
-
-    public void LoseSequence()
-    {
-        fingers--;
-        if (fingers == 0) {
-            //loseScript
+            loseGame.Invoke();
         }
         else
-            StartSequence();
+        {
+            sequenceNumber += 1;
+            if (sequenceNumber > 4)
+                winGame.Invoke();
+            else
+                startNewSequence.Invoke();
+        }
+    }
+    
+    // Handlers pour les événements
+    private void LoseGameHandler()
+    {
+        Debug.Log("Game Over");
     }
 
-    public void StartSequence()
+    private void WinGameHandler()
     {
-        sequenceManager.SetCurrentSequence(score);
-        StartCoroutine(Init());
+        Debug.Log("You Win!");
     }
 
-    IEnumerator Init()
+    private void StartNewSequenceHandler()
     {
-        //choiceContainer = GameObject.FindGameObjectWithTag("ChoiceContainer");
-        choiceContainer.SetActive(false);
-        //issueContainer = GameObject.FindGameObjectWithTag("IssueContainer");
-        issueContainer.SetActive(true);
-
-        float animationTime = 2f;
-        timer.GetComponent<TimerBehavior>().thinkTime = animationTime;
-        sequenceManager.SetTimer(animationTime);
-        yield return new WaitForSeconds(animationTime);
-
-        //Logique
-        choiceContainer.SetActive(true);
-        issueContainer.SetActive(false);
-        sequenceManager.SetIssueText();
-        sequenceManager.SetButtonsChoices(sequenceManager.GetCurrentSequence().GetComponent<Sequence>().GetFirstChoices());
-
+        Debug.Log("Starting new sequence...");
     }
 }
