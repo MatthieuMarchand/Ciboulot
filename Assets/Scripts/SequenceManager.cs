@@ -13,23 +13,30 @@ public class SequenceManager : MonoBehaviour
     private float _timer;
     private bool _isTimerActivated;
     private bool _isIssueStep;
-    [FormerlySerializedAs("TimerUI")] [SerializeField] private GameObject timerUI;
+    
     public UnityEvent endSequence;
+    public UnityEvent startChoiceStep;
 
+    [FormerlySerializedAs("TimerUI")] [SerializeField] private GameObject timerUI;
     [SerializeField] private GameObject[] playerResponses;
     [SerializeField] private GameObject[] firstIssues;
-    [SerializeField] private GameManager gameManager;
     [FormerlySerializedAs("CurrentIssue")] [SerializeField] private GameObject currentIssue;
-
     [SerializeField] private GameObject issueContainer;
     [SerializeField] private GameObject choiceContainer;
+
+    [SerializeField] private GameManager gameManager;
 
     //Getter and setter
     public float GetTimer()
     {
         return _timer;
     }
-    
+
+    public GameObject[] GetPlayerResponses()
+    {
+        return playerResponses;
+    }
+    //End Getter and setter
     
     private void Awake()
     {
@@ -45,6 +52,7 @@ public class SequenceManager : MonoBehaviour
         }
         gameManager.startNewSequence.AddListener(OnStartNewSequence);
         gameManager.startIntro.AddListener(OnStartGame);
+        startChoiceStep.AddListener(StartChoice);
 
     }
 
@@ -80,11 +88,11 @@ public class SequenceManager : MonoBehaviour
         if (_isIssueStep)
         {
             _isIssueStep = false;
-            StartChoice();
+            startChoiceStep.Invoke();
         }
         else
         {
-            _isIssueStep = true;
+            
             SetChoiceToPlayerResponses(true);
         }
     }
@@ -110,8 +118,6 @@ public class SequenceManager : MonoBehaviour
         _timer = 5f;
         _isTimerActivated = true;
         _isIssueStep = true;
-        issueContainer.SetActive(true);
-        timerUI.SetActive(true);
         SetUpUI(true);
     }
 
@@ -119,7 +125,9 @@ public class SequenceManager : MonoBehaviour
     {
         if (setIssue)
         {
+            choiceContainer.SetActive(false);
             issueContainer.SetActive(true);
+            timerUI.SetActive(true);
             for (int i = 0; i < issueContainer.transform.childCount; i++)
             {
                 if (issueContainer.transform.GetChild(i).gameObject.name == "Question 1")
@@ -137,6 +145,8 @@ public class SequenceManager : MonoBehaviour
         }
         else
         {
+            issueContainer.SetActive(false);
+            choiceContainer.SetActive(true);
             
         }
     }

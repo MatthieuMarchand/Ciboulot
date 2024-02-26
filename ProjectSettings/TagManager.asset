@@ -11,6 +11,8 @@ TagManager:
   - Timer
   - Ciboulot
   - AnimationManager
+  - ChoiceProgressionBar
+  - GameProgressionBar
   layers:
   - Default
   - TransparentFX
