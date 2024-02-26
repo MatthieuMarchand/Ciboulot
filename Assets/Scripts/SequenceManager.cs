@@ -6,53 +6,95 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
-using TMPro;
 
 
 public class SequenceManager : MonoBehaviour
 {
     private float _timer;
-    private bool isTimerActivated;
-    [SerializeField] private GameObject TimerUI;
+    private bool _isTimerActivated;
+    private bool _isIssueStep;
+    
     public UnityEvent endSequence;
+    public UnityEvent startChoiceStep;
 
+    [FormerlySerializedAs("TimerUI")] [SerializeField] private GameObject timerUI;
     [SerializeField] private GameObject[] playerResponses;
     [SerializeField] private GameObject[] firstIssues;
-    [SerializeField] private GameManager gameManager;
     [FormerlySerializedAs("CurrentIssue")] [SerializeField] private GameObject currentIssue;
-
     [SerializeField] private GameObject issueContainer;
+    [SerializeField] private GameObject choiceContainer;
 
+    [SerializeField] private GameManager gameManager;
+
+    //Getter and setter
+    public float GetTimer()
+    {
+        return _timer;
+    }
+
+    public GameObject[] GetPlayerResponses()
+    {
+        return playerResponses;
+    }
+    //End Getter and setter
+    
     private void Awake()
     {
         if (gameManager == null)
         {
             gameManager = FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
         }
-        if (issueContainer == null)
+        if (issueContainer == null || timerUI == null || choiceContainer == null)
         {
             issueContainer = GameObject.FindGameObjectWithTag("IssueContainer");
+            choiceContainer = GameObject.FindGameObjectWithTag("ChoiceContainer");
+            timerUI = GameObject.FindGameObjectWithTag("Timer").gameObject;
         }
         gameManager.startNewSequence.AddListener(OnStartNewSequence);
+        gameManager.startIntro.AddListener(OnStartGame);
+        startChoiceStep.AddListener(StartChoice);
+
     }
 
     void Start()
     {
         
     }
-
+    
     void Update()
     {
-        if (isTimerActivated == false)
+        if (_isTimerActivated == false)
             return;
         
         _timer -= Time.deltaTime;
 
         if (_timer <= 0)
         {
-            //todo
+            OnTimerOver();
         }
                 
+    }
+
+    void OnStartGame()
+    {
+        choiceContainer.SetActive(false);
+        timerUI.SetActive(false);
+    }
+    
+    private void OnTimerOver()
+    {
+        _isTimerActivated = false;
+
+        if (_isIssueStep)
+        {
+            _isIssueStep = false;
+            startChoiceStep.Invoke();
+        }
+        else
+        {
+            
+            SetChoiceToPlayerResponses(true);
+        }
     }
 
     public void EndSequence()
@@ -74,15 +116,18 @@ public class SequenceManager : MonoBehaviour
     {
         currentIssue = firstIssues[gameManager.GetSequenceNumber()];
         _timer = 5f;
-        isTimerActivated = true;
-        SetUpUI();
+        _isTimerActivated = true;
+        _isIssueStep = true;
+        SetUpUI(true);
     }
 
-    void SetUpUI()
+    private void SetUpUI(bool setIssue)
     {
-        if (playerResponses.Length < 3)
+        if (setIssue)
         {
+            choiceContainer.SetActive(false);
             issueContainer.SetActive(true);
+            timerUI.SetActive(true);
             for (int i = 0; i < issueContainer.transform.childCount; i++)
             {
                 if (issueContainer.transform.GetChild(i).gameObject.name == "Question 1")
@@ -97,6 +142,27 @@ public class SequenceManager : MonoBehaviour
                 }
                 
             }
+        }
+        else
+        {
+            issueContainer.SetActive(false);
+            choiceContainer.SetActive(true);
+            
+        }
+    }
+
+    
+
+    public void SetChoiceToPlayerResponses(bool isDefaultChoice)
+    {
+        
+    }
+    
+    private void StartChoice()
+    {
+        if (playerResponses.Length < 3)
+        {
+            SetUpUI(false);
         }
     }
 }
