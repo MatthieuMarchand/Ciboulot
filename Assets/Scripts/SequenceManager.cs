@@ -20,6 +20,7 @@ public class SequenceManager : MonoBehaviour
     [FormerlySerializedAs("TimerUI")] [SerializeField] private GameObject timerUI;
     [SerializeField] private GameObject[] playerResponses;
     [SerializeField] private GameObject[] firstIssues;
+    [SerializeField] private GameObject[] currentChoices;
     [FormerlySerializedAs("CurrentIssue")] [SerializeField] private GameObject currentIssue;
     [SerializeField] private GameObject issueContainer;
     [SerializeField] private GameObject choiceContainer;
@@ -119,6 +120,7 @@ public class SequenceManager : MonoBehaviour
         _isTimerActivated = true;
         _isIssueStep = true;
         SetUpUI(true);
+        currentChoices = currentIssue.GetComponent<IssueBehavior>().GetChoices();
     }
 
     private void SetUpUI(bool setIssue)
@@ -128,35 +130,53 @@ public class SequenceManager : MonoBehaviour
             choiceContainer.SetActive(false);
             issueContainer.SetActive(true);
             timerUI.SetActive(true);
-            for (int i = 0; i < issueContainer.transform.childCount; i++)
-            {
-                if (issueContainer.transform.GetChild(i).gameObject.name == "Question 1")
-                {
-                    issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
-                        currentIssue.GetComponent<IssueBehavior>().GetissueText(1);
-                }
-                else if (issueContainer.transform.GetChild(i).gameObject.name == "Question 2")
-                {
-                    issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
-                        currentIssue.GetComponent<IssueBehavior>().GetissueText(2);
-                }
-                
-            }
+            SetIssueUI();
         }
         else
         {
             issueContainer.SetActive(false);
             choiceContainer.SetActive(true);
+            SetChoiceUI();
             
         }
     }
 
+    private void SetIssueUI()
+    {
+        for (int i = 0; i < issueContainer.transform.childCount; i++)
+        {
+            if (issueContainer.transform.GetChild(i).gameObject.name == "Question 1")
+            {
+                issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
+                    currentIssue.GetComponent<IssueBehavior>().GetissueText(1);
+            }
+            else if (issueContainer.transform.GetChild(i).gameObject.name == "Question 2")
+            {
+                issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
+                    currentIssue.GetComponent<IssueBehavior>().GetissueText(2);
+            }
+                
+        }
+    }
+    private void SetChoiceUI()
+    {
+        choiceContainer.transform.Find("choix1").gameObject.transform.GetChild(0).gameObject
+                .GetComponentInChildren<TextMeshProUGUI>().text =
+            currentChoices[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
+        choiceContainer.transform.Find("choix2").gameObject.transform.GetChild(0).gameObject
+                .GetComponentInChildren<TextMeshProUGUI>().text =
+            currentChoices[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
+        choiceContainer.transform.Find("choix3").gameObject.transform.GetChild(0).gameObject
+                .GetComponentInChildren<TextMeshProUGUI>().text =
+            currentChoices[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
+    }
     
 
     public void SetChoiceToPlayerResponses(bool isDefaultChoice)
     {
         
     }
+    
     
     private void StartChoice()
     {

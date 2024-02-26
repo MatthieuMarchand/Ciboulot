@@ -2288,10 +2288,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 173553286}
   - {fileID: 1691987001}
   - {fileID: 2046041779}
   - {fileID: 1124236894}
+  - {fileID: 173553286}
   - {fileID: 1919958670}
   m_Father: {fileID: 1519090605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3366,7 +3366,7 @@ GameObject:
   - component: {fileID: 1343191725}
   - component: {fileID: 1343191724}
   m_Layer: 0
-  m_Name: Choice (1)
+  m_Name: Choice Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3571,14 +3571,22 @@ PrefabInstance:
       objectReference: {fileID: 409143309}
     - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
       propertyPath: firstIssues.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
       propertyPath: sequences.Array.data[0]
       value: 
       objectReference: {fileID: 1226748680}
     - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
+      propertyPath: currentChoices.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
       propertyPath: firstIssues.Array.data[0]
+      value: 
+      objectReference: {fileID: 1226748680}
+    - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
+      propertyPath: firstIssues.Array.data[1]
       value: 
       objectReference: {fileID: 1226748680}
     - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
@@ -3893,8 +3901,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   _sequenceManager: {fileID: 0}
-  choiceProgressionbar: {fileID: 0}
-  gameProgressionBar: {fileID: 0}
+  choiceProgressionbar: {fileID: 173553285}
+  gameProgressionBar: {fileID: 875432426}
 --- !u!4 &1491936789
 Transform:
   m_ObjectHideFlags: 0

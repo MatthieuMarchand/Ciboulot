@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class ProgressionManager : MonoBehaviour
 {
@@ -48,19 +48,19 @@ public class ProgressionManager : MonoBehaviour
         switch (_sequenceManager.GetPlayerResponses().Length)
         {
             case 0:
-                choiceProgressionbar.transform.GetChild(1).gameObject.GetComponent<Image>().SetEnabled(true);
-                choiceProgressionbar.transform.GetChild(2).gameObject.GetComponent<Image>().SetEnabled(false);
-                choiceProgressionbar.transform.GetChild(3).gameObject.GetComponent<Image>().SetEnabled(false);
+                choiceProgressionbar.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = true;
+                choiceProgressionbar.transform.GetChild(1).gameObject.GetComponent<Image>().enabled = false;
+                choiceProgressionbar.transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
                 break;
             case 1:
-                choiceProgressionbar.transform.GetChild(1).gameObject.GetComponent<Image>().SetEnabled(false);
-                choiceProgressionbar.transform.GetChild(2).gameObject.GetComponent<Image>().SetEnabled(true);
-                choiceProgressionbar.transform.GetChild(3).gameObject.GetComponent<Image>().SetEnabled(false);
+                choiceProgressionbar.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = false;
+                choiceProgressionbar.transform.GetChild(1).gameObject.GetComponent<Image>().enabled = true;
+                choiceProgressionbar.transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
                 break;
             case 2:
-                choiceProgressionbar.transform.GetChild(1).gameObject.GetComponent<Image>().SetEnabled(false);
-                choiceProgressionbar.transform.GetChild(2).gameObject.GetComponent<Image>().SetEnabled(false);
-                choiceProgressionbar.transform.GetChild(3).gameObject.GetComponent<Image>().SetEnabled(true);
+                choiceProgressionbar.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = false;
+                choiceProgressionbar.transform.GetChild(1).gameObject.GetComponent<Image>().enabled = false;
+                choiceProgressionbar.transform.GetChild(2).gameObject.GetComponent<Image>().enabled = true;
                 break;
         }
         

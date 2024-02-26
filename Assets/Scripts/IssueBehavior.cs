@@ -21,6 +21,11 @@ public class IssueBehavior : MonoBehaviour
 
         return textToReturn;
     }
+
+    public GameObject[] GetChoices()
+    {
+        return choices;
+    }
     
     // Start is called before the first frame update
     void Start()
