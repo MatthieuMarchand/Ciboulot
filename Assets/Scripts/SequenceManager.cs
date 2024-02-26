@@ -93,7 +93,6 @@ public class SequenceManager : MonoBehaviour
         }
         else
         {
-            
             SetChoiceToPlayerResponses(true);
         }
     }
@@ -120,7 +119,6 @@ public class SequenceManager : MonoBehaviour
         _isTimerActivated = true;
         _isIssueStep = true;
         SetUpUI(true);
-        currentChoices = currentIssue.GetComponent<IssueBehavior>().GetChoices();
     }
 
     private void SetUpUI(bool setIssue)
@@ -174,7 +172,15 @@ public class SequenceManager : MonoBehaviour
 
     public void SetChoiceToPlayerResponses(bool isDefaultChoice)
     {
-        
+        _isTimerActivated = false;
+        if (isDefaultChoice)
+        {
+            
+        }
+        else
+        {
+            
+        }
     }
     
     
@@ -182,6 +188,10 @@ public class SequenceManager : MonoBehaviour
     {
         if (playerResponses.Length < 3)
         {
+            currentChoices = currentIssue.GetComponent<IssueBehavior>().GetChoices();
+            _timer = 5f;
+            _isTimerActivated = true;
+            _isIssueStep = true;
             SetUpUI(false);
         }
     }
