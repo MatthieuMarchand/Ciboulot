@@ -14,22 +14,22 @@ public class BossAnimationController : MonoBehaviour
             animationManager = GameObject.FindWithTag("AnimationManager").gameObject.GetComponent<AnimationManager>();
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     public void CallBackIntroAnimation()
     {
         Debug.Log("CallBackIntroAnimation");
         animationManager.IntroAnimationOver();
+    }
+    
+    public void CallBackGoodAnimation()
+    {
+        Debug.Log("CallBackGoodAnimation");
+        animationManager.EndChoiceAnimationOver();
+    }
+    
+    public void CallBackBadAnimation()
+    {
+        Debug.Log("CallBackBadAnimation");
+        animationManager.EndChoiceAnimationOver();
     }
 }

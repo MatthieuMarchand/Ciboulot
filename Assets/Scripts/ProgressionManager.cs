@@ -23,12 +23,6 @@ public class ProgressionManager : MonoBehaviour
         {
             _sequenceManager = GameObject.FindWithTag("SequenceManager").GetComponent<SequenceManager>();
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
         if (choiceProgressionbar == null)
         {
             choiceProgressionbar = GameObject.FindWithTag("ChoiceProgressionBar");
@@ -38,8 +32,13 @@ public class ProgressionManager : MonoBehaviour
             gameProgressionBar = GameObject.FindWithTag("GameProgressionBar");
         }
         
-        _sequenceManager.startChoiceStep.AddListener(SetUpProgressBar);
         
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        _sequenceManager.startChoiceStep.AddListener(SetUpProgressBar);
     }
 
     private void SetUpProgressBar()

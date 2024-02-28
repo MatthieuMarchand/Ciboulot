@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
+public class EndChoiceEvent : UnityEvent<bool>
+{
+}
 
 public class SequenceManager : MonoBehaviour
 {
@@ -16,16 +21,20 @@ public class SequenceManager : MonoBehaviour
     
     public UnityEvent endSequence;
     public UnityEvent startChoiceStep;
+    public EndChoiceEvent endChoice;
+    
 
-    [FormerlySerializedAs("TimerUI")] [SerializeField] private GameObject timerUI;
     [SerializeField] private GameObject[] playerResponses;
     [SerializeField] private GameObject[] firstIssues;
     [SerializeField] private GameObject[] currentChoices;
-    [FormerlySerializedAs("CurrentIssue")] [SerializeField] private GameObject currentIssue;
-    [SerializeField] private GameObject issueContainer;
-    [SerializeField] private GameObject choiceContainer;
+    [SerializeField] private GameObject[] goodChoices;
 
+    [FormerlySerializedAs("CurrentIssue")] [SerializeField] private GameObject currentIssue;
+    [SerializeField] private GameObject defaultChoice;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private UIManager uiManager;
+
+    
 
     //Getter and setter
     public float GetTimer()
@@ -45,11 +54,9 @@ public class SequenceManager : MonoBehaviour
         {
             gameManager = FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
         }
-        if (issueContainer == null || timerUI == null || choiceContainer == null)
+        if (uiManager == null)
         {
-            issueContainer = GameObject.FindGameObjectWithTag("IssueContainer");
-            choiceContainer = GameObject.FindGameObjectWithTag("ChoiceContainer");
-            timerUI = GameObject.FindGameObjectWithTag("Timer").gameObject;
+            uiManager = FindAnyObjectByType<UIManager>().GetComponent<UIManager>();
         }
         gameManager.startNewSequence.AddListener(OnStartNewSequence);
         gameManager.startIntro.AddListener(OnStartGame);
@@ -57,11 +64,6 @@ public class SequenceManager : MonoBehaviour
 
     }
 
-    void Start()
-    {
-        
-    }
-    
     void Update()
     {
         if (_isTimerActivated == false)
@@ -78,8 +80,7 @@ public class SequenceManager : MonoBehaviour
 
     void OnStartGame()
     {
-        choiceContainer.SetActive(false);
-        timerUI.SetActive(false);
+        uiManager.SetUpUI(UIManager.UIType.SetStartGame);
     }
     
     private void OnTimerOver()
@@ -107,83 +108,56 @@ public class SequenceManager : MonoBehaviour
         
     }
     
-    public void CheckNumberOfResponses()
-    {
-        
-    }
-
     public void OnStartNewSequence()
     {
         currentIssue = firstIssues[gameManager.GetSequenceNumber()];
         _timer = 5f;
         _isTimerActivated = true;
         _isIssueStep = true;
-        SetUpUI(true);
+        defaultChoice = currentIssue.GetComponent<IssueBehavior>().GetDefaultChoice();
+        playerResponses = new GameObject[0];
+        goodChoices = currentIssue.GetComponent<IssueBehavior>().GetGoodChoices();
+        
+        
+        uiManager.SetUpUI(UIManager.UIType.SetIssue, currentIssue.GetComponent<IssueBehavior>().GetissueText(1), currentIssue.GetComponent<IssueBehavior>().GetissueText(2));
     }
-
-    private void SetUpUI(bool setIssue)
-    {
-        if (setIssue)
-        {
-            choiceContainer.SetActive(false);
-            issueContainer.SetActive(true);
-            timerUI.SetActive(true);
-            SetIssueUI();
-        }
-        else
-        {
-            issueContainer.SetActive(false);
-            choiceContainer.SetActive(true);
-            SetChoiceUI();
-            
-        }
-    }
-
-    private void SetIssueUI()
-    {
-        for (int i = 0; i < issueContainer.transform.childCount; i++)
-        {
-            if (issueContainer.transform.GetChild(i).gameObject.name == "Question 1")
-            {
-                issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
-                    currentIssue.GetComponent<IssueBehavior>().GetissueText(1);
-            }
-            else if (issueContainer.transform.GetChild(i).gameObject.name == "Question 2")
-            {
-                issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
-                    currentIssue.GetComponent<IssueBehavior>().GetissueText(2);
-            }
-                
-        }
-    }
-    private void SetChoiceUI()
-    {
-        choiceContainer.transform.Find("choix1").gameObject.transform.GetChild(0).gameObject
-                .GetComponentInChildren<TextMeshProUGUI>().text =
-            currentChoices[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
-        choiceContainer.transform.Find("choix2").gameObject.transform.GetChild(0).gameObject
-                .GetComponentInChildren<TextMeshProUGUI>().text =
-            currentChoices[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
-        choiceContainer.transform.Find("choix3").gameObject.transform.GetChild(0).gameObject
-                .GetComponentInChildren<TextMeshProUGUI>().text =
-            currentChoices[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
-    }
-    
-
-    public void SetChoiceToPlayerResponses(bool isDefaultChoice)
+    private void SetChoiceToPlayerResponses(bool isDefaultChoice, GameObject choiceSelected = null)
     {
         _isTimerActivated = false;
         if (isDefaultChoice)
         {
-            
+            List<GameObject> listeResponses = new List<GameObject>(playerResponses);
+            listeResponses.Add(defaultChoice);
+            playerResponses = listeResponses.ToArray();
         }
         else
         {
-            
+            List<GameObject> listeResponses = new List<GameObject>(playerResponses);
+            listeResponses.Add(choiceSelected);
+            playerResponses = listeResponses.ToArray();
+        }
+        CheckNumberOfResponses();
+    }
+    private void CheckNumberOfResponses()
+    {
+        
+        if (playerResponses.Length < 3)
+        {
+            CheckLastPlayerChoice(playerResponses[^1]);
+        }
+        else if (playerResponses.Length == 3)
+        {
+            //TODO EndSequence
         }
     }
-    
-    
+    private void CheckLastPlayerChoice(GameObject lastPlayerChoice)
+    {
+        uiManager.SetUpUI(UIManager.UIType.SetEndChoice);
+        if (lastPlayerChoice == goodChoices[playerResponses.Length -1])
+        {
+            //todo Player bad animation
+        }
+    }
     private void StartChoice()
     {
         if (playerResponses.Length < 3)
@@ -191,8 +165,8 @@ public class SequenceManager : MonoBehaviour
             currentChoices = currentIssue.GetComponent<IssueBehavior>().GetChoices();
             _timer = 5f;
             _isTimerActivated = true;
-            _isIssueStep = true;
-            SetUpUI(false);
+            _isIssueStep = false;
+            uiManager.SetUpUI(UIManager.UIType.SetChoice, currentChoices[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), currentChoices[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), currentChoices[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText());
         }
     }
 }

@@ -9,6 +9,7 @@ public class IssueBehavior : MonoBehaviour
     [SerializeField] private string issueText2;
     [SerializeField] private GameObject defaultChoice;
     [SerializeField] private GameObject[] choices;
+    [SerializeField] private GameObject[] goodChoices;
 
     //Setter and getter
     public string GetissueText(int part)
@@ -22,9 +23,18 @@ public class IssueBehavior : MonoBehaviour
         return textToReturn;
     }
 
+    public GameObject GetDefaultChoice()
+    {
+        return defaultChoice;
+    }
+
     public GameObject[] GetChoices()
     {
         return choices;
+    }
+    public GameObject[] GetGoodChoices()
+    {
+        return goodChoices;
     }
     
     // Start is called before the first frame update

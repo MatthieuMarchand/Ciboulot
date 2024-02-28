@@ -27,6 +27,8 @@ public class AnimationManager : MonoBehaviour
         }
         
         gameManager.startIntro.AddListener(IntroAnimation);
+        gameManager.startIntro.AddListener(IntroAnimation);
+
     }
 
     // Update is called once per frame
@@ -44,5 +46,21 @@ public class AnimationManager : MonoBehaviour
     {
         bossAnimation.SetTrigger("boss_idle");
         introIsOver.Invoke();
+    }
+    
+    private void GoodAnimation()
+    {
+        bossAnimation.SetTrigger("boss_good");
+    }
+
+    public void EndChoiceAnimationOver()
+    {
+        bossAnimation.SetTrigger("boss_idle");
+        
+    }
+    
+    private void BadAnimation()
+    {
+        bossAnimation.SetTrigger("boss_bad");
     }
 }
