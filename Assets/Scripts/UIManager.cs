@@ -74,8 +74,12 @@ public class UIManager : MonoBehaviour
                 SetIssueText(newText1, newText2);
                 break;
             case UIType.SetChoice:
+                timerUI.SetActive(true);
                 issueContainer.SetActive(false);
                 choiceContainer.SetActive(true);
+                choice1Container.SetActive(true);
+                choice2Container.SetActive(true);
+                choice3Container.SetActive(true);
                 SetChoicesText(newText1, newText2, newText3);
                 break;
             case UIType.SetEndChoice:

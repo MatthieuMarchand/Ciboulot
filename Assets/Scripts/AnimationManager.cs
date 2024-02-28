@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class AnimationManager : MonoBehaviour
 {
     
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private SequenceManager sequenceManager;
     [SerializeField] private Animator bossAnimation;
     [SerializeField] private Animator ciboulotAnimation;
     
@@ -18,17 +20,24 @@ public class AnimationManager : MonoBehaviour
         {
             gameManager = FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
         }
+        if (sequenceManager == null)
+        {
+            sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
+        }
 
-        if (bossAnimation || ciboulotAnimation == null)
+        if (bossAnimation == null || ciboulotAnimation == null)
         {
             bossAnimation = GameObject.FindWithTag("Boss").GetComponent<Animator>();
             ciboulotAnimation = GameObject.FindWithTag("Ciboulot").GetComponent<Animator>();
 
         }
         
-        gameManager.startIntro.AddListener(IntroAnimation);
-        gameManager.startIntro.AddListener(IntroAnimation);
+        gameManager.startIntro.AddListener(IntroAnimation); 
+    }
 
+    private void Start()
+    {
+        sequenceManager.endChoiceStep.AddListener(playEndChoiceAnimation);
     }
 
     // Update is called once per frame
@@ -47,7 +56,14 @@ public class AnimationManager : MonoBehaviour
         bossAnimation.SetTrigger("boss_idle");
         introIsOver.Invoke();
     }
-    
+
+    private void playEndChoiceAnimation(bool goodAnim)
+    {
+        if (goodAnim)
+            GoodAnimation();
+        else
+            BadAnimation();
+    }
     private void GoodAnimation()
     {
         bossAnimation.SetTrigger("boss_good");
@@ -56,7 +72,7 @@ public class AnimationManager : MonoBehaviour
     public void EndChoiceAnimationOver()
     {
         bossAnimation.SetTrigger("boss_idle");
-        
+        sequenceManager.startChoiceStep.Invoke();
     }
     
     private void BadAnimation()

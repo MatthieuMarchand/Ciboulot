@@ -8,20 +8,20 @@ using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-
-public class EndChoiceEvent : UnityEvent<bool>
-{
-}
+[Tooltip("bool is 'isGoodAnimation'")]
 
 public class SequenceManager : MonoBehaviour
 {
+public class EndChoiceEvent : UnityEvent<bool>
+{
+}
     private float _timer;
     private bool _isTimerActivated;
     private bool _isIssueStep;
     
     public UnityEvent endSequence;
     public UnityEvent startChoiceStep;
-    public EndChoiceEvent endChoice;
+    public EndChoiceEvent endChoiceStep;
     
 
     [SerializeField] private GameObject[] playerResponses;
@@ -61,6 +61,7 @@ public class SequenceManager : MonoBehaviour
         gameManager.startNewSequence.AddListener(OnStartNewSequence);
         gameManager.startIntro.AddListener(OnStartGame);
         startChoiceStep.AddListener(StartChoice);
+        endChoiceStep = new EndChoiceEvent();
 
     }
 
@@ -121,7 +122,7 @@ public class SequenceManager : MonoBehaviour
         
         uiManager.SetUpUI(UIManager.UIType.SetIssue, currentIssue.GetComponent<IssueBehavior>().GetissueText(1), currentIssue.GetComponent<IssueBehavior>().GetissueText(2));
     }
-    private void SetChoiceToPlayerResponses(bool isDefaultChoice, GameObject choiceSelected = null)
+    public void SetChoiceToPlayerResponses(bool isDefaultChoice, GameObject choiceSelected = null)
     {
         _isTimerActivated = false;
         if (isDefaultChoice)
@@ -138,6 +139,12 @@ public class SequenceManager : MonoBehaviour
         }
         CheckNumberOfResponses();
     }
+
+    public void ButtonSelected(GameObject choiceSelected)
+    {
+        SetChoiceToPlayerResponses(choiceSelected);
+    }
+    
     private void CheckNumberOfResponses()
     {
         
@@ -155,7 +162,11 @@ public class SequenceManager : MonoBehaviour
         uiManager.SetUpUI(UIManager.UIType.SetEndChoice);
         if (lastPlayerChoice == goodChoices[playerResponses.Length -1])
         {
-            //todo Player bad animation
+            endChoiceStep.Invoke(true);
+        }
+        else
+        {
+            endChoiceStep.Invoke(false);
         }
     }
     private void StartChoice()
