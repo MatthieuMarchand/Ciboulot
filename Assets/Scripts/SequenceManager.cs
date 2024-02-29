@@ -12,16 +12,18 @@ using UnityEngine.UI;
 
 public class SequenceManager : MonoBehaviour
 {
-public class EndChoiceEvent : UnityEvent<bool>
+public class EndEvent : UnityEvent<bool>
 {
 }
+    
     private float _timer;
     private bool _isTimerActivated;
     private bool _isIssueStep;
     
     public UnityEvent endSequence;
     public UnityEvent startChoiceStep;
-    public EndChoiceEvent endChoiceStep;
+    public EndEvent EndChoiceStep;
+    public EndEvent EndSequenceStep;
     
 
     [SerializeField] private GameObject[] playerResponses;
@@ -30,7 +32,7 @@ public class EndChoiceEvent : UnityEvent<bool>
     [SerializeField] private GameObject[] goodChoices;
 
     [FormerlySerializedAs("CurrentIssue")] [SerializeField] private GameObject currentIssue;
-    [SerializeField] private GameObject defaultChoice;
+    [FormerlySerializedAs("defaultChoice")] [SerializeField] private GameObject currentDefaultChoice;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIManager uiManager;
 
@@ -61,7 +63,7 @@ public class EndChoiceEvent : UnityEvent<bool>
         gameManager.startNewSequence.AddListener(OnStartNewSequence);
         gameManager.startIntro.AddListener(OnStartGame);
         startChoiceStep.AddListener(StartChoice);
-        endChoiceStep = new EndChoiceEvent();
+        EndChoiceStep = new EndEvent();
 
     }
 
@@ -115,20 +117,20 @@ public class EndChoiceEvent : UnityEvent<bool>
         _timer = 5f;
         _isTimerActivated = true;
         _isIssueStep = true;
-        defaultChoice = currentIssue.GetComponent<IssueBehavior>().GetDefaultChoice();
+        currentDefaultChoice = currentIssue.GetComponent<IssueBehavior>().GetDefaultChoice();
         playerResponses = new GameObject[0];
         goodChoices = currentIssue.GetComponent<IssueBehavior>().GetGoodChoices();
         
         
         uiManager.SetUpUI(UIManager.UIType.SetIssue, currentIssue.GetComponent<IssueBehavior>().GetissueText(1), currentIssue.GetComponent<IssueBehavior>().GetissueText(2));
     }
-    public void SetChoiceToPlayerResponses(bool isDefaultChoice, GameObject choiceSelected = null)
+    private void SetChoiceToPlayerResponses(bool isDefaultChoice, GameObject choiceSelected = null)
     {
         _isTimerActivated = false;
         if (isDefaultChoice)
         {
             List<GameObject> listeResponses = new List<GameObject>(playerResponses);
-            listeResponses.Add(defaultChoice);
+            listeResponses.Add(currentDefaultChoice);
             playerResponses = listeResponses.ToArray();
         }
         else
@@ -154,21 +156,53 @@ public class EndChoiceEvent : UnityEvent<bool>
         }
         else if (playerResponses.Length == 3)
         {
-            //TODO EndSequence
+            CheckPlayerResponses();
         }
     }
+    
+    private void CheckPlayerResponses()
+    {
+        int goodAnswers = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            if (goodChoices[i] == playerResponses[i])
+            {
+                goodAnswers++;
+            }
+        }
+        
+        if (goodAnswers > 2)
+        {
+            Debug.Log("Good !");
+            //Todo Play good end sequence animation
+        }
+        else
+        {
+            Debug.Log("Bad !");
+            //todo play bad sequence animation
+        }
+    }
+    
     private void CheckLastPlayerChoice(GameObject lastPlayerChoice)
     {
         uiManager.SetUpUI(UIManager.UIType.SetEndChoice);
         if (lastPlayerChoice == goodChoices[playerResponses.Length -1])
         {
-            endChoiceStep.Invoke(true);
+            
+            EndChoiceStep.Invoke(true);
         }
         else
         {
-            endChoiceStep.Invoke(false);
+            EndChoiceStep.Invoke(false);
         }
     }
+
+    private void SetNextChoiceStep(GameObject lastPlayerChoice)
+    {
+        currentChoices = lastPlayerChoice.GetComponent<ChoiceBehavior>().GetChoices();
+        currentDefaultChoice = lastPlayerChoice.GetComponent<ChoiceBehavior>().GetDefaultChoice();
+    }
+    
     private void StartChoice()
     {
         if (playerResponses.Length < 3)

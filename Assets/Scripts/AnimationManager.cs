@@ -37,7 +37,7 @@ public class AnimationManager : MonoBehaviour
 
     private void Start()
     {
-        sequenceManager.endChoiceStep.AddListener(playEndChoiceAnimation);
+        sequenceManager.EndChoiceStep.AddListener(playEndChoiceAnimation);
     }
 
     // Update is called once per frame
