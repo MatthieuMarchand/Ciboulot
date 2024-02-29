@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 {
 
     [SerializeField] private int lives;
-    [SerializeField] private int sequenceNumber = 1;
+    [SerializeField] private int sequenceNumber = 0;
     [SerializeField] private SequenceManager _sequenceManager;
     [SerializeField] private AnimationManager _animationManager;
     
@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent loseGame;
     public UnityEvent winGame;
     public UnityEvent startNewSequence;
+    public UnityEvent checkGameState;
+
     [FormerlySerializedAs("startGame")] public UnityEvent startIntro;
     
 //Getter and setter
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
             _animationManager = GameObject.FindWithTag("AnimationManager").GetComponent<AnimationManager>();
         }
         
-        loseGame.AddListener(LoseGameHandler);
+        loseGame.AddListener(OnLoseGame);
         winGame.AddListener(WinGameHandler);
         startNewSequence.AddListener(StartNewSequenceHandler);
         startIntro.AddListener(StartIntroHandler);
@@ -46,8 +48,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        _animationManager.introIsOver.AddListener(StartGamehandler);
-        _sequenceManager.endSequence.AddListener(OnSequenceEnd);
+        _animationManager.introIsOver.AddListener(StartGameHandler);
+        _sequenceManager.EndSequenceStep.AddListener(OnSequenceEnd);
         startIntro.Invoke();
     }
 
@@ -58,16 +60,19 @@ public class GameManager : MonoBehaviour
     }
 
     
-    void OnSequenceEnd()
+    void OnSequenceEnd(bool goodSequence)
     {
+        if (!goodSequence)
+            RemoveLife();
+        
         if (lives < 1)
         {
             loseGame.Invoke();
         }
         else
         {
-            sequenceNumber += 1;
-            if (sequenceNumber > 4)
+            sequenceNumber ++;
+            if (sequenceNumber == _sequenceManager.GetFirstIssues().Length)
                 winGame.Invoke();
             else
                 startNewSequence.Invoke();
@@ -75,7 +80,7 @@ public class GameManager : MonoBehaviour
     }
     
     // Handlers pour les événements
-    private void LoseGameHandler()
+    private void OnLoseGame()
     {
         Debug.Log("Game Over");
     }
@@ -95,7 +100,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Starting Intro...");
         
     }
-    private void StartGamehandler()
+    private void StartGameHandler()
     {
         Debug.Log("Starting Game...");
         startNewSequence.Invoke();

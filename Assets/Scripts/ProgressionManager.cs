@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ProgressionManager : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private SequenceManager _sequenceManager;
+    [FormerlySerializedAs("_sequenceManager")] [SerializeField] private SequenceManager sequenceManager;
 
     [SerializeField] private GameObject choiceProgressionbar;
+    [FormerlySerializedAs("sequenceProgressionbar")] [SerializeField] private GameObject gameProgressionbar;
     [SerializeField] private GameObject gameProgressionBar;
 
     private void Awake()
@@ -19,50 +21,46 @@ public class ProgressionManager : MonoBehaviour
         {
             gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
         }
-        if (_sequenceManager == null)
+        if (sequenceManager == null)
         {
-            _sequenceManager = GameObject.FindWithTag("SequenceManager").GetComponent<SequenceManager>();
+            sequenceManager = GameObject.FindWithTag("SequenceManager").GetComponent<SequenceManager>();
         }
         if (choiceProgressionbar == null)
         {
             choiceProgressionbar = GameObject.FindWithTag("ChoiceProgressionBar");
         }
+        if (gameProgressionbar == null)
+        {
+            gameProgressionbar = GameObject.FindWithTag("GameProgressionBar");
+        }
         if (gameProgressionBar == null)
         {
             gameProgressionBar = GameObject.FindWithTag("GameProgressionBar");
         }
-        
-        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _sequenceManager.startChoiceStep.AddListener(SetUpProgressBar);
+        sequenceManager.startChoiceStep.AddListener(SetUpChoiceProgressBar);
+        gameManager.startNewSequence.AddListener(SetUpSequenceProgressBar);
     }
 
-    private void SetUpProgressBar()
+    private void SetUpChoiceProgressBar()
     {
         Debug.Log("Set progress bar");
-        switch (_sequenceManager.GetPlayerResponses().Length)
+        for (int i = 0; i < 3; i++)
         {
-            case 0:
-                choiceProgressionbar.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = true;
-                choiceProgressionbar.transform.GetChild(1).gameObject.GetComponent<Image>().enabled = false;
-                choiceProgressionbar.transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
-                break;
-            case 1:
-                choiceProgressionbar.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = false;
-                choiceProgressionbar.transform.GetChild(1).gameObject.GetComponent<Image>().enabled = true;
-                choiceProgressionbar.transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
-                break;
-            case 2:
-                choiceProgressionbar.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = false;
-                choiceProgressionbar.transform.GetChild(1).gameObject.GetComponent<Image>().enabled = false;
-                choiceProgressionbar.transform.GetChild(2).gameObject.GetComponent<Image>().enabled = true;
-                break;
+            choiceProgressionbar.transform.GetChild(i).gameObject.GetComponent<Image>().enabled = i == sequenceManager.GetPlayerResponses().Length;
         }
-        
-        
+    }
+    
+    private void SetUpSequenceProgressBar()
+    {
+        Debug.Log("Set Global progress bar");
+        for (int i = 0; i < 5; i++)
+        {
+            gameProgressionbar.transform.GetChild(i).gameObject.GetComponent<Image>().enabled = i == gameManager.GetSequenceNumber();
+        }
     }
 }

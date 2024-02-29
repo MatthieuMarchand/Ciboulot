@@ -22,7 +22,9 @@ public class EndEvent : UnityEvent<bool>
     
     public UnityEvent endSequence;
     public UnityEvent startChoiceStep;
+    [Tooltip("bool is 'isGoodAnimation'")]
     public EndEvent EndChoiceStep;
+    [Tooltip("bool is 'isGoodAnimation'")]
     public EndEvent EndSequenceStep;
     
 
@@ -48,6 +50,11 @@ public class EndEvent : UnityEvent<bool>
     {
         return playerResponses;
     }
+    
+    public GameObject[] GetFirstIssues()
+    {
+        return firstIssues;
+    }
     //End Getter and setter
     
     private void Awake()
@@ -64,6 +71,7 @@ public class EndEvent : UnityEvent<bool>
         gameManager.startIntro.AddListener(OnStartGame);
         startChoiceStep.AddListener(StartChoice);
         EndChoiceStep = new EndEvent();
+        EndSequenceStep = new EndEvent();
 
     }
 
@@ -100,16 +108,6 @@ public class EndEvent : UnityEvent<bool>
             SetChoiceToPlayerResponses(true);
         }
     }
-
-    public void EndSequence()
-    {
-        endSequence.Invoke();
-    }
-
-    public void CheckResponses()
-    {
-        
-    }
     
     public void OnStartNewSequence()
     {
@@ -120,10 +118,11 @@ public class EndEvent : UnityEvent<bool>
         currentDefaultChoice = currentIssue.GetComponent<IssueBehavior>().GetDefaultChoice();
         playerResponses = new GameObject[0];
         goodChoices = currentIssue.GetComponent<IssueBehavior>().GetGoodChoices();
-        
+        currentChoices = currentIssue.GetComponent<IssueBehavior>().GetChoices();
         
         uiManager.SetUpUI(UIManager.UIType.SetIssue, currentIssue.GetComponent<IssueBehavior>().GetissueText(1), currentIssue.GetComponent<IssueBehavior>().GetissueText(2));
     }
+    
     private void SetChoiceToPlayerResponses(bool isDefaultChoice, GameObject choiceSelected = null)
     {
         _isTimerActivated = false;
@@ -142,9 +141,9 @@ public class EndEvent : UnityEvent<bool>
         CheckNumberOfResponses();
     }
 
-    public void ButtonSelected(GameObject choiceSelected)
+    public void ButtonSelected(int buttonNumber)
     {
-        SetChoiceToPlayerResponses(choiceSelected);
+        SetChoiceToPlayerResponses(currentChoices[buttonNumber]);
     }
     
     private void CheckNumberOfResponses()
@@ -162,7 +161,7 @@ public class EndEvent : UnityEvent<bool>
     
     private void CheckPlayerResponses()
     {
-        int goodAnswers = 0;
+        var goodAnswers = 0;
         for (int i = 0; i < 3; i++)
         {
             if (goodChoices[i] == playerResponses[i])
@@ -170,22 +169,13 @@ public class EndEvent : UnityEvent<bool>
                 goodAnswers++;
             }
         }
-        
-        if (goodAnswers > 2)
-        {
-            Debug.Log("Good !");
-            //Todo Play good end sequence animation
-        }
-        else
-        {
-            Debug.Log("Bad !");
-            //todo play bad sequence animation
-        }
+        EndSequenceStep.Invoke(goodAnswers > 2);
     }
     
     private void CheckLastPlayerChoice(GameObject lastPlayerChoice)
     {
         uiManager.SetUpUI(UIManager.UIType.SetEndChoice);
+        SetNextChoiceStep(lastPlayerChoice);
         if (lastPlayerChoice == goodChoices[playerResponses.Length -1])
         {
             
@@ -207,7 +197,6 @@ public class EndEvent : UnityEvent<bool>
     {
         if (playerResponses.Length < 3)
         {
-            currentChoices = currentIssue.GetComponent<IssueBehavior>().GetChoices();
             _timer = 5f;
             _isTimerActivated = true;
             _isIssueStep = false;

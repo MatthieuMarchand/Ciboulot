@@ -11,6 +11,7 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private SequenceManager sequenceManager;
     [SerializeField] private Animator bossAnimation;
     [SerializeField] private Animator ciboulotAnimation;
+    private bool rightAnim = true;
     
     public UnityEvent introIsOver;
     // Start is called before the first frame update
@@ -37,7 +38,9 @@ public class AnimationManager : MonoBehaviour
 
     private void Start()
     {
-        sequenceManager.EndChoiceStep.AddListener(playEndChoiceAnimation);
+        sequenceManager.EndChoiceStep.AddListener(PlayEndChoiceAnimation);
+        sequenceManager.EndSequenceStep.AddListener(PlayEndChoiceAnimation);
+
     }
 
     // Update is called once per frame
@@ -46,18 +49,19 @@ public class AnimationManager : MonoBehaviour
         
     }
 
+    //Intro Animation:
     private void IntroAnimation()
     {
         bossAnimation.SetTrigger("boss_intro");
     }
-
     public void IntroAnimationOver()
     {
         bossAnimation.SetTrigger("boss_idle");
         introIsOver.Invoke();
     }
-
-    private void playEndChoiceAnimation(bool goodAnim)
+    
+    //End Choice Animation:
+    private void PlayEndChoiceAnimation(bool goodAnim)
     {
         if (goodAnim)
             GoodAnimation();
@@ -68,15 +72,36 @@ public class AnimationManager : MonoBehaviour
     {
         bossAnimation.SetTrigger("boss_good");
     }
-
+    private void BadAnimation()
+    {
+        bossAnimation.SetTrigger("boss_bad");
+    }
     public void EndChoiceAnimationOver()
     {
         bossAnimation.SetTrigger("boss_idle");
         sequenceManager.startChoiceStep.Invoke();
     }
     
-    private void BadAnimation()
+    //EndSequence Animation
+    private void PlayEndSequenceAnimation(bool goodAnim)
+    {
+        if (goodAnim)
+            HitAnimation();
+        else
+            SatisfyAnimation();
+    }
+    private void HitAnimation()
+    {
+        bossAnimation.SetTrigger(rightAnim ? "boss_frappe_d" : "boss_satisfy");
+    }
+    private void SatisfyAnimation()
     {
         bossAnimation.SetTrigger("boss_bad");
+    }
+    public void EndSequenceAnimationOver()
+    {
+        bossAnimation.SetTrigger("boss_idle");
+        gameManager.checkGameState.Invoke();
+        
     }
 }
