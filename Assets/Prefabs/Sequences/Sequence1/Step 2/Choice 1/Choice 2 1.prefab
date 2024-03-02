@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6130090607615282743
+--- !u!1 &3670149966555080916
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4190829923528669115}
-  - component: {fileID: 5544862474609577749}
+  - component: {fileID: 7546039187826971893}
+  - component: {fileID: 7376601591544712135}
   m_Layer: 0
-  m_Name: Choice 1 2
+  m_Name: Choice 2 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &4190829923528669115
+--- !u!4 &7546039187826971893
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130090607615282743}
+  m_GameObject: {fileID: 3670149966555080916}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 373.9894, y: 299.5167, z: 0.24488534}
@@ -32,18 +32,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5544862474609577749
+--- !u!114 &7376601591544712135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130090607615282743}
+  m_GameObject: {fileID: 3670149966555080916}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7edebfef86f63304f8136a82ab96ae3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChoiceText: Choice 1 2
-  choices: []
-  defaultChoice: {fileID: 0}
+  ChoiceText: Choice 1 1
+  choices:
+  - {fileID: 3670149966555080916, guid: d50e483b18fc907479d929bb07d0d07f, type: 3}
+  - {fileID: 6130090607615282743, guid: 5bffd9d68010dd34bb1c1ff9af32039d, type: 3}
+  - {fileID: 4682970293359357888, guid: d98b635f92e4c0a4fbbf3e8caef1f080, type: 3}
+  defaultChoice: {fileID: 8585379727505785060, guid: 1c1273b8f3493d7478e5cd6dbe0250d6, type: 3}

@@ -21,15 +21,21 @@ public class BossAnimationController : MonoBehaviour
         animationManager.IntroAnimationOver();
     }
     
-    public void CallBackGoodAnimation()
+    public void CallBackChoiceAnimation()
     {
         Debug.Log("CallBackGoodAnimation");
         animationManager.EndChoiceAnimationOver();
     }
     
-    public void CallBackBadAnimation()
+    public void CallBackEndSequenceAnimation()
     {
-        Debug.Log("CallBackBadAnimation");
-        animationManager.EndChoiceAnimationOver();
+        Debug.Log("CallBackEndSequenceAnimation");
+        animationManager.EndSequenceAnimationOver();
+    }
+    
+    public void CallBackEndGameAnimation()
+    {
+        Debug.Log("CallBackEndGameAnimation");
+        animationManager.EndSequenceAnimationOver();
     }
 }

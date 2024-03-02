@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 public class SequenceManager : MonoBehaviour
 {
-public class EndEvent : UnityEvent<bool>
+public class BoolEvent : UnityEvent<bool>
 {
 }
     
@@ -23,9 +23,9 @@ public class EndEvent : UnityEvent<bool>
     public UnityEvent endSequence;
     public UnityEvent startChoiceStep;
     [Tooltip("bool is 'isGoodAnimation'")]
-    public EndEvent EndChoiceStep;
+    public BoolEvent BoolChoiceStep;
     [Tooltip("bool is 'isGoodAnimation'")]
-    public EndEvent EndSequenceStep;
+    public BoolEvent BoolSequenceStep;
     
 
     [SerializeField] private GameObject[] playerResponses;
@@ -68,10 +68,9 @@ public class EndEvent : UnityEvent<bool>
             uiManager = FindAnyObjectByType<UIManager>().GetComponent<UIManager>();
         }
         gameManager.startNewSequence.AddListener(OnStartNewSequence);
-        gameManager.startIntro.AddListener(OnStartGame);
         startChoiceStep.AddListener(StartChoice);
-        EndChoiceStep = new EndEvent();
-        EndSequenceStep = new EndEvent();
+        BoolChoiceStep = new BoolEvent();
+        BoolSequenceStep = new BoolEvent();
 
     }
 
@@ -88,11 +87,11 @@ public class EndEvent : UnityEvent<bool>
         }
                 
     }
-
-    void OnStartGame()
-    {
-        uiManager.SetUpUI(UIManager.UIType.SetStartGame);
-    }
+    //
+    // void OnStartGame()
+    // {
+    //     uiManager.SetUpUI(UIManager.UIType.SetStartGame);
+    // }
     
     private void OnTimerOver()
     {
@@ -143,12 +142,11 @@ public class EndEvent : UnityEvent<bool>
 
     public void ButtonSelected(int buttonNumber)
     {
-        SetChoiceToPlayerResponses(currentChoices[buttonNumber]);
+        SetChoiceToPlayerResponses(false, currentChoices[buttonNumber]);
     }
     
     private void CheckNumberOfResponses()
     {
-        
         if (playerResponses.Length < 3)
         {
             CheckLastPlayerChoice(playerResponses[^1]);
@@ -169,7 +167,7 @@ public class EndEvent : UnityEvent<bool>
                 goodAnswers++;
             }
         }
-        EndSequenceStep.Invoke(goodAnswers > 2);
+        BoolSequenceStep.Invoke(goodAnswers > 2);
     }
     
     private void CheckLastPlayerChoice(GameObject lastPlayerChoice)
@@ -178,12 +176,11 @@ public class EndEvent : UnityEvent<bool>
         SetNextChoiceStep(lastPlayerChoice);
         if (lastPlayerChoice == goodChoices[playerResponses.Length -1])
         {
-            
-            EndChoiceStep.Invoke(true);
+            BoolChoiceStep.Invoke(true);
         }
         else
         {
-            EndChoiceStep.Invoke(false);
+            BoolChoiceStep.Invoke(false);
         }
     }
 

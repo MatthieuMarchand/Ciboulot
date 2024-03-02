@@ -28,6 +28,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject choice2Container;
     [SerializeField] private GameObject choice3Container;
     [SerializeField] private GameObject recapChoiceContainer;
+    
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private SequenceManager sequenceManager;
 
     
     
@@ -35,28 +38,31 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (!issueContainer || !timerUI || !choiceContainer || !choice1Container || !choice2Container || !choice3Container || !recapChoiceContainer)
+        if (gameManager == null)
         {
-            issueContainer = GameObject.FindGameObjectWithTag("IssueContainer");
-            choiceContainer = GameObject.FindGameObjectWithTag("ChoiceContainer");
-            timerUI = GameObject.FindGameObjectWithTag("Timer").gameObject;
-            choice1Container = choiceContainer.transform.Find("choix1").gameObject;
-            choice2Container = choiceContainer.transform.Find("choix2").gameObject;
-            choice3Container = choiceContainer.transform.Find("choix3").gameObject;
-            recapChoiceContainer = choiceContainer.transform.Find("AllChoice").gameObject;
+            gameManager = FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
         }
+        if (sequenceManager == null)
+        {
+            sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
+        }
+        
+        gameManager.startIntro.AddListener(SetUpIntroUI);
+
+        if (issueContainer && timerUI && choiceContainer && choice1Container && choice2Container && choice3Container &&
+            recapChoiceContainer) return;
+        issueContainer = GameObject.FindGameObjectWithTag("IssueContainer");
+        choiceContainer = GameObject.FindGameObjectWithTag("ChoiceContainer");
+        timerUI = GameObject.FindGameObjectWithTag("Timer").gameObject;
+        choice1Container = choiceContainer.transform.Find("choix1").gameObject;
+        choice2Container = choiceContainer.transform.Find("choix2").gameObject;
+        choice3Container = choiceContainer.transform.Find("choix3").gameObject;
+        recapChoiceContainer = choiceContainer.transform.Find("AllChoice").gameObject;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void SetUpIntroUI()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SetUpUI(UIManager.UIType.SetStartGame);
     }
     
     public void SetUpUI(Enum UItype, string newText1 = "", string newText2 = "", string newText3 = "")

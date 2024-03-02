@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class AnimationManager : MonoBehaviour
 {
     
     [SerializeField] private GameManager gameManager;
     [SerializeField] private SequenceManager sequenceManager;
-    [SerializeField] private Animator bossAnimation;
-    [SerializeField] private Animator ciboulotAnimation;
-    private bool rightAnim = true;
+    [FormerlySerializedAs("bossAnimation")] [SerializeField] private Animator bossAnimator;
+    [FormerlySerializedAs("ciboulotAnimation")] [SerializeField] private Animator ciboulotAnimator;
+    private bool _rightAnim = true;
+    private bool _goodSequence;
     
     public UnityEvent introIsOver;
     // Start is called before the first frame update
@@ -26,37 +28,32 @@ public class AnimationManager : MonoBehaviour
             sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
         }
 
-        if (bossAnimation == null || ciboulotAnimation == null)
+        if (bossAnimator == null || ciboulotAnimator == null)
         {
-            bossAnimation = GameObject.FindWithTag("Boss").GetComponent<Animator>();
-            ciboulotAnimation = GameObject.FindWithTag("Ciboulot").GetComponent<Animator>();
+            bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
+            ciboulotAnimator = GameObject.FindWithTag("Ciboulot").GetComponent<Animator>();
 
         }
         
-        gameManager.startIntro.AddListener(IntroAnimation); 
+        gameManager.startIntro.AddListener(IntroAnimation);
+        gameManager.winGame.AddListener(PlayEndGameAnimation); 
+
     }
 
     private void Start()
     {
-        sequenceManager.EndChoiceStep.AddListener(PlayEndChoiceAnimation);
-        sequenceManager.EndSequenceStep.AddListener(PlayEndChoiceAnimation);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        sequenceManager.BoolChoiceStep.AddListener(PlayEndChoiceAnimation);
+        sequenceManager.BoolSequenceStep.AddListener(PlayEndSequenceAnimation);
     }
 
     //Intro Animation:
     private void IntroAnimation()
     {
-        bossAnimation.SetTrigger("boss_intro");
+        bossAnimator.SetTrigger("boss_intro");
     }
     public void IntroAnimationOver()
     {
-        bossAnimation.SetTrigger("boss_idle");
+        bossAnimator.SetTrigger("boss_idle");
         introIsOver.Invoke();
     }
     
@@ -70,15 +67,17 @@ public class AnimationManager : MonoBehaviour
     }
     private void GoodAnimation()
     {
-        bossAnimation.SetTrigger("boss_good");
+        bossAnimator.SetTrigger("boss_good");
     }
     private void BadAnimation()
     {
-        bossAnimation.SetTrigger("boss_bad");
+        bossAnimator.SetTrigger("boss_bad");
+        ciboulotAnimator.SetTrigger("ciboulot_bad");
     }
     public void EndChoiceAnimationOver()
     {
-        bossAnimation.SetTrigger("boss_idle");
+        bossAnimator.SetTrigger("boss_idle");
+        ciboulotAnimator.SetTrigger("ciboulot_idle");
         sequenceManager.startChoiceStep.Invoke();
     }
     
@@ -86,22 +85,42 @@ public class AnimationManager : MonoBehaviour
     private void PlayEndSequenceAnimation(bool goodAnim)
     {
         if (goodAnim)
-            HitAnimation();
-        else
+        {
+            _goodSequence = true;
             SatisfyAnimation();
+        }
+        else
+        {
+            _goodSequence = true;
+            HitAnimation();
+        }
     }
     private void HitAnimation()
     {
-        bossAnimation.SetTrigger(rightAnim ? "boss_frappe_d" : "boss_satisfy");
+        bossAnimator.SetTrigger(_rightAnim ? "boss_frappe_d" : "boss_frappe_g");
+        ciboulotAnimator.SetTrigger(_rightAnim ? "ciboulot_frappe_d" : "ciboulot_frappe_g");
+        _rightAnim = !_rightAnim;
     }
     private void SatisfyAnimation()
     {
-        bossAnimation.SetTrigger("boss_bad");
+        bossAnimator.SetTrigger("boss_satisfy");
     }
     public void EndSequenceAnimationOver()
     {
-        bossAnimation.SetTrigger("boss_idle");
-        gameManager.checkGameState.Invoke();
-        
+        bossAnimator.SetTrigger("boss_idle");
+        ciboulotAnimator.SetTrigger("ciboulot_idle");
+        gameManager.checkGameState.Invoke(_goodSequence);
     }
+    
+    //EndGame Animation
+    private void PlayEndGameAnimation()
+    {
+        bossAnimator.SetTrigger("boss_happy");
+        ciboulotAnimator.SetTrigger("ciboulot_happy");
+    }
+    public void OnEndGameAnimationOver()
+    {
+        gameManager.endScreen.Invoke();
+    }
+
 }

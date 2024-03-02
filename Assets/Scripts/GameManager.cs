@@ -8,7 +8,10 @@ using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
-
+    public class BoolEvent : UnityEvent<bool>
+    {
+    }
+    
     [SerializeField] private int lives;
     [SerializeField] private int sequenceNumber = 0;
     [SerializeField] private SequenceManager _sequenceManager;
@@ -18,7 +21,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent loseGame;
     public UnityEvent winGame;
     public UnityEvent startNewSequence;
-    public UnityEvent checkGameState;
+    public BoolEvent checkGameState;
+    public UnityEvent endScreen;
 
     [FormerlySerializedAs("startGame")] public UnityEvent startIntro;
     
@@ -39,28 +43,33 @@ public class GameManager : MonoBehaviour
         {
             _animationManager = GameObject.FindWithTag("AnimationManager").GetComponent<AnimationManager>();
         }
+
+        checkGameState = new BoolEvent();
+
         
         loseGame.AddListener(OnLoseGame);
         winGame.AddListener(WinGameHandler);
         startNewSequence.AddListener(StartNewSequenceHandler);
         startIntro.AddListener(StartIntroHandler);
+        endScreen.AddListener(SwitchToEndScreen);
+
     }
 
-    void Start()
+    private void Start()
     {
         _animationManager.introIsOver.AddListener(StartGameHandler);
-        _sequenceManager.EndSequenceStep.AddListener(OnSequenceEnd);
+        checkGameState.AddListener(OnSequenceEnd);
         startIntro.Invoke();
     }
 
 
-    void RemoveLife()
+    private void RemoveLife()
     {
         lives -= 1;
     }
 
-    
-    void OnSequenceEnd(bool goodSequence)
+
+    private void OnSequenceEnd(bool goodSequence)
     {
         if (!goodSequence)
             RemoveLife();
@@ -104,5 +113,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Starting Game...");
         startNewSequence.Invoke();
+    }
+    
+    private void SwitchToEndScreen()
+    {
+        Debug.Log("EndScreen...");
     }
 }

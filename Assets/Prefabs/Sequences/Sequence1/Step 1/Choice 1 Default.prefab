@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1426583035347322574}
   - component: {fileID: 336185592559450834}
   m_Layer: 0
-  m_Name: Choice Default 1
+  m_Name: Choice 1 Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChoiceText: DefaultChoice
   choices:
-  - {fileID: 3670149966555080916, guid: 747200109bbc6f540845c6bc71ed566f, type: 3}
-  - {fileID: 6130090607615282743, guid: 3a8783ea790d618439dd9147c9037c23, type: 3}
-  - {fileID: 4682970293359357888, guid: f598ae08f408da0458a0eeffd6fc600f, type: 3}
-  defaultChoice: {fileID: 8585379727505785060, guid: c33ad93b65a1ae347bf9e740b5ef1d71, type: 3}
+  - {fileID: 3670149966555080916, guid: 72d68181c01cae642ba02186c294b5b1, type: 3}
+  - {fileID: 6130090607615282743, guid: f81cf220d1ee2264fa6a6e7724ca7bce, type: 3}
+  - {fileID: 4682970293359357888, guid: 33e5e2cd194db0c49aa307b621688c41, type: 3}
+  defaultChoice: {fileID: 8585379727505785060, guid: b43c7926f7cb8694c807165134faa88a, type: 3}
