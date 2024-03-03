@@ -12,6 +12,8 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private SequenceManager sequenceManager;
     [FormerlySerializedAs("bossAnimation")] [SerializeField] private Animator bossAnimator;
     [FormerlySerializedAs("ciboulotAnimation")] [SerializeField] private Animator ciboulotAnimator;
+    [SerializeField] private GameObject blackScreen;
+    [SerializeField] private Animator animatorBlackScreen;
     private bool _rightAnim = true;
     private bool _goodSequence;
     
@@ -27,15 +29,17 @@ public class AnimationManager : MonoBehaviour
             sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
         }
 
-        if (bossAnimator == null || ciboulotAnimator == null)
+        if (bossAnimator == null || ciboulotAnimator == null || animatorBlackScreen == null)
         {
             bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
             ciboulotAnimator = GameObject.FindWithTag("Ciboulot").GetComponent<Animator>();
+            blackScreen = GameObject.FindWithTag("AnimationBlackScreen");
+            animatorBlackScreen = blackScreen.GetComponent<Animator>();
 
         }
         
         gameManager.startIntro.AddListener(IntroAnimation);
-        gameManager.winGame.AddListener(PlayEndGameAnimation); 
+        gameManager.winGame.AddListener(PlayEndGameAnimation);
 
     }
 
@@ -49,10 +53,12 @@ public class AnimationManager : MonoBehaviour
     private void IntroAnimation()
     {
         bossAnimator.SetTrigger("boss_intro");
+        animatorBlackScreen.SetTrigger("fade_in");
     }
     public void IntroAnimationOver()
     {
-        introIsOver.Invoke();
+        // introIsOver.Invoke();
+        blackScreen.SetActive(false);
     }
     
     //End Choice Animation:

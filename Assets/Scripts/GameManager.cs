@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private int lives;
     [SerializeField] private int sequenceNumber = 0;
-    [SerializeField] private SequenceManager _sequenceManager;
-    [SerializeField] private AnimationManager _animationManager;
+    [FormerlySerializedAs("_sequenceManager")] [SerializeField] private SequenceManager sequenceManager;
+    [FormerlySerializedAs("_animationManager")] [SerializeField] private AnimationManager animationManager;
     
     
     public UnityEvent loseGame;
@@ -36,13 +36,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_sequenceManager == null)
+        if (sequenceManager == null)
         {
-            _sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
+            sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
         }
-        if (_animationManager == null)
+        if (animationManager == null)
         {
-            _animationManager = GameObject.FindWithTag("AnimationManager").GetComponent<AnimationManager>();
+            animationManager = GameObject.FindWithTag("AnimationManager").GetComponent<AnimationManager>();
         }
 
         checkGameState = new BoolEvent();
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _animationManager.introIsOver.AddListener(StartGameHandler);
+        animationManager.introIsOver.AddListener(StartGameHandler);
         checkGameState.AddListener(OnSequenceEnd);
         startIntro.Invoke();
     }
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         else
         {
             sequenceNumber ++;
-            if (sequenceNumber == _sequenceManager.GetFirstIssues().Length)
+            if (sequenceNumber == sequenceManager.GetFirstIssues().Length)
                 winGame.Invoke();
             else
                 startNewSequence.Invoke();
@@ -90,34 +90,34 @@ public class GameManager : MonoBehaviour
     }
     
     // Handlers pour les événements
-    private void OnLoseGame()
+    private static void OnLoseGame()
     {
         Debug.Log("Game Over");
         SceneManager.LoadScene("LoseScreen");
     }
 
-    private void WinGameHandler()
+    private static void WinGameHandler()
     {
         Debug.Log("You Win!");
     }
 
-    private void StartNewSequenceHandler()
+    private static void StartNewSequenceHandler()
     {
         Debug.Log("Starting new sequence...");
     }
     
-    private void StartIntroHandler()
+    private static void StartIntroHandler()
     {
         Debug.Log("Starting Intro...");
         
     }
-    private void StartGameHandler()
+    public void StartGameHandler()
     {
         Debug.Log("Starting Game...");
         startNewSequence.Invoke();
     }
     
-    private void SwitchToEndScreen()
+    private static void SwitchToEndScreen()
     {
         Debug.Log("EndScreen...");
         SceneManager.LoadScene("WinScreen");
