@@ -23,7 +23,7 @@ public class BossAnimationController : MonoBehaviour
     
     public void CallBackChoiceAnimation()
     {
-        Debug.Log("CallBackGoodAnimation");
+        Debug.Log("CallBackEndChoiceAnimation");
         animationManager.EndChoiceAnimationOver();
     }
     
@@ -36,6 +36,6 @@ public class BossAnimationController : MonoBehaviour
     public void CallBackEndGameAnimation()
     {
         Debug.Log("CallBackEndGameAnimation");
-        animationManager.EndSequenceAnimationOver();
+        animationManager.OnEndGameAnimationOver();
     }
 }

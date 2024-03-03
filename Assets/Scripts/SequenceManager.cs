@@ -46,6 +46,11 @@ public class BoolEvent : UnityEvent<bool>
         return _timer;
     }
 
+    public GameObject GetCurrentIssue()
+    {
+        return currentIssue;
+    }
+
     public GameObject[] GetPlayerResponses()
     {
         return playerResponses;
@@ -87,11 +92,6 @@ public class BoolEvent : UnityEvent<bool>
         }
                 
     }
-    //
-    // void OnStartGame()
-    // {
-    //     uiManager.SetUpUI(UIManager.UIType.SetStartGame);
-    // }
     
     private void OnTimerOver()
     {

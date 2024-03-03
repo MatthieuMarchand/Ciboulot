@@ -98,7 +98,8 @@ public class AnimationManager : MonoBehaviour
     private void HitAnimation()
     {
         bossAnimator.SetTrigger(_rightAnim ? "boss_frappe_d" : "boss_frappe_g");
-        ciboulotAnimator.SetTrigger(_rightAnim ? "ciboulot_frappe_d" : "ciboulot_frappe_g");
+        //ciboulotAnimator.SetTrigger(_rightAnim ? "ciboulot_frappe_d" : "ciboulot_frappe_g");
+        ciboulotAnimator.SetTrigger("ciboulot_frappe_d");
         _rightAnim = !_rightAnim;
     }
     private void SatisfyAnimation()

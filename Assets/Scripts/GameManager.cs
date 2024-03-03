@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
@@ -118,5 +119,6 @@ public class GameManager : MonoBehaviour
     private void SwitchToEndScreen()
     {
         Debug.Log("EndScreen...");
+        SceneManager.LoadScene("WinScreen");
     }
 }

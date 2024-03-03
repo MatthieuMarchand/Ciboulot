@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
         }
         
         gameManager.startIntro.AddListener(SetUpIntroUI);
+        //gameManager.startNewSequence.AddListener(); //TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         if (issueContainer && timerUI && choiceContainer && choice1Container && choice2Container && choice3Container &&
             recapChoiceContainer) return;
