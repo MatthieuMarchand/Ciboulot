@@ -14,6 +14,7 @@ TagManager:
   - ChoiceProgressionBar
   - GameProgressionBar
   - AnimationBlackScreen
+  - StartButton
   layers:
   - Default
   - TransparentFX

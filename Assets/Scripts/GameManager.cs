@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
     public void StartGameHandler()
     {
         Debug.Log("Starting Game...");
+        GameObject.FindWithTag("StartButton").SetActive(false);
         startNewSequence.Invoke();
     }
     

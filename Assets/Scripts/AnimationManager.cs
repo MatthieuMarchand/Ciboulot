@@ -12,13 +12,13 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private SequenceManager sequenceManager;
     [FormerlySerializedAs("bossAnimation")] [SerializeField] private Animator bossAnimator;
     [FormerlySerializedAs("ciboulotAnimation")] [SerializeField] private Animator ciboulotAnimator;
-    [SerializeField] private GameObject blackScreen;
     [SerializeField] private Animator animatorBlackScreen;
     private bool _rightAnim = true;
     private bool _goodSequence;
     
     public UnityEvent introIsOver;
-    void Awake()
+
+    private void Awake()
     {
         if (gameManager == null)
         {
@@ -33,8 +33,7 @@ public class AnimationManager : MonoBehaviour
         {
             bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
             ciboulotAnimator = GameObject.FindWithTag("Ciboulot").GetComponent<Animator>();
-            blackScreen = GameObject.FindWithTag("AnimationBlackScreen");
-            animatorBlackScreen = blackScreen.GetComponent<Animator>();
+            animatorBlackScreen = GameObject.FindWithTag("AnimationBlackScreen").GetComponent<Animator>();
 
         }
         
@@ -58,7 +57,6 @@ public class AnimationManager : MonoBehaviour
     public void IntroAnimationOver()
     {
         // introIsOver.Invoke();
-        blackScreen.SetActive(false);
     }
     
     //End Choice Animation:

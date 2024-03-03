@@ -115,7 +115,7 @@ public class BoolEvent : UnityEvent<bool>
         _isTimerActivated = true;
         _isIssueStep = true;
         currentDefaultChoice = currentIssue.GetComponent<IssueBehavior>().GetDefaultChoice();
-        playerResponses = new GameObject[0];
+        playerResponses = Array.Empty<GameObject>();
         goodChoices = currentIssue.GetComponent<IssueBehavior>().GetGoodChoices();
         currentChoices = currentIssue.GetComponent<IssueBehavior>().GetChoices();
         
@@ -151,13 +151,13 @@ public class BoolEvent : UnityEvent<bool>
         {
             CheckLastPlayerChoice(playerResponses[^1]);
         }
-        else if (playerResponses.Length == 3)
+        else
         {
             StartCoroutine(ShowResponsesAndWait());
         }
     }
 
-    IEnumerator ShowResponsesAndWait()
+    private IEnumerator ShowResponsesAndWait()
     {
         uiManager.SetUpUI(UIManager.UIType.SetRecapPlayersResponses, playerResponses[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), playerResponses[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), playerResponses[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText());
         yield return new WaitForSeconds(5f);
@@ -182,14 +182,7 @@ public class BoolEvent : UnityEvent<bool>
     {
         uiManager.SetUpUI(UIManager.UIType.SetEndChoice);
         SetNextChoiceStep(lastPlayerChoice);
-        if (lastPlayerChoice == goodChoices[playerResponses.Length -1])
-        {
-            BoolChoiceStep.Invoke(true);
-        }
-        else
-        {
-            BoolChoiceStep.Invoke(false);
-        }
+        BoolChoiceStep.Invoke(lastPlayerChoice == goodChoices[playerResponses.Length - 1]);
     }
 
     private void SetNextChoiceStep(GameObject lastPlayerChoice)
@@ -200,12 +193,9 @@ public class BoolEvent : UnityEvent<bool>
     
     private void StartChoice()
     {
-        if (playerResponses.Length < 3)
-        {
-            _timer = 5f;
-            _isTimerActivated = true;
-            _isIssueStep = false;
-            uiManager.SetUpUI(UIManager.UIType.SetChoice, currentChoices[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), currentChoices[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), currentChoices[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText());
-        }
+        _timer = 5f;
+        _isTimerActivated = true;
+        _isIssueStep = false;
+        uiManager.SetUpUI(UIManager.UIType.SetChoice, currentChoices[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), currentChoices[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), currentChoices[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText());
     }
 }
