@@ -10,14 +10,23 @@ public class IssueContainerBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (question1 || question2 == null)
+        {
+            question1 = transform.Find("Question 1").gameObject;
+            question2 = transform.Find("Question 2").gameObject;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Space)) return;
-        if (question1.activeSelf == true)
+        SwitchUI();
+    }
+
+    public void SwitchUI()
+    {
+        if (question1.activeSelf)
         {
             question1.SetActive(false);
             question2.SetActive(true);

@@ -4,16 +4,28 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
-
+    public class BoolEvent : UnityEvent<bool>
+    {
+    }
+    
     [SerializeField] private int lives;
-    [SerializeField] private int sequenceNumber = 1;
-    [SerializeField] private SequenceManager _sequenceManager;
+    [SerializeField] private int sequenceNumber = 0;
+    [FormerlySerializedAs("_sequenceManager")] [SerializeField] private SequenceManager sequenceManager;
+    [FormerlySerializedAs("_animationManager")] [SerializeField] private AnimationManager animationManager;
+    
+    
     public UnityEvent loseGame;
     public UnityEvent winGame;
     public UnityEvent startNewSequence;
+    public BoolEvent checkGameState;
+    public UnityEvent endScreen;
+
+    [FormerlySerializedAs("startGame")] public UnityEvent startIntro;
     
 //Getter and setter
 
@@ -24,40 +36,53 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        loseGame.AddListener(LoseGameHandler);
+        if (sequenceManager == null)
+        {
+            sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
+        }
+        if (animationManager == null)
+        {
+            animationManager = GameObject.FindWithTag("AnimationManager").GetComponent<AnimationManager>();
+        }
+
+        checkGameState = new BoolEvent();
+
+        
+        loseGame.AddListener(OnLoseGame);
         winGame.AddListener(WinGameHandler);
         startNewSequence.AddListener(StartNewSequenceHandler);
+        startIntro.AddListener(StartIntroHandler);
+        endScreen.AddListener(SwitchToEndScreen);
+
     }
 
-    void Start()
+    private void Start()
     {
-        if (_sequenceManager == null)
-        {
-            _sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
-        }
-        
-        _sequenceManager.endSequence.AddListener(OnSequenceEnd);
-        startNewSequence.Invoke();
-        
+        animationManager.introIsOver.AddListener(StartGameHandler);
+        checkGameState.AddListener(OnSequenceEnd);
+        startIntro.Invoke();
     }
 
 
-    void RemoveLife()
+    private void RemoveLife()
     {
         lives -= 1;
     }
 
-    
-    void OnSequenceEnd()
+
+    private void OnSequenceEnd(bool goodSequence)
     {
+        if (!goodSequence)
+            RemoveLife();
+        
         if (lives < 1)
         {
             loseGame.Invoke();
         }
         else
         {
-            sequenceNumber += 1;
-            if (sequenceNumber > 4)
+            sequenceNumber ++;
+            if (sequenceNumber == sequenceManager.GetFirstIssues().Length)
                 winGame.Invoke();
             else
                 startNewSequence.Invoke();
@@ -65,18 +90,36 @@ public class GameManager : MonoBehaviour
     }
     
     // Handlers pour les événements
-    private void LoseGameHandler()
+    private static void OnLoseGame()
     {
         Debug.Log("Game Over");
+        SceneManager.LoadScene("LoseScreen");
     }
 
-    private void WinGameHandler()
+    private static void WinGameHandler()
     {
         Debug.Log("You Win!");
     }
 
-    private void StartNewSequenceHandler()
+    private static void StartNewSequenceHandler()
     {
         Debug.Log("Starting new sequence...");
+    }
+    
+    private static void StartIntroHandler()
+    {
+        Debug.Log("Starting Intro...");
+        
+    }
+    public void StartGameHandler()
+    {
+        Debug.Log("Starting Game...");
+        startNewSequence.Invoke();
+    }
+    
+    private static void SwitchToEndScreen()
+    {
+        Debug.Log("EndScreen...");
+        SceneManager.LoadScene("WinScreen");
     }
 }

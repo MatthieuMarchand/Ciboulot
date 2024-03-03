@@ -9,6 +9,11 @@ TagManager:
   - IssueContainer
   - Boss
   - Timer
+  - Ciboulot
+  - AnimationManager
+  - ChoiceProgressionBar
+  - GameProgressionBar
+  - AnimationBlackScreen
   layers:
   - Default
   - TransparentFX
