@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
     private void OnLoseGame()
     {
         Debug.Log("Game Over");
+        SceneManager.LoadScene("LoseScreen");
     }
 
     private void WinGameHandler()

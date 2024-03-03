@@ -33,10 +33,6 @@ public class ProgressionManager : MonoBehaviour
         {
             gameProgressionbar = GameObject.FindWithTag("GameProgressionBar");
         }
-        if (gameProgressionBar == null)
-        {
-            gameProgressionBar = GameObject.FindWithTag("GameProgressionBar");
-        }
     }
 
     // Start is called before the first frame update

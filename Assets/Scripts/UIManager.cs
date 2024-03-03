@@ -18,7 +18,9 @@ public class UIManager : MonoBehaviour
         SetChoice,
         SetEndChoice,
         SetEndSequence,
-        SetIntroOrEndGame
+        SetEndGame,
+        SetRecapPlayersResponses,
+        HideRecap
     }
     
     [SerializeField] private GameObject issueContainer;
@@ -28,6 +30,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject choice2Container;
     [SerializeField] private GameObject choice3Container;
     [SerializeField] private GameObject recapChoiceContainer;
+    
+    [SerializeField] private GameObject choiceProgressionbar;
+    [SerializeField] private GameObject gameProgressionBar;
+
+
     
     [SerializeField] private GameManager gameManager;
     [SerializeField] private SequenceManager sequenceManager;
@@ -48,10 +55,12 @@ public class UIManager : MonoBehaviour
         }
         
         gameManager.startIntro.AddListener(SetUpIntroUI);
-        //gameManager.startNewSequence.AddListener(); //TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        gameManager.winGame.AddListener(SetUpEndGame);
+        gameManager.loseGame.AddListener(SetUpEndGame);
+
 
         if (issueContainer && timerUI && choiceContainer && choice1Container && choice2Container && choice3Container &&
-            recapChoiceContainer) return;
+            recapChoiceContainer && choiceProgressionbar && gameProgressionBar) return;
         issueContainer = GameObject.FindGameObjectWithTag("IssueContainer");
         choiceContainer = GameObject.FindGameObjectWithTag("ChoiceContainer");
         timerUI = GameObject.FindGameObjectWithTag("Timer").gameObject;
@@ -59,11 +68,18 @@ public class UIManager : MonoBehaviour
         choice2Container = choiceContainer.transform.Find("choix2").gameObject;
         choice3Container = choiceContainer.transform.Find("choix3").gameObject;
         recapChoiceContainer = choiceContainer.transform.Find("AllChoice").gameObject;
+        choiceProgressionbar = GameObject.FindWithTag("ChoiceProgressionBar");
+        gameProgressionBar = GameObject.FindWithTag("GameProgressionBar");
     }
 
     private void SetUpIntroUI()
     {
         SetUpUI(UIManager.UIType.SetStartGame);
+    }
+
+    private void SetUpEndGame()
+    {
+        SetUpUI(UIType.SetEndGame);
     }
     
     public void SetUpUI(Enum UItype, string newText1 = "", string newText2 = "", string newText3 = "")
@@ -71,10 +87,13 @@ public class UIManager : MonoBehaviour
         switch (UItype)
         {
             case UIType.SetStartGame:
+                gameProgressionBar.SetActive(false);
+                recapChoiceContainer.SetActive(false);
                 choiceContainer.SetActive(false);
                 timerUI.SetActive(false);
                 break;
             case UIType.SetIssue:
+                gameProgressionBar.SetActive(true);
                 choiceContainer.SetActive(false);
                 issueContainer.SetActive(true);
                 timerUI.SetActive(true);
@@ -95,6 +114,22 @@ public class UIManager : MonoBehaviour
                 choice1Container.SetActive(false);
                 choice2Container.SetActive(false);
                 choice3Container.SetActive(false);
+                break;
+            case UIType.SetRecapPlayersResponses:
+                timerUI.SetActive(false);
+                issueContainer.SetActive(false);
+                choice1Container.SetActive(false);
+                choice2Container.SetActive(false);
+                choice3Container.SetActive(false);
+                recapChoiceContainer.SetActive(true);
+                SetRecapPlayerResponsesText(newText1, newText2, newText3);
+                break;
+            case UIType.HideRecap:
+                recapChoiceContainer.SetActive(false);
+                break;
+            case UIType.SetEndGame:
+                gameProgressionBar.SetActive(false);
+                choiceContainer.SetActive(false);
                 break;
         }
     }
@@ -129,4 +164,9 @@ public class UIManager : MonoBehaviour
             choiceText3;
     }
 
+    private void SetRecapPlayerResponsesText(string choiceText1, string choiceText2, string choiceText3)
+    {
+        recapChoiceContainer.GetComponentInChildren<TextMeshProUGUI>().text =
+            choiceText1 + " " + choiceText2 + " " + choiceText3 + " ";
+    }
 }

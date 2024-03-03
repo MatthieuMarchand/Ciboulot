@@ -16,7 +16,6 @@ public class AnimationManager : MonoBehaviour
     private bool _goodSequence;
     
     public UnityEvent introIsOver;
-    // Start is called before the first frame update
     void Awake()
     {
         if (gameManager == null)
@@ -53,7 +52,6 @@ public class AnimationManager : MonoBehaviour
     }
     public void IntroAnimationOver()
     {
-        bossAnimator.SetTrigger("boss_idle");
         introIsOver.Invoke();
     }
     
@@ -68,6 +66,7 @@ public class AnimationManager : MonoBehaviour
     private void GoodAnimation()
     {
         bossAnimator.SetTrigger("boss_good");
+        ciboulotAnimator.SetTrigger("ciboulot_good");
     }
     private void BadAnimation()
     {
@@ -76,8 +75,6 @@ public class AnimationManager : MonoBehaviour
     }
     public void EndChoiceAnimationOver()
     {
-        bossAnimator.SetTrigger("boss_idle");
-        ciboulotAnimator.SetTrigger("ciboulot_idle");
         sequenceManager.startChoiceStep.Invoke();
     }
     
@@ -91,15 +88,14 @@ public class AnimationManager : MonoBehaviour
         }
         else
         {
-            _goodSequence = true;
+            _goodSequence = false;
             HitAnimation();
         }
     }
     private void HitAnimation()
     {
         bossAnimator.SetTrigger(_rightAnim ? "boss_frappe_d" : "boss_frappe_g");
-        //ciboulotAnimator.SetTrigger(_rightAnim ? "ciboulot_frappe_d" : "ciboulot_frappe_g");
-        ciboulotAnimator.SetTrigger("ciboulot_frappe_d");
+        ciboulotAnimator.SetTrigger(_rightAnim ? "ciboulot_frappe_d" : "ciboulot_frappe_g");
         _rightAnim = !_rightAnim;
     }
     private void SatisfyAnimation()
@@ -108,16 +104,14 @@ public class AnimationManager : MonoBehaviour
     }
     public void EndSequenceAnimationOver()
     {
-        bossAnimator.SetTrigger("boss_idle");
-        ciboulotAnimator.SetTrigger("ciboulot_idle");
         gameManager.checkGameState.Invoke(_goodSequence);
     }
     
     //EndGame Animation
     private void PlayEndGameAnimation()
     {
-        bossAnimator.SetTrigger("boss_happy");
         ciboulotAnimator.SetTrigger("ciboulot_happy");
+        bossAnimator.SetTrigger("boss_happy");
     }
     public void OnEndGameAnimationOver()
     {

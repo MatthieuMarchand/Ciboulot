@@ -153,8 +153,16 @@ public class BoolEvent : UnityEvent<bool>
         }
         else if (playerResponses.Length == 3)
         {
-            CheckPlayerResponses();
+            StartCoroutine(ShowResponsesAndWait());
         }
+    }
+
+    IEnumerator ShowResponsesAndWait()
+    {
+        uiManager.SetUpUI(UIManager.UIType.SetRecapPlayersResponses, playerResponses[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), playerResponses[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), playerResponses[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText());
+        yield return new WaitForSeconds(5f);
+        uiManager.SetUpUI(UIManager.UIType.HideRecap);
+        CheckPlayerResponses();
     }
     
     private void CheckPlayerResponses()
@@ -167,7 +175,7 @@ public class BoolEvent : UnityEvent<bool>
                 goodAnswers++;
             }
         }
-        BoolSequenceStep.Invoke(goodAnswers > 2);
+        BoolSequenceStep.Invoke(goodAnswers > 1);
     }
     
     private void CheckLastPlayerChoice(GameObject lastPlayerChoice)
