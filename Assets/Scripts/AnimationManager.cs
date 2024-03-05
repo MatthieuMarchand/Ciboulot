@@ -12,6 +12,8 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private SequenceManager sequenceManager;
     [FormerlySerializedAs("bossAnimation")] [SerializeField] private Animator bossAnimator;
     [FormerlySerializedAs("ciboulotAnimation")] [SerializeField] private Animator ciboulotAnimator;
+    [SerializeField] private Animator rightHandAnimator;
+    [SerializeField] private Animator leftHandAnimator;
     [SerializeField] private Animator animatorBlackScreen;
     private bool _rightAnim = true;
     private bool _goodSequence;
@@ -29,12 +31,13 @@ public class AnimationManager : MonoBehaviour
             sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
         }
 
-        if (bossAnimator == null || ciboulotAnimator == null || animatorBlackScreen == null)
+        if (bossAnimator == null || ciboulotAnimator == null || animatorBlackScreen == null || rightHandAnimator == null || leftHandAnimator == null)
         {
             bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
             ciboulotAnimator = GameObject.FindWithTag("Ciboulot").GetComponent<Animator>();
             animatorBlackScreen = GameObject.FindWithTag("AnimationBlackScreen").GetComponent<Animator>();
-
+            rightHandAnimator = GameObject.FindWithTag("Hands").transform.Find("MainDroite").GetComponent<Animator>();
+            leftHandAnimator = GameObject.FindWithTag("Hands").transform.Find("MainGauche").GetComponent<Animator>();
         }
         
         gameManager.startIntro.AddListener(IntroAnimation);
@@ -100,6 +103,12 @@ public class AnimationManager : MonoBehaviour
     {
         bossAnimator.SetTrigger(_rightAnim ? "boss_frappe_d" : "boss_frappe_g");
         ciboulotAnimator.SetTrigger(_rightAnim ? "ciboulot_frappe_d" : "ciboulot_frappe_g");
+
+        if (_rightAnim)
+            rightHandAnimator.SetTrigger("PlayRightHandAnimation");
+        else
+            leftHandAnimator.SetTrigger("PlayLeftHandAnimation");
+        
         _rightAnim = !_rightAnim;
     }
     private void SatisfyAnimation()

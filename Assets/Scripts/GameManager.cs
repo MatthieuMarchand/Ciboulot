@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent startNewSequence;
     public BoolEvent checkGameState;
     public UnityEvent endScreen;
+    public UnityEvent lifeRemoved;
+
 
     [FormerlySerializedAs("startGame")] public UnityEvent startIntro;
     
@@ -32,6 +34,11 @@ public class GameManager : MonoBehaviour
     public int GetSequenceNumber()
     {
         return sequenceNumber;
+    }
+
+    public int GetLives()
+    {
+        return lives;
     }
 
     private void Awake()
@@ -67,6 +74,7 @@ public class GameManager : MonoBehaviour
     private void RemoveLife()
     {
         lives -= 1;
+        lifeRemoved.Invoke();
     }
 
 
