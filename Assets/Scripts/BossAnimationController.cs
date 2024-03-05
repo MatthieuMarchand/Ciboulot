@@ -18,7 +18,6 @@ public class BossAnimationController : MonoBehaviour
     public void CallBackIntroAnimation()
     {
         Debug.Log("CallBackIntroAnimation");
-        animationManager.IntroAnimationOver();
     }
     
     public void CallBackChoiceAnimation()

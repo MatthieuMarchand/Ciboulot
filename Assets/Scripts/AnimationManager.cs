@@ -57,10 +57,6 @@ public class AnimationManager : MonoBehaviour
         bossAnimator.SetTrigger("boss_intro");
         animatorBlackScreen.SetTrigger("fade_in");
     }
-    public void IntroAnimationOver()
-    {
-        // introIsOver.Invoke();
-    }
     
     //End Choice Animation:
     private void PlayEndChoiceAnimation(bool goodAnim)
