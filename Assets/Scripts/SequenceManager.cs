@@ -119,7 +119,7 @@ public class BoolEvent : UnityEvent<bool>
         goodChoices = currentIssue.GetComponent<IssueBehavior>().GetGoodChoices();
         currentChoices = currentIssue.GetComponent<IssueBehavior>().GetChoices();
         
-        uiManager.SetUpUI(UIManager.UIType.SetIssue, currentIssue.GetComponent<IssueBehavior>().GetissueText(1), currentIssue.GetComponent<IssueBehavior>().GetissueText(2));
+        uiManager.SetUpUI(UIManager.UIType.SetIssue, currentIssue.GetComponent<IssueBehavior>().GetissueTexts());
     }
     
     private void SetChoiceToPlayerResponses(bool isDefaultChoice, GameObject choiceSelected = null)
@@ -159,7 +159,11 @@ public class BoolEvent : UnityEvent<bool>
 
     private IEnumerator ShowResponsesAndWait()
     {
-        uiManager.SetUpUI(UIManager.UIType.SetRecapPlayersResponses, playerResponses[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), playerResponses[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), playerResponses[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText());
+        var recapResponses = new string[3];
+        recapResponses[0] = playerResponses[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
+        recapResponses[1] = playerResponses[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
+        recapResponses[2] = playerResponses[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
+        uiManager.SetUpUI(UIManager.UIType.SetRecapPlayersResponses, recapResponses);
         yield return new WaitForSeconds(5f);
         uiManager.SetUpUI(UIManager.UIType.HideRecap);
         CheckPlayerResponses();
@@ -193,9 +197,13 @@ public class BoolEvent : UnityEvent<bool>
     
     private void StartChoice()
     {
+        var currentChoicesText = new string[3];
+        currentChoicesText[0] = currentChoices[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
+        currentChoicesText[1] = currentChoices[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
+        currentChoicesText[2] = currentChoices[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
         _timer = 5f;
         _isTimerActivated = true;
         _isIssueStep = false;
-        uiManager.SetUpUI(UIManager.UIType.SetChoice, currentChoices[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), currentChoices[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText(), currentChoices[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText());
+        uiManager.SetUpUI(UIManager.UIType.SetChoice, currentChoicesText);
     }
 }

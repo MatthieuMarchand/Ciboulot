@@ -44,8 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c82b0319db60744be586ac3b651ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  issueText1: Question 1
-  issueText2: Question 2
+  issueTexts:
+  - Issue 1
+  - Issue 2
+  - Issue 3
+  - Issue 4
   defaultChoice: {fileID: 8585379727505785060, guid: a1fa237f36483714980818de785d474e, type: 3}
   choices:
   - {fileID: 3670149966555080916, guid: c5cd5e681e20c344bbd5d2e6defa5947, type: 3}

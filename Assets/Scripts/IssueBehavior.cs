@@ -5,22 +5,17 @@ using UnityEngine.UI;
 
 public class IssueBehavior : MonoBehaviour
 {
-    [SerializeField] private string issueText1;
-    [SerializeField] private string issueText2;
+    // [SerializeField] private string issueText1;
+    // [SerializeField] private string issueText2;
+    [SerializeField] private string[] issueTexts;
     [SerializeField] private GameObject defaultChoice;
     [SerializeField] private GameObject[] choices;
     [SerializeField] private GameObject[] goodChoices;
 
     //Setter and getter
-    public string GetissueText(int part)
+    public string[] GetissueTexts()
     {
-        string textToReturn = "";
-        if (part == 1)
-            textToReturn = issueText1;
-        if (part == 2)
-            textToReturn = issueText2;
-
-        return textToReturn;
+        return issueTexts;
     }
 
     public GameObject GetDefaultChoice()

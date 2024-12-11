@@ -82,7 +82,7 @@ public class UIManager : MonoBehaviour
         SetUpUI(UIType.SetEndGame);
     }
     
-    public void SetUpUI(Enum UItype, string newText1 = "", string newText2 = "", string newText3 = "")
+    public void SetUpUI(Enum UItype, string[] texts = null)
     {
         switch (UItype)
         {
@@ -97,7 +97,7 @@ public class UIManager : MonoBehaviour
                 choiceContainer.SetActive(false);
                 issueContainer.SetActive(true);
                 timerUI.SetActive(true);
-                SetIssueText(newText1, newText2);
+                SetIssueText(texts);
                 break;
             case UIType.SetChoice:
                 timerUI.SetActive(true);
@@ -106,7 +106,10 @@ public class UIManager : MonoBehaviour
                 choice1Container.SetActive(true);
                 choice2Container.SetActive(true);
                 choice3Container.SetActive(true);
-                SetChoicesText(newText1, newText2, newText3);
+                if (texts != null)
+                {
+                    SetChoicesText(texts[0], texts[1], texts[2]);
+                }
                 break;
             case UIType.SetEndChoice:
                 issueContainer.SetActive(false);
@@ -122,7 +125,10 @@ public class UIManager : MonoBehaviour
                 choice2Container.SetActive(false);
                 choice3Container.SetActive(false);
                 recapChoiceContainer.SetActive(true);
-                SetRecapPlayerResponsesText(newText1, newText2, newText3);
+                if (texts != null)
+                {
+                    SetRecapPlayerResponsesText(texts[0], texts[1], texts[2]);
+                }
                 break;
             case UIType.HideRecap:
                 recapChoiceContainer.SetActive(false);
@@ -134,21 +140,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void SetIssueText(string questionPart1, string questionPart2)
+    private void SetIssueText(string[] texts)
     {
-        for (int i = 0; i < issueContainer.transform.childCount; i++)
+        var issueContainerBehavior = issueContainer.GetComponent<IssueContainerBehavior>();
+        if (issueContainerBehavior)
         {
-            if (issueContainer.transform.GetChild(i).gameObject.name == "Question 1")
-            {
-                issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
-                    questionPart1;
-            }
-            else if (issueContainer.transform.GetChild(i).gameObject.name == "Question 2")
-            {
-                issueContainer.transform.GetChild(i).gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
-                    questionPart2;
-            }
-                
+            issueContainerBehavior.SetTexts(texts);
         }
     }
     private void SetChoicesText(string choiceText1, string choiceText2, string choiceText3)
