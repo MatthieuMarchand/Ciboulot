@@ -649,11 +649,15 @@ MonoBehaviour:
   textBox: {fileID: 1216307539}
   texts:
   - "Je m\u2019appelle Modestie Komoshimu, je suis le patron de Nitenders. Nous sommes
-    \xE0 la recherche du de com\xE9diens pour notre prochain jeu : Les animaux qui
-    passent."
+    \xE0 la recherche de com\xE9diens pour notre prochain jeu : Les animaux qui passent."
   - "Merci pour ta candidature (ou plut\xF4t ton kidnapping...) pour devenir le prochain
     grand com\xE9dien de notre jeu !"
-  - 
+  - "Pour prouver tes comp\xE9tences humoristiques hors du commun, tu vas devoir
+    me faire rire \xE0 partir d\u2019histoire que je vais te raconter."
+  - "A chaque histoire, tu devras cr\xE9er une blague \xE0 partir de ces \xE9l\xE9ments.
+    Mais attention, \xE9coute bien car..."
+  - "Ma deuxi\xE8me passion dans la vie est la torture, alors m\xE9fie toi des mauvaises
+    r\xE9ponses HAHAHAHAHAHA."
 --- !u!1 &262636188
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +693,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 97.7, y: -41.3}
+  m_AnchoredPosition: {x: 117.4, y: -43.3}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &262636190
@@ -971,7 +975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 377.7, y: 187.9}
+  m_AnchoredPosition: {x: 274.8, y: 80.2}
   m_SizeDelta: {x: 25.5887, y: 38.3831}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &377514955
@@ -4363,7 +4367,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 69.60006, y: -41.300003}
+  m_AnchoredPosition: {x: 89.30006, y: -43.299995}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1743766268
@@ -4511,7 +4515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977fe207f787d48f4a23b44ab77ed549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sequenceManager: {fileID: 0}
+  _sequenceManager: {fileID: 1397649853}
   UIAmount: {fileID: 953775749}
   UIText: {fileID: 428307556}
 --- !u!1 &1919958669

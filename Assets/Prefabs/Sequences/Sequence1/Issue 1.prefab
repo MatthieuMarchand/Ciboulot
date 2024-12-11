@@ -44,17 +44,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c82b0319db60744be586ac3b651ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 30
   issueTexts:
-  - Issue 1
-  - Issue 2
-  - Issue 3
-  - Issue 4
+  - "Maintenant qu\u2019on se conna\xEEt un peu mieux, laisse moi te raconter l\u2019histoire
+    de ma vie..."
+  - "Quand j\u2019\xE9tais petit, j\u2019avais un chien que j\u2019aimais beaucoup.
+    En effet ma famille n\u2019\xE9tait pas vraiment l\xE0 pour moi..."
+  - "Vois-tu, je viens d\u2019une riche famille de patrons, alors s\u2019occuper
+    de leur enfant, c\u2019\xE9tait pas trop le truc de mes parents."
+  - "Ils pr\xE9f\xE9raient travailler..."
+  - "...ou faire des s\xE9minaires..."
+  - ...ou partir chercher des clopes et ne jamais revenir...
+  - ...
+  - .............
+  - "Enfin bref mon chien s\u2019appelait Avril."
+  - "Et un jour il s\u2019est fait \xE9craser par un camion."
   defaultChoice: {fileID: 8585379727505785060, guid: a1fa237f36483714980818de785d474e, type: 3}
   choices:
   - {fileID: 3670149966555080916, guid: c5cd5e681e20c344bbd5d2e6defa5947, type: 3}
   - {fileID: 6130090607615282743, guid: 213e05735c9de4e458ca8b982bdc4393, type: 3}
   - {fileID: 4682970293359357888, guid: 2a1c917ec264e134e9e4faa279dd93ac, type: 3}
   goodChoices:
-  - {fileID: 3670149966555080916, guid: c5cd5e681e20c344bbd5d2e6defa5947, type: 3}
-  - {fileID: 3670149966555080916, guid: 72d68181c01cae642ba02186c294b5b1, type: 3}
-  - {fileID: 3670149966555080916, guid: d50e483b18fc907479d929bb07d0d07f, type: 3}
+  - {fileID: 4682970293359357888, guid: 2a1c917ec264e134e9e4faa279dd93ac, type: 3}
+  - {fileID: 6130090607615282743, guid: f81cf220d1ee2264fa6a6e7724ca7bce, type: 3}
+  - {fileID: 4682970293359357888, guid: d98b635f92e4c0a4fbbf3e8caef1f080, type: 3}

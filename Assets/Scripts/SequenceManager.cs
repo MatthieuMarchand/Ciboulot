@@ -17,6 +17,7 @@ public class BoolEvent : UnityEvent<bool>
 }
     
     private float _timer;
+    private float timeAmount;
     private bool _isTimerActivated;
     private bool _isIssueStep;
     
@@ -37,13 +38,17 @@ public class BoolEvent : UnityEvent<bool>
     [FormerlySerializedAs("defaultChoice")] [SerializeField] private GameObject currentDefaultChoice;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIManager uiManager;
-
     
 
     //Getter and setter
     public float GetTimer()
     {
         return _timer;
+    }
+    
+    public float GetTimeAmount()
+    {
+        return timeAmount;
     }
 
     public GameObject GetCurrentIssue()
@@ -111,10 +116,11 @@ public class BoolEvent : UnityEvent<bool>
     public void OnStartNewSequence()
     {
         currentIssue = firstIssues[gameManager.GetSequenceNumber()];
-        _timer = 5f;
         _isTimerActivated = true;
         _isIssueStep = true;
         currentDefaultChoice = currentIssue.GetComponent<IssueBehavior>().GetDefaultChoice();
+        _timer = currentIssue.GetComponent<IssueBehavior>().GetTimer();
+        timeAmount = currentIssue.GetComponent<IssueBehavior>().GetTimer();
         playerResponses = Array.Empty<GameObject>();
         goodChoices = currentIssue.GetComponent<IssueBehavior>().GetGoodChoices();
         currentChoices = currentIssue.GetComponent<IssueBehavior>().GetChoices();
@@ -201,7 +207,8 @@ public class BoolEvent : UnityEvent<bool>
         currentChoicesText[0] = currentChoices[0].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
         currentChoicesText[1] = currentChoices[1].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
         currentChoicesText[2] = currentChoices[2].gameObject.GetComponent<ChoiceBehavior>().GetChoiceText();
-        _timer = 5f;
+        _timer = 10f;
+        timeAmount = 10f;
         _isTimerActivated = true;
         _isIssueStep = false;
         uiManager.SetUpUI(UIManager.UIType.SetChoice, currentChoicesText);

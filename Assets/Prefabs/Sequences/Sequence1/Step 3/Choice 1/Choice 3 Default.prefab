@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edebfef86f63304f8136a82ab96ae3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChoiceText: DefaultChoice 1
+  ChoiceText: bouh ! Haha... ha... ha ?
   choices:
   - {fileID: 0}
   - {fileID: 0}

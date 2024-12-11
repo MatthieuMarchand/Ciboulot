@@ -33,7 +33,11 @@ public class TimerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UIAmount.fillAmount = _sequenceManager.GetTimer() / 5f;
+        if (!_sequenceManager)
+        {
+            return;
+        }
+        UIAmount.fillAmount = _sequenceManager.GetTimer() / _sequenceManager.GetTimeAmount();
         UIText.text = Mathf.Floor(_sequenceManager.GetTimer() + .9f).ToString();;
     }
 }

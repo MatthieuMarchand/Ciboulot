@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edebfef86f63304f8136a82ab96ae3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChoiceText: Choice 1 2
-  choices: []
-  defaultChoice: {fileID: 0}
+  ChoiceText: Qui est-ce ?
+  choices:
+  - {fileID: 3670149966555080916, guid: d50e483b18fc907479d929bb07d0d07f, type: 3}
+  - {fileID: 6130090607615282743, guid: 5bffd9d68010dd34bb1c1ff9af32039d, type: 3}
+  - {fileID: 4682970293359357888, guid: d98b635f92e4c0a4fbbf3e8caef1f080, type: 3}
+  defaultChoice: {fileID: 8585379727505785060, guid: 1c1273b8f3493d7478e5cd6dbe0250d6, type: 3}

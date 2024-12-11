@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edebfef86f63304f8136a82ab96ae3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChoiceText: Choice 1
+  ChoiceText: Comment appelle t'on...
   choices:
   - {fileID: 3670149966555080916, guid: 72d68181c01cae642ba02186c294b5b1, type: 3}
   - {fileID: 6130090607615282743, guid: f81cf220d1ee2264fa6a6e7724ca7bce, type: 3}

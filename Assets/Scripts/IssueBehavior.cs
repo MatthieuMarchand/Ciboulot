@@ -5,13 +5,17 @@ using UnityEngine.UI;
 
 public class IssueBehavior : MonoBehaviour
 {
-    // [SerializeField] private string issueText1;
-    // [SerializeField] private string issueText2;
+    [SerializeField] private float timer;
     [SerializeField] private string[] issueTexts;
     [SerializeField] private GameObject defaultChoice;
     [SerializeField] private GameObject[] choices;
     [SerializeField] private GameObject[] goodChoices;
 
+    public float GetTimer()
+    {
+        return timer;
+    }
+    
     //Setter and getter
     public string[] GetissueTexts()
     {
