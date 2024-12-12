@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6846768225632489257}
   - component: {fileID: 7158697078657865292}
   m_Layer: 0
-  m_Name: Issue 1
+  m_Name: Issue 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,25 +46,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 10
   issueTexts:
-  - "Maintenant qu\u2019on se conna\xEEt un peu mieux, laisse moi te raconter l\u2019histoire
-    de ma vie..."
-  - "Quand j\u2019\xE9tais petit, j\u2019avais un chien que j\u2019aimais beaucoup.
-    En effet ma famille n\u2019\xE9tait pas vraiment l\xE0 pour moi..."
-  - "Vois-tu, je viens d\u2019une riche famille de patrons, alors s\u2019occuper
-    de leur enfant, c\u2019\xE9tait pas trop le truc de mes parents."
-  - "Ils pr\xE9f\xE9raient travailler..."
-  - "...ou faire des s\xE9minaires..."
-  - ...ou partir chercher des clopes et ne jamais revenir...
-  - ...
-  - .............
-  - "Enfin bref mon chien s\u2019appelait Avril."
-  - "Et un jour il s\u2019est fait \xE9craser par un camion."
+  - "Commen\xE7ons par quelque chose de facile..."
+  - "Tu vois avant de te d\xE9nicher, j\u2019ai fais passer nombres d\u2019entretiens"
+  - (avec, ou sans leur accord...)
+  - "Une fois, l\u2019un des candidats avait disparu alors que j\u2019avais le dos
+    tourn\xE9 !"
+  - "Je me suis dit, \u201COu est-ce qu\u2019il est pass\xE9 ?"
+  - "C\u2019est l\u2019homme invisible ou quoi ?\u201D"
+  - "C\u2019est alors que j\u2019entends un petit bruit sous le bureau"
+  - "\u201C\xE0 l\u2019aide, je veux pas travailler ici...\u201D"
+  - "Il s\u2019\xE9tait cach\xE9 sous le bureau HAHAHA"
+  - "Enfin, en tout cas son voeu est exerc\xE9, il ne pourra plus jamais travailler."
   defaultChoice: {fileID: 8585379727505785060, guid: a1fa237f36483714980818de785d474e, type: 3}
   choices:
-  - {fileID: 3670149966555080916, guid: c5cd5e681e20c344bbd5d2e6defa5947, type: 3}
-  - {fileID: 6130090607615282743, guid: 213e05735c9de4e458ca8b982bdc4393, type: 3}
-  - {fileID: 4682970293359357888, guid: 2a1c917ec264e134e9e4faa279dd93ac, type: 3}
+  - {fileID: 3670149966555080916, guid: 17ec60deb5c044c9789bc6dd0b8dc870, type: 3}
+  - {fileID: 6130090607615282743, guid: c8524811648ba42e489c4be8a143db84, type: 3}
+  - {fileID: 4682970293359357888, guid: 97a750127cd524a25bb3e62b2915ad99, type: 3}
   goodChoices:
-  - {fileID: 4682970293359357888, guid: 2a1c917ec264e134e9e4faa279dd93ac, type: 3}
-  - {fileID: 6130090607615282743, guid: f81cf220d1ee2264fa6a6e7724ca7bce, type: 3}
-  - {fileID: 4682970293359357888, guid: d98b635f92e4c0a4fbbf3e8caef1f080, type: 3}
+  - {fileID: 4682970293359357888, guid: 97a750127cd524a25bb3e62b2915ad99, type: 3}
+  - {fileID: 3670149966555080916, guid: 3427c90e470004c1494498934be9d7b3, type: 3}
+  - {fileID: 3670149966555080916, guid: f7bbbc3dcbd7148a9aa2b8d6597c5662, type: 3}

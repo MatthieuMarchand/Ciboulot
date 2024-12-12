@@ -1430,7 +1430,7 @@ PrefabInstance:
       objectReference: {fileID: 813948468}
     - target: {fileID: 4762510015684543199, guid: 006622c773d3e304495952cf8dd4a654, type: 3}
       propertyPath: lives
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4762510015684543199, guid: 006622c773d3e304495952cf8dd4a654, type: 3}
       propertyPath: timer
@@ -3717,7 +3717,7 @@ PrefabInstance:
       objectReference: {fileID: 409143309}
     - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
       propertyPath: firstIssues.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
       propertyPath: goodChoices.Array.size
@@ -3734,11 +3734,11 @@ PrefabInstance:
     - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
       propertyPath: firstIssues.Array.data[0]
       value: 
-      objectReference: {fileID: 4853061771890308992, guid: d10c65c817fdab24982302ed3f410b68, type: 3}
+      objectReference: {fileID: 4853061771890308992, guid: d5f28b2c3635f48898536df4ac2207cc, type: 3}
     - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
       propertyPath: firstIssues.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4853061771890308992, guid: d10c65c817fdab24982302ed3f410b68, type: 3}
     - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
       propertyPath: endSequence.m_PersistentCalls.m_Calls.Array.size
       value: 0
