@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChoiceText: Euh... Je...
   choices:
-  - {fileID: 3670149966555080916, guid: 72d68181c01cae642ba02186c294b5b1, type: 3}
-  - {fileID: 6130090607615282743, guid: f81cf220d1ee2264fa6a6e7724ca7bce, type: 3}
-  - {fileID: 4682970293359357888, guid: 33e5e2cd194db0c49aa307b621688c41, type: 3}
-  defaultChoice: {fileID: 8585379727505785060, guid: b43c7926f7cb8694c807165134faa88a, type: 3}
+  - {fileID: 3670149966555080916, guid: 3427c90e470004c1494498934be9d7b3, type: 3}
+  - {fileID: 6130090607615282743, guid: 0ef84ec609c6b49929177b4fb516d0fb, type: 3}
+  - {fileID: 4682970293359357888, guid: c58f2996d3af4446b9554f23b3cc7dd1, type: 3}
+  defaultChoice: {fileID: 8585379727505785060, guid: 1d7f7dfdcdcc3408d8c81da95c8141b0, type: 3}

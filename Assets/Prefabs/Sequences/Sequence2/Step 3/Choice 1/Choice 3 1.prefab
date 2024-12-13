@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edebfef86f63304f8136a82ab96ae3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChoiceText: "Le service de r\xE9clamations d'un club de parachutisme"
+  ChoiceText: Parce qu'il ne se voyait pas travailler.
   choices: []
   defaultChoice: {fileID: 0}

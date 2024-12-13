@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edebfef86f63304f8136a82ab96ae3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChoiceText: Avril le chien !
+  ChoiceText: "Je lui ai r\xE9pondu, \u201CMais qui vous a dit que je travaillais\u201D"
   choices: []
   defaultChoice: {fileID: 0}

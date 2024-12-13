@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edebfef86f63304f8136a82ab96ae3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChoiceText: "Pas ton p\xE8re !"
+  ChoiceText: "\u2013 Je bosse bosse."
   choices: []
   defaultChoice: {fileID: 0}
