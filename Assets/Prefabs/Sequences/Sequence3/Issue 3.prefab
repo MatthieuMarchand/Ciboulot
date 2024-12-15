@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4853061771890308992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6846768225632489257}
+  - component: {fileID: 7158697078657865292}
+  m_Layer: 0
+  m_Name: Issue 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6846768225632489257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853061771890308992}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 373.9894, y: 299.5167, z: 0.24488534}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7158697078657865292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853061771890308992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c82b0319db60744be586ac3b651ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 10
+  issueTexts:
+  - Tu sais, je suis au courant de ton talent sportif
+  - "On peut dire que quand tu t\u2019y mets, tu bats tous les records !"
+  - "Comment je sais \xE7a ?"
+  - Pendant que je te surveillais pour te ki...
+  - Euh je veux dire...
+  - "Je suis toutes performances sur les r\xE9seaux \xE9videmment !"
+  - "(Depuis le compte pirat\xE9 de mon ex femme pour que tu ne te doutes de rien...)"
+  - "Comment \xE7a tu n\u2019as pas de r\xE9seaux ?! Menteur !"
+  defaultChoice: {fileID: 8585379727505785060, guid: 1afd760ff545d4f17a0c9be118313c38, type: 3}
+  choices:
+  - {fileID: 3670149966555080916, guid: f40120dc45b10424b8b7b6dcfbe97c46, type: 3}
+  - {fileID: 6130090607615282743, guid: eca9c64843d644fcb82785517e16fb45, type: 3}
+  - {fileID: 4682970293359357888, guid: 25ed1c64c1c6b49b487a9a2d7664afed, type: 3}
+  goodChoices:
+  - {fileID: 3670149966555080916, guid: f40120dc45b10424b8b7b6dcfbe97c46, type: 3}
+  - {fileID: 6130090607615282743, guid: 9cc4f7985597546d1aa25398290fd7fb, type: 3}
+  - {fileID: 4682970293359357888, guid: a93b5575f45904542a7cd6c059c22a5f, type: 3}
