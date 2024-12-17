@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c82b0319db60744be586ac3b651ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 10
+  timer: 5
   issueTexts:
   - "Maintenant qu\u2019on se conna\xEEt un peu mieux, laisse moi te raconter l\u2019histoire
     de ma vie..."

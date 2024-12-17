@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6846768225632489257}
   - component: {fileID: 7158697078657865292}
   m_Layer: 0
-  m_Name: Issue 2
+  m_Name: Issue 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,23 +46,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 5
   issueTexts:
-  - "Commen\xE7ons par quelque chose de facile..."
-  - "Tu vois avant de te d\xE9nicher, j\u2019ai fais passer nombres d\u2019entretiens"
-  - (avec, ou sans leur accord...)
-  - "Une fois, l\u2019un des candidats avait disparu alors que j\u2019avais le dos
-    tourn\xE9 !"
-  - "Je me suis dit, \u201COu est-ce qu\u2019il est pass\xE9 ?"
-  - "C\u2019est l\u2019homme invisible ou quoi ?\u201D"
-  - "C\u2019est alors que j\u2019entends un petit bruit sous le bureau"
-  - "\u201C\xE0 l\u2019aide, je veux pas travailler ici...\u201D"
-  - "Il s\u2019\xE9tait cach\xE9 sous le bureau HAHAHA"
-  - "Enfin, en tout cas son voeu est exerc\xE9, il ne pourra plus jamais travailler."
-  defaultChoice: {fileID: 8585379727505785060, guid: a1fa237f36483714980818de785d474e, type: 3}
+  - "\xC7a n\u2019a pas \xE9t\xE9 \xE9vident de trouver des acteurs pour ce jeu."
+  - "On m\u2019a demand\xE9 de trouver des animaux qui parlent..."
+  - "T\u2019as d\xE9j\xE0 vu \xE7a un animal qui parle ?!"
+  - "On avait trouv\xE9 une girafe, mais impossible de la cadrer \xE0 l\u2019\xE9cran"
+  - "Son t\xEAte sortait de l\u2019image peu importe l\u2019angle choisi..."
+  - Finalement on est parti sur un gorille
+  - "D\u2019ailleurs t\u2019es bien un animal rassure moi ?"
+  - "J\u2019avais jamais vu un animal avec des habits..."
+  defaultChoice: {fileID: 8585379727505785060, guid: a1278805959a14e93b11f0625528fd1e, type: 3}
   choices:
-  - {fileID: 3670149966555080916, guid: 17ec60deb5c044c9789bc6dd0b8dc870, type: 3}
-  - {fileID: 6130090607615282743, guid: c8524811648ba42e489c4be8a143db84, type: 3}
-  - {fileID: 4682970293359357888, guid: 97a750127cd524a25bb3e62b2915ad99, type: 3}
+  - {fileID: 3670149966555080916, guid: 31d54a9481c444975a79cc6be6deeb4a, type: 3}
+  - {fileID: 6130090607615282743, guid: eaabcb08a818e4109a67b40b372abf80, type: 3}
+  - {fileID: 4682970293359357888, guid: d60dc0cfa44dd42c69209374c4f74bee, type: 3}
   goodChoices:
-  - {fileID: 4682970293359357888, guid: 97a750127cd524a25bb3e62b2915ad99, type: 3}
-  - {fileID: 3670149966555080916, guid: 3427c90e470004c1494498934be9d7b3, type: 3}
-  - {fileID: 3670149966555080916, guid: f7bbbc3dcbd7148a9aa2b8d6597c5662, type: 3}
+  - {fileID: 6130090607615282743, guid: eaabcb08a818e4109a67b40b372abf80, type: 3}
+  - {fileID: 3670149966555080916, guid: 158f1ba7dc70248e297345cf6d9ef0c5, type: 3}
+  - {fileID: 6130090607615282743, guid: 89950b009c59e4acd8def89b1fad74cd, type: 3}
