@@ -2525,7 +2525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hands:
   - {fileID: 21300000, guid: 68c6af76e63bfee4390a82df1b8fdc46, type: 3}
-  - {fileID: 21300000, guid: 4cee6a07343faff4590f4e30f4b50eac, type: 3}
+  - {fileID: 21300000, guid: 74d1c8dbfdf499746bcc23a75751957b, type: 3}
   - {fileID: 21300000, guid: 37ed7fa6a0669cf4e8b5f0d7179d3d90, type: 3}
   - {fileID: 21300000, guid: ca60355c8aaa12b4db9f20a783090e5a, type: 3}
   - {fileID: 21300000, guid: c645e7b80b4909a4d8085625edbc231e, type: 3}

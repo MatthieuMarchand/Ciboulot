@@ -33,12 +33,12 @@ public class HandBehavior : MonoBehaviour
         switch (lifeNumber)
         {
             case 1:
-                rightHand.GetComponent<Image>().sprite = hands[5];
+                // rightHand.GetComponent<Image>().sprite = hands[5];
                 leftHand.GetComponent<Image>().sprite = hands[2];
                 break;
             case 2:
-                rightHand.GetComponent<Image>().sprite = hands[4];
-                leftHand.GetComponent<Image>().sprite = hands[1];
+                rightHand.GetComponent<Image>().sprite = hands[5];
+                // leftHand.GetComponent<Image>().sprite = hands[2];
                 break;
             case 3:
                 rightHand.GetComponent<Image>().sprite = hands[3];
