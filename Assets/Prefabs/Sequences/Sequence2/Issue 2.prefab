@@ -57,7 +57,7 @@ MonoBehaviour:
   - "\u201C\xE0 l\u2019aide, je veux pas travailler ici...\u201D"
   - "Il s\u2019\xE9tait cach\xE9 sous le bureau HAHAHA"
   - "Enfin, en tout cas son voeu est exerc\xE9, il ne pourra plus jamais travailler."
-  defaultChoice: {fileID: 8585379727505785060, guid: a1fa237f36483714980818de785d474e, type: 3}
+  defaultChoice: {fileID: 8585379727505785060, guid: da051317ddd1746cf970a1060ced66cf, type: 3}
   choices:
   - {fileID: 3670149966555080916, guid: 17ec60deb5c044c9789bc6dd0b8dc870, type: 3}
   - {fileID: 6130090607615282743, guid: c8524811648ba42e489c4be8a143db84, type: 3}
