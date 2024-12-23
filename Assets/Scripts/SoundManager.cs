@@ -11,7 +11,6 @@ public class SoundManager : MonoBehaviour
     [FormerlySerializedAs("soundSource")] [SerializeField] private AudioSource dialogueSource;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private float fadeDuration = .2f;
-    public event Action OnDialogueEnd;
 
     public static SoundManager Instance { get; private set; }
 
@@ -43,22 +42,14 @@ public class SoundManager : MonoBehaviour
         {
             dialogueSource.clip = clip;
             dialogueSource.Play();
-            Invoke(nameof(TriggerOnDialogueEnd), clip.length);
+            Debug.Log("clip lenght : " + clip.length);
+            Invoke(nameof(RestoreMusicVolume), clip.length + .1f);
         });
-    }
-
-    private void TriggerOnDialogueEnd()
-    {
-        OnDialogueEnd?.Invoke();
-    }
-
-    private void Start()
-    {
-        OnDialogueEnd += RestoreMusicVolume;
     }
 
     private void RestoreMusicVolume()
     {
+        Debug.Log("Is playing sound " + dialogueSource.isPlaying);
         if (dialogueSource.isPlaying)
         {
             return;
@@ -68,7 +59,6 @@ public class SoundManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        OnDialogueEnd -= RestoreMusicVolume;
         if (Instance == this)
         {
             Instance = null;
