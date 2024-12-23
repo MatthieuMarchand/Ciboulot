@@ -1165,6 +1165,7 @@ GameObject:
   - component: {fileID: 409143313}
   - component: {fileID: 409143312}
   - component: {fileID: 409143311}
+  - component: {fileID: 409143314}
   m_Layer: 5
   m_Name: Hitbox3
   m_TagString: Untagged
@@ -1286,6 +1287,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409143309}
   m_CullTransparentMesh: 1
+--- !u!114 &409143314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409143309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1021273753}
+          m_TargetAssemblyTypeName: ButtonChoiceBehavior, Assembly-CSharp
+          m_MethodName: OnButtonEnter
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &428307554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2548,6 +2578,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021273752}
+  - component: {fileID: 1021273753}
   m_Layer: 5
   m_Name: Choice
   m_TagString: ChoiceContainer
@@ -2579,6 +2610,18 @@ RectTransform:
   m_AnchoredPosition: {x: -16.814453, y: -225.00323}
   m_SizeDelta: {x: -181.67041, y: -224.86}
   m_Pivot: {x: 0.52190393, y: 1}
+--- !u!114 &1021273753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021273751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47980a1a93d4d2c45b10118bfcc264e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1071888222
 GameObject:
   m_ObjectHideFlags: 0
@@ -3999,6 +4042,7 @@ GameObject:
   - component: {fileID: 1551551049}
   - component: {fileID: 1551551048}
   - component: {fileID: 1551551047}
+  - component: {fileID: 1551551050}
   m_Layer: 5
   m_Name: Hitbox2
   m_TagString: Untagged
@@ -4120,6 +4164,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551551045}
   m_CullTransparentMesh: 1
+--- !u!114 &1551551050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551551045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1021273753}
+          m_TargetAssemblyTypeName: ButtonChoiceBehavior, Assembly-CSharp
+          m_MethodName: OnButtonEnter
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1576922544
 GameObject:
   m_ObjectHideFlags: 0
@@ -4876,6 +4949,7 @@ GameObject:
   - component: {fileID: 2116195202}
   - component: {fileID: 2116195201}
   - component: {fileID: 2116195200}
+  - component: {fileID: 2116195203}
   m_Layer: 5
   m_Name: Hitbox1
   m_TagString: Untagged
@@ -4997,6 +5071,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116195198}
   m_CullTransparentMesh: 1
+--- !u!114 &2116195203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116195198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1021273753}
+          m_TargetAssemblyTypeName: ButtonChoiceBehavior, Assembly-CSharp
+          m_MethodName: OnButtonEnter
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1138933059513657922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5236,6 +5339,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9131376936639396425, guid: ad539dd2bb5b9485b9cfe7775d576d98, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 97888fc111e684fa9ad17556be9af850, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

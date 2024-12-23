@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Serialization;
@@ -42,14 +39,12 @@ public class SoundManager : MonoBehaviour
         {
             dialogueSource.clip = clip;
             dialogueSource.Play();
-            Debug.Log("clip lenght : " + clip.length);
-            Invoke(nameof(RestoreMusicVolume), clip.length + .1f);
+            Invoke(nameof(RestoreMusicVolume), clip.length + .1f); //Adding .1f to avoid errors.
         });
     }
 
     private void RestoreMusicVolume()
     {
-        Debug.Log("Is playing sound " + dialogueSource.isPlaying);
         if (dialogueSource.isPlaying)
         {
             return;

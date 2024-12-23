@@ -39,7 +39,12 @@ public class BoolEvent : UnityEvent<bool>
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIManager uiManager;
     
+    public static SequenceManager Instance { get; private set; }
 
+    public GameObject GetCurrentChoice(int index)
+    {
+        return currentChoices[index];
+    }
     //Getter and setter
     public float GetTimer()
     {
@@ -69,6 +74,13 @@ public class BoolEvent : UnityEvent<bool>
     
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        
         if (gameManager == null)
         {
             gameManager = FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
@@ -82,6 +94,14 @@ public class BoolEvent : UnityEvent<bool>
         BoolChoiceStep = new BoolEvent();
         BoolSequenceStep = new BoolEvent();
 
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 
     void Update()
