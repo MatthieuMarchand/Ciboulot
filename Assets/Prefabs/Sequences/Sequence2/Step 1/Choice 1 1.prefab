@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChoiceText: "Un dromadaire rencontre un chameau dans le d\xE9sert."
+  dialogue: {fileID: 8300000, guid: 80ed371c34d824c1caed474857bd69ee, type: 3}
   choices:
   - {fileID: 3670149966555080916, guid: 3427c90e470004c1494498934be9d7b3, type: 3}
   - {fileID: 6130090607615282743, guid: 0ef84ec609c6b49929177b4fb516d0fb, type: 3}
