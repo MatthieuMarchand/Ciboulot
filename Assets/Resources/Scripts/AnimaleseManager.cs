@@ -43,14 +43,8 @@ public class AnimaleseManager : MonoBehaviour
     public AudioClip GenerateAnimalese(string text)
     {
         var audioData = jsEngine.Invoke("Animalese", text, false, 1.0);
-
-        if (audioData is not Jint.Native.JsArray)
-        {
-            Debug.LogWarning(audioData + " is not a JsArray");
-            return null;
-        }
         
-        var samples = ConvertAudioData(audioData.AsArray());
+        var samples = ConvertAudioData(audioData);
 
         return CreateAudioClip(samples);
     }
@@ -62,19 +56,35 @@ public class AnimaleseManager : MonoBehaviour
         return clip;
     }
 
-    private float[] ConvertAudioData(Jint.Native.JsArray audioData)
+    private float[] ConvertAudioData(Jint.Native.JsValue audioData)
     {
-        var jsArray = audioData;
-        
-        float[] samples = new float[jsArray.Length];
-        for (int i = 0; i < jsArray.Length; i++)
+        // Vérifier si le résultat est un Uint8Array (en tant qu'objet JS)
+        if (!audioData.IsObject())
         {
-            if (jsArray[i] is not Jint.Native.JsNumber)
-            {
-                Debug.LogWarning(jsArray[i] + " is not a JsNumber");
-            }
-            samples[i] = (float)jsArray[i].AsNumber();
+            Debug.LogError("Les données audio ne sont pas un objet valide.");
+            return null;
         }
+
+        var jsObject = audioData.AsObject();
+        int length = (int)jsObject.Get("length").AsNumber(); // Obtenir la longueur du tableau
+
+        // Créer un tableau de float pour stocker les données audio converties
+        float[] samples = new float[length];
+
+        // Parcourir le tableau et convertir les valeurs
+        for (int i = 0; i < length; i++)
+        {
+            var value = jsObject.Get(i.ToString()); // Accéder à l'élément indexé
+            if (!value.IsArray())
+            {
+                Debug.LogWarning($"L'élément à l'index {i} n'est pas un nombre.");
+                continue;
+            }
+
+            // Normaliser la valeur de 0-255 à -1.0 à 1.0
+            samples[i] = (float)value.AsNumber() / 128.0f - 1.0f;
+        }
+
         return samples;
     }
 }
