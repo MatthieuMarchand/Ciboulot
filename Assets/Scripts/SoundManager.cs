@@ -21,10 +21,19 @@ public class SoundManager : MonoBehaviour
 
         Instance = this; 
         DontDestroyOnLoad(gameObject);
+
+        GameObject animaleseObject = new GameObject("AnimaleseManagerObject");
+        AnimaleseManager animaleseManager = animaleseObject.AddComponent<AnimaleseManager>();
     }
 
-    public void PlaySound(AudioClip clip)
+    //Play a animalese dialogue
+    public void PlayAnimaleseDialogueFromText(string text)
     {
+        if (text.Length == 0)
+        {
+            return;
+        }
+        AudioClip clip = AnimaleseManager.Instance.GenerateAnimalese(text);
         if (!clip || !dialogueSource || !musicSource)
         {
             return;
