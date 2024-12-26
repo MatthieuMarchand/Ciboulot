@@ -6,14 +6,9 @@ using UnityEngine.UI;
 public class ChoiceBehavior : MonoBehaviour
 {
     [SerializeField] private string ChoiceText;
-    [SerializeField] private AudioClip dialogue;
     [SerializeField] private GameObject[] choices;
     [SerializeField] private GameObject defaultChoice;
-
-    public AudioClip GetAudioClip()
-    {
-        return dialogue;
-    }
+    
     public string GetChoiceText()
     {
         return ChoiceText;

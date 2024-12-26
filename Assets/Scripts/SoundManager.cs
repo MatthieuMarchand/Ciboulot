@@ -23,8 +23,16 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void PlaySound(AudioClip clip)
+    //Play a animalese dialogue
+    public void PlayAnimaleseDialogueFromText(string text, bool isBoss)
     {
+        if (text.Length == 0)
+        {
+            return;
+        }
+
+        float pitch = isBoss ? .5f : 1.3f;
+        AudioClip clip = AnimaleseManager.Instance.TextToSpeech(text, false, pitch);
         if (!clip || !dialogueSource || !musicSource)
         {
             return;

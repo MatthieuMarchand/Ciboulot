@@ -10,6 +10,6 @@ public class ButtonChoiceBehavior : MonoBehaviour
         {
             return;
         }
-        SoundManager.Instance.PlaySound(SequenceManager.Instance.GetCurrentChoice(index).GetComponent<ChoiceBehavior>().GetAudioClip());
+        SoundManager.Instance.PlayAnimaleseDialogueFromText(SequenceManager.Instance.GetCurrentChoice(index).GetComponent<ChoiceBehavior>().GetChoiceText(), false);
     }
 }

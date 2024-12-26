@@ -11,7 +11,6 @@ public class IssueContainerBehavior : MonoBehaviour
     [FormerlySerializedAs("question1")] [SerializeField] private GameObject question;
     [FormerlySerializedAs("question2")] [SerializeField] private GameObject textBox;
     [SerializeField] private string[] texts;
-    [SerializeField] private AudioClip[] dialogueClips;
     private int _currentIndex = 0;
     
     // Start is called before the first frame update
@@ -38,7 +37,7 @@ public class IssueContainerBehavior : MonoBehaviour
         if (text)
         {
             text.SetText(texts[_currentIndex]);
-            SoundManager.Instance.PlaySound(dialogueClips[_currentIndex]);
+            SoundManager.Instance.PlayAnimaleseDialogueFromText(texts[_currentIndex], true);
         }
     }
 
