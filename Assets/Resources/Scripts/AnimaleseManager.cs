@@ -74,11 +74,11 @@ public class AnimaleseManager : MonoBehaviour
     {
         try
         {
-            // Obtenir les données audio brutes depuis JavaScript
+            // Get raw data from animalese.js
             var result = jsEngine.Evaluate($"animalese.Animalese('{text}', {shorten.ToString().ToLower()}, {pitch})");
             var audioData = result.ToObject() as object[];
             
-            // Créer un AudioClip
+            // Create audio clip
             var samples = new float[audioData.Length];
             for (int i = 0; i < audioData.Length; i++)
             {
