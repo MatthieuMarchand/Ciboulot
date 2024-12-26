@@ -37,7 +37,7 @@ public class IssueContainerBehavior : MonoBehaviour
         if (text)
         {
             text.SetText(texts[_currentIndex]);
-            SoundManager.Instance.PlayAnimaleseDialogueFromText(texts[_currentIndex]);
+            SoundManager.Instance.PlayAnimaleseDialogueFromText(texts[_currentIndex], true);
         }
     }
 

@@ -1,12 +1,13 @@
-using System;
 using UnityEngine;
 using Jint;
+using System;
 using System.IO;
-using System.Linq;
-using Jint.Native.Object;
+using UnityEngine.Serialization;
 
 public class AnimaleseManager : MonoBehaviour
 {
+    [FormerlySerializedAs("animalseWavFile")] [SerializeField]
+    private AudioClip animaleseWavFile;
     private Engine jsEngine;
     
     public static AnimaleseManager Instance { get; private set; }
@@ -19,72 +20,81 @@ public class AnimaleseManager : MonoBehaviour
             return;
         }
 
-        Instance = this; 
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
     void Start()
     {
         jsEngine = new Engine();
 
-        string animaleseJsPath = Path.Combine(Application.dataPath + "/Resources/Scripts/animalese.js");
+        string animaleseJsPath = Path.Combine(Application.dataPath, "Resources/Scripts/animalese.js");
         string animaleseJsCode = File.ReadAllText(animaleseJsPath);
         
         jsEngine.SetValue("log", new Action<object>(Debug.Log));
-        jsEngine.Execute(animaleseJsCode);
-//          jsEngine.Execute(@"
-//              var synth = new Animalese('animalese.wav', function() {
-//                  log('Animalese initialisé');
-//              });
-//
-//              //synth.Animalese('Hello world', false, 1.0);
-//          ");
-    }
-
-    public AudioClip GenerateAnimalese(string text)
-    {
-        var audioData = jsEngine.Invoke("Animalese", text, false, 1.0);
         
-        var samples = ConvertAudioData(audioData);
-
-        return CreateAudioClip(samples);
+        InitializeAnimalese(animaleseJsCode);
     }
 
-    private AudioClip CreateAudioClip(float[] samples)
+    private void InitializeAnimalese(string jsCode)
     {
-        AudioClip clip = AudioClip.Create("AnimaleseClip", samples.Length, 1, 44100, false);
-        clip.SetData(samples, 0);
-        return clip;
-    }
-
-    private float[] ConvertAudioData(Jint.Native.JsValue audioData)
-    {
-        // Vérifier si le résultat est un Uint8Array (en tant qu'objet JS)
-        if (!audioData.IsObject())
+        if (animaleseWavFile == null)
         {
-            Debug.LogError("Les données audio ne sont pas un objet valide.");
+            Debug.LogError("Fichier WAV non assigné !");
+            return;
+        }
+
+        // Convert .wav clip into raw data.
+        float[] samples = new float[animaleseWavFile.samples];
+        animaleseWavFile.GetData(samples, 0);
+        
+        byte[] letterLibrary = new byte[samples.Length];
+        for (int i = 0; i < samples.Length; i++)
+        {
+            float sample = samples[i];
+            sample = (sample + 1f) * 127.5f;
+            letterLibrary[i] = (byte)Mathf.Clamp(sample, 0f, 255f);
+        }
+        
+        jsEngine.Execute(jsCode);
+        
+        // Create Animalese instance.
+        jsEngine.Execute("var animalese = new Animalese();");
+        
+        // Create letterLibrary
+        jsEngine.Execute($"var letterLibraryData = new Uint8Array({letterLibrary.Length});");
+        for (int i = 0; i < letterLibrary.Length; i++)
+        {
+            jsEngine.Execute($"letterLibraryData[{i}] = {letterLibrary[i]};");
+        }
+        jsEngine.Execute("animalese.letter_library = letterLibraryData;");
+    }
+
+    public AudioClip TextToSpeech(string text, bool shorten = true, float pitch = 1.0f)
+    {
+        try
+        {
+            // Obtenir les données audio brutes depuis JavaScript
+            var result = jsEngine.Evaluate($"animalese.Animalese('{text}', {shorten.ToString().ToLower()}, {pitch})");
+            var audioData = result.ToObject() as object[];
+            
+            // Créer un AudioClip
+            var samples = new float[audioData.Length];
+            for (int i = 0; i < audioData.Length; i++)
+            {
+                float sample = Convert.ToSingle(audioData[i]);
+                samples[i] = (sample - 127f) / 128f;
+            }
+            
+            AudioClip clip = AudioClip.Create("AnimalSpeak", samples.Length, 1, 44100, false);
+            clip.SetData(samples, 0);
+            
+            return clip;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Erreur lors de la génération de la voix: {e.Message}");
             return null;
         }
-
-        var jsObject = audioData.AsObject();
-        int length = (int)jsObject.Get("length").AsNumber(); // Obtenir la longueur du tableau
-
-        // Créer un tableau de float pour stocker les données audio converties
-        float[] samples = new float[length];
-
-        // Parcourir le tableau et convertir les valeurs
-        for (int i = 0; i < length; i++)
-        {
-            var value = jsObject.Get(i.ToString()); // Accéder à l'élément indexé
-            if (!value.IsArray())
-            {
-                Debug.LogWarning($"L'élément à l'index {i} n'est pas un nombre.");
-                continue;
-            }
-
-            // Normaliser la valeur de 0-255 à -1.0 à 1.0
-            samples[i] = (float)value.AsNumber() / 128.0f - 1.0f;
-        }
-
-        return samples;
     }
 }
