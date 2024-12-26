@@ -59,6 +59,17 @@ MonoBehaviour:
   - .............
   - "Enfin bref mon chien s\u2019appelait Avril."
   - "Et un jour il s\u2019est fait \xE9craser par un camion."
+  dialogues:
+  - {fileID: 8300000, guid: e6856638722064185b61298ddc5fe208, type: 3}
+  - {fileID: 8300000, guid: 7749671f635e540839e1025a3e1a667b, type: 3}
+  - {fileID: 8300000, guid: d06af02e59f2d47a59b8a0bbd054b93a, type: 3}
+  - {fileID: 8300000, guid: 7749671f635e540839e1025a3e1a667b, type: 3}
+  - {fileID: 8300000, guid: d06af02e59f2d47a59b8a0bbd054b93a, type: 3}
+  - {fileID: 8300000, guid: 7749671f635e540839e1025a3e1a667b, type: 3}
+  - {fileID: 8300000, guid: c2be09ef5e5ae4ccda6e8e7c3ec7df54, type: 3}
+  - {fileID: 8300000, guid: 2063168f2f6ad4e51a6922ac6aa48ec1, type: 3}
+  - {fileID: 8300000, guid: d06af02e59f2d47a59b8a0bbd054b93a, type: 3}
+  - {fileID: 8300000, guid: e6856638722064185b61298ddc5fe208, type: 3}
   defaultChoice: {fileID: 8585379727505785060, guid: a1fa237f36483714980818de785d474e, type: 3}
   choices:
   - {fileID: 3670149966555080916, guid: c5cd5e681e20c344bbd5d2e6defa5947, type: 3}

@@ -661,9 +661,9 @@ MonoBehaviour:
   dialogueClips:
   - {fileID: 8300000, guid: e6856638722064185b61298ddc5fe208, type: 3}
   - {fileID: 8300000, guid: 7749671f635e540839e1025a3e1a667b, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: d06af02e59f2d47a59b8a0bbd054b93a, type: 3}
+  - {fileID: 8300000, guid: 7749671f635e540839e1025a3e1a667b, type: 3}
+  - {fileID: 8300000, guid: d06af02e59f2d47a59b8a0bbd054b93a, type: 3}
 --- !u!1 &262636188
 GameObject:
   m_ObjectHideFlags: 0
