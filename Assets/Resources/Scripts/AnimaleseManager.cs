@@ -40,7 +40,7 @@ public class AnimaleseManager : MonoBehaviour
     {
         if (animaleseWavFile == null)
         {
-            Debug.LogError("Fichier WAV non assigné !");
+            Debug.LogError("Wav file unassigned !");
             return;
         }
 
@@ -72,6 +72,10 @@ public class AnimaleseManager : MonoBehaviour
 
     public AudioClip TextToSpeech(string text, bool shorten = true, float pitch = 1.0f)
     {
+        if (text.Length > 50)
+        {
+            text = text.Remove(50);
+        }
         try
         {
             // Get raw data from animalese.js
@@ -93,7 +97,7 @@ public class AnimaleseManager : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError($"Erreur lors de la génération de la voix: {e.Message}");
+            Debug.LogError($"Error when generating voice : {e.Message}");
             return null;
         }
     }
