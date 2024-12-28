@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/HomeScreen.unity
+    guid: 2c0d2cedc59b7c647bb2f306be0dead5
   - enabled: 1
     path: Assets/Scenes/WinScreen.unity
     guid: 46ad3120f447af240b50e1a695f58f98
   - enabled: 1
-    path: Assets/Scenes/HomeScreen.unity
-    guid: 2c0d2cedc59b7c647bb2f306be0dead5
+    path: Assets/Scenes/GameScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/LoseScreen.unity
     guid: a4a52c89d9ba73f43ad469fca3dedbce
