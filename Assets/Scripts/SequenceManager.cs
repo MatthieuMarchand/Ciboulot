@@ -30,7 +30,7 @@ public class BoolEvent : UnityEvent<bool>
     
 
     [SerializeField] private GameObject[] playerResponses;
-    [SerializeField] private GameObject[] firstIssues;
+    [FormerlySerializedAs("Issues")] [FormerlySerializedAs("firstIssues")] [SerializeField] private GameObject[] issues;
     [SerializeField] private GameObject[] currentChoices;
     [SerializeField] private GameObject[] goodChoices;
 
@@ -66,11 +66,94 @@ public class BoolEvent : UnityEvent<bool>
         return playerResponses;
     }
     
-    public GameObject[] GetFirstIssues()
+    public GameObject[] GetIssues()
     {
-        return firstIssues;
+        return issues;
     }
     //End Getter and setter
+    
+    /**
+     * Returns a Dictionary of text for key and isBoss for value
+     */
+    public Dictionary<string, bool> GetAllTexts()
+    {
+        var outTexts = new Dictionary<string, bool>();
+        var issueContainer = GameObject.FindGameObjectWithTag("IssueContainer").GetComponent<IssueContainerBehavior>();
+        //Intro
+        if (issueContainer)
+        {
+            foreach (var text in issueContainer.GetTexts())
+            {
+                outTexts.TryAdd(text, true);
+            }
+        }
+        //Issues
+        foreach (var issue in issues)
+        {
+            if (!issue)
+            {
+                continue;
+            }
+
+            IssueBehavior issueBehavior = issue.GetComponent<IssueBehavior>();
+            if (!issueBehavior)
+            {
+                continue;
+            }
+            foreach (var text in issueBehavior.GetissueTexts())
+            {
+                outTexts.TryAdd(text, true);
+            }
+            //Choices
+            foreach (var choice in issueBehavior.GetChoices())
+            {
+                if (!choice)
+                {
+                    continue;
+                }
+
+                ChoiceBehavior choiceBehavior = choice.GetComponent<ChoiceBehavior>();
+                if (!choiceBehavior)
+                {
+                    continue;
+                }
+
+                List<string> choiceTexts = new List<string>(); 
+                GetChildrenChoiceTexts(choice, choiceTexts);
+                foreach (var choiceText in choiceTexts)
+                {
+                    outTexts.TryAdd(choiceText, false);
+                }
+            }
+        }
+
+        return outTexts;
+    }
+
+    //Get all the texts of children issues
+    private void GetChildrenChoiceTexts(GameObject choice, List<string> texts)
+    {
+        if (!choice)
+        {
+            return;
+        }
+        ChoiceBehavior choiceBehavior = choice.GetComponent<ChoiceBehavior>();
+        if (!choiceBehavior)
+        {
+            return;   
+        }
+
+        texts.Add(choiceBehavior.GetChoiceText());
+        if (choiceBehavior.GetChoices().Length < 1)
+        {
+            return;
+        }
+
+        foreach (var childChoice in choiceBehavior.GetChoices())
+        {
+            GetChildrenChoiceTexts(childChoice, texts);
+        }
+    }
     
     private void Awake()
     {
@@ -135,7 +218,7 @@ public class BoolEvent : UnityEvent<bool>
     
     public void OnStartNewSequence()
     {
-        currentIssue = firstIssues[gameManager.GetSequenceNumber()];
+        currentIssue = issues[gameManager.GetSequenceNumber()];
         _isTimerActivated = true;
         _isIssueStep = true;
         currentDefaultChoice = currentIssue.GetComponent<IssueBehavior>().GetDefaultChoice();

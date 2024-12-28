@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class SoundManager : MonoBehaviour
@@ -8,6 +11,8 @@ public class SoundManager : MonoBehaviour
     [FormerlySerializedAs("soundSource")] [SerializeField] private AudioSource dialogueSource;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private float fadeDuration = .2f;
+
+    public UnityEvent onDialoguesLoaded;
 
     public static SoundManager Instance { get; private set; }
 

@@ -1,14 +1,22 @@
 using UnityEngine;
 using Jint;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine.Serialization;
+using System.Threading.Tasks;
+using System.Collections;
+using System.Linq;
 
 public class AnimaleseManager : MonoBehaviour
 {
     [FormerlySerializedAs("animalseWavFile")] [SerializeField]
     private AudioClip animaleseWavFile;
     private Engine jsEngine;
+    
+    private Dictionary<string, AudioClip> audioCache = new Dictionary<string, AudioClip>();
+    private const int MAX_CACHE_SIZE = 100; // cache limit
+    private Queue<string> cacheOrder = new Queue<string>();
     
     public static AnimaleseManager Instance { get; private set; }
 
@@ -72,6 +80,81 @@ public class AnimaleseManager : MonoBehaviour
 
     public AudioClip TextToSpeech(string text, bool shorten = true, float pitch = 1.0f)
     {
+        string cacheKey = $"{text}_{pitch}";
+        if (audioCache.TryGetValue(cacheKey, out AudioClip cachedClip))
+        {
+            return cachedClip;
+        }
+        
+        string escapedText = text.Replace("'", "\\'")
+            .Replace("\"", "\\\"")
+            .Replace("\n", "\\n")
+            .Replace("\r", "\\r");
+
+        AudioClip clip = GenerateAudioClip(escapedText, shorten, pitch);
+        if (!clip)
+        {
+            return null;
+        }
+        
+        AddToCache(cacheKey, clip);
+        
+        return clip;
+    }
+    
+    //Returns an Audioclip and cache it.
+    public async Task<AudioClip> TextToSpeechAsync(string text, bool shorten = true, float pitch = 1.0f)
+    {
+        string cacheKey = $"{text}_{pitch}";
+
+        if (audioCache.TryGetValue(cacheKey, out AudioClip cachedClip))
+        {
+            return cachedClip;
+        }
+        
+        string escapedText = text.Replace("'", "\\'")
+            .Replace("\"", "\\\"")
+            .Replace("\n", "\\n")
+            .Replace("\r", "\\r");
+
+        // Generate audio on seperated thread
+        var audioData = await Task.Run(() => 
+        {
+            var result = jsEngine.Evaluate($"animalese.Animalese('{escapedText}', {shorten.ToString().ToLower()}, {pitch})");
+            return result.ToObject() as object[];
+        });
+
+        // Get back on main thread to create AudioClip
+        AudioClip clip = null;
+        await Task.Run(() =>
+        {
+            var samples = new float[audioData.Length];
+            for (int i = 0; i < audioData.Length; i++)
+            {
+                float sample = Convert.ToSingle(audioData[i]);
+                samples[i] = (sample - 127f) / 128f;
+            }
+
+            // Create audio clip on main thread
+            MainThreadDispatcher.Instance.Enqueue(() =>
+            {
+                if (samples.Length < 1)
+                {
+                    return;
+                }
+                clip = AudioClip.Create("AnimalSpeak", samples.Length, 1, 44100, false);
+                clip.SetData(samples, 0);
+                
+                // Ajouter au cache
+                AddToCache(cacheKey, clip);
+            });
+        });
+
+        return clip;
+    }
+
+    public AudioClip GenerateAudioClip(string text, bool shorten, float pitch)
+    {
         if (text.Length > 50)
         {
             text = text.Remove(50);
@@ -100,5 +183,17 @@ public class AnimaleseManager : MonoBehaviour
             Debug.LogError($"Error when generating voice : {e.Message}");
             return null;
         }
+    }
+
+    private void AddToCache(string key, AudioClip clip)
+    {
+        if (audioCache.Count >= MAX_CACHE_SIZE)
+        {
+            string oldestKey = cacheOrder.Dequeue();
+            audioCache.Remove(oldestKey);
+        }
+
+        audioCache[key] = clip;
+        cacheOrder.Enqueue(key);
     }
 }

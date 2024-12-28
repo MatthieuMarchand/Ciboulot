@@ -25,8 +25,9 @@ public class GameManager : MonoBehaviour
     public BoolEvent checkGameState;
     public UnityEvent endScreen;
     public UnityEvent lifeRemoved;
-
-
+    
+    public static GameManager Instance { get; private set; }
+    
     [FormerlySerializedAs("startGame")] public UnityEvent startIntro;
     
 //Getter and setter
@@ -40,9 +41,18 @@ public class GameManager : MonoBehaviour
     {
         return lives;
     }
-
+    
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this; 
+        DontDestroyOnLoad(gameObject);
+        
         if (sequenceManager == null)
         {
             sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
@@ -53,20 +63,25 @@ public class GameManager : MonoBehaviour
         }
 
         checkGameState = new BoolEvent();
-
         
         loseGame.AddListener(OnLoseGame);
         winGame.AddListener(WinGameHandler);
         startNewSequence.AddListener(StartNewSequenceHandler);
         startIntro.AddListener(StartIntroHandler);
         endScreen.AddListener(SwitchToEndScreen);
-
     }
 
-    private void Start()
+    private async void Start()
     {
         animationManager.introIsOver.AddListener(StartGameHandler);
         checkGameState.AddListener(OnSequenceEnd);
+        if (!LoadingBehaviour.Instance || !SequenceManager.Instance)
+        {
+            return;
+        }
+
+        var dialogues = SequenceManager.Instance.GetAllTexts();
+        await LoadingBehaviour.Instance.LoadDialogues(dialogues);
         startIntro.Invoke();
     }
 
@@ -90,7 +105,7 @@ public class GameManager : MonoBehaviour
         else
         {
             sequenceNumber ++;
-            if (sequenceNumber == sequenceManager.GetFirstIssues().Length)
+            if (sequenceNumber == sequenceManager.GetIssues().Length)
                 winGame.Invoke();
             else
                 startNewSequence.Invoke();

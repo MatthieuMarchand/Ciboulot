@@ -21,7 +21,11 @@ public class IssueContainerBehavior : MonoBehaviour
             question = transform.Find("background_question").gameObject;
             textBox = question.transform.Find("text_question").gameObject;
         }
-        SetCurrentText();
+
+        if (GameManager.Instance)
+        {
+            GameManager.Instance.startIntro.AddListener(SetCurrentText);            
+        }
     }
 
     public void SetTexts(string[] newTexts)
@@ -29,6 +33,11 @@ public class IssueContainerBehavior : MonoBehaviour
         texts = newTexts;
         _currentIndex = 0;
         SetCurrentText();
+    }
+
+    public string[] GetTexts()
+    {
+        return texts;
     }
 
     private void SetCurrentText()
