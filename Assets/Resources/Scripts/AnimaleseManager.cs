@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Linq;
+using UnityEditor;
 
 public class AnimaleseManager : MonoBehaviour
 {
@@ -36,8 +37,8 @@ public class AnimaleseManager : MonoBehaviour
     {
         jsEngine = new Engine();
 
-        string animaleseJsPath = Path.Combine(Application.dataPath, "Resources/Scripts/animalese.js");
-        string animaleseJsCode = File.ReadAllText(animaleseJsPath);
+        TextAsset animaleseJs = Resources.Load<TextAsset>("Scripts/animalese");
+        string animaleseJsCode = animaleseJs.text;
         
         jsEngine.SetValue("log", new Action<object>(Debug.Log));
         

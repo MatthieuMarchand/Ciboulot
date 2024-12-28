@@ -3,11 +3,12 @@ using UnityEngine.UI;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class LoadingBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject loadingScreen;
-    [SerializeField] private Slider progressBar;
+    [FormerlySerializedAs("progressBar")] [SerializeField] private Image progressImage;
     [SerializeField] private TextMeshProUGUI progressText;
     
     public static LoadingBehaviour Instance { get; private set; }
@@ -57,8 +58,8 @@ public class LoadingBehaviour : MonoBehaviour
     {
         MainThreadDispatcher.Instance.Enqueue(() =>
         {
-            if (progressBar != null)
-                progressBar.value = progress;
+            if (progressImage != null)
+                progressImage.transform.Rotate(0, 0, progressImage.transform.rotation.z - 20);
             
             if (progressText != null)
                 progressText.text = message;
