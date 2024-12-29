@@ -433,6 +433,7 @@ RectTransform:
   - {fileID: 1642274587}
   - {fileID: 1550773894}
   - {fileID: 1248564216}
+  - {fileID: 554463718}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -628,6 +629,117 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &554463717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 554463718}
+  - component: {fileID: 554463722}
+  - component: {fileID: 554463721}
+  - component: {fileID: 554463720}
+  - component: {fileID: 554463719}
+  m_Layer: 5
+  m_Name: AnimationBlackScreen
+  m_TagString: AnimationBlackScreen
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &554463718
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554463717}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 136704790}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &554463719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554463717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303bb900c08f6ba4290a9541ad10922e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 554463720}
+  onAnimationOver:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!95 &554463720
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554463717}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 84492ae1e71977747be3225493e624b4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &554463721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554463717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &554463722
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554463717}
+  m_CullTransparentMesh: 1
 --- !u!1 &764755340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1142,6 @@ GameObject:
   - component: {fileID: 1248564220}
   - component: {fileID: 1248564219}
   - component: {fileID: 1248564218}
-  - component: {fileID: 1248564217}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -1058,18 +1169,6 @@ RectTransform:
   m_AnchoredPosition: {x: -290, y: 66.45001}
   m_SizeDelta: {x: 110.2562, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1248564217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248564215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff7f25d1e49be246a8a5246407e115a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1248564218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,7 +1275,6 @@ GameObject:
   - component: {fileID: 1550773898}
   - component: {fileID: 1550773897}
   - component: {fileID: 1550773896}
-  - component: {fileID: 1550773895}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -1204,18 +1302,6 @@ RectTransform:
   m_AnchoredPosition: {x: -290, y: 100}
   m_SizeDelta: {x: 110.2562, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1550773895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550773893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff7f25d1e49be246a8a5246407e115a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1550773896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1397,7 +1483,6 @@ GameObject:
   - component: {fileID: 1642274590}
   - component: {fileID: 1642274589}
   - component: {fileID: 1642274588}
-  - component: {fileID: 1642274591}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1519,18 +1604,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642274586}
   m_CullTransparentMesh: 1
---- !u!114 &1642274591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1642274586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff7f25d1e49be246a8a5246407e115a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1719854629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1828,6 +1901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff7f25d1e49be246a8a5246407e115a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackScreen: {fileID: 554463717}
 --- !u!4 &2052428926
 Transform:
   m_ObjectHideFlags: 0
