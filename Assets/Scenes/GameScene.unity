@@ -2393,6 +2393,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 873134416}
+  onAnimationOver:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &875432426
 GameObject:
   m_ObjectHideFlags: 0
@@ -3952,6 +3955,30 @@ PrefabInstance:
       propertyPath: issueContainer
       value: 
       objectReference: {fileID: 251204653}
+    - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
+      propertyPath: issues.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
+      propertyPath: issues.Array.data[0]
+      value: 
+      objectReference: {fileID: 4853061771890308992, guid: d5f28b2c3635f48898536df4ac2207cc, type: 3}
+    - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
+      propertyPath: issues.Array.data[1]
+      value: 
+      objectReference: {fileID: 4853061771890308992, guid: 7e2d843ccef5b4ad2a2100a11846d6b1, type: 3}
+    - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
+      propertyPath: issues.Array.data[2]
+      value: 
+      objectReference: {fileID: 4853061771890308992, guid: d82d26c28aed148cd8433b2d2ddafb87, type: 3}
+    - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
+      propertyPath: issues.Array.data[3]
+      value: 
+      objectReference: {fileID: 4853061771890308992, guid: e05754e90266c4979a0b732035728585, type: 3}
+    - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
+      propertyPath: issues.Array.data[4]
+      value: 
+      objectReference: {fileID: 4853061771890308992, guid: d10c65c817fdab24982302ed3f410b68, type: 3}
     - target: {fileID: 8736671706226491282, guid: 050535a964d51234eaa895b03ff4b1a9, type: 3}
       propertyPath: sequences.Array.size
       value: 5

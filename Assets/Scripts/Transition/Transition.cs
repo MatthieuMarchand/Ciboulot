@@ -36,7 +36,6 @@ namespace Transition
         public void OnFadeOutOver()
         {
             onAnimationOver.Invoke();
-            // gameObject.SetActive(false);
         }
 
         private void OnDestroy()

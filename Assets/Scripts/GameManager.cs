@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -75,12 +76,24 @@ public class GameManager : MonoBehaviour
     {
         animationManager.introIsOver.AddListener(StartGameHandler);
         checkGameState.AddListener(OnSequenceEnd);
-        if (!LoadingBehaviour.Instance || !SequenceManager.Instance)
+        if (!LoadingBehaviour.Instance || !SequenceManager.Instance || !AnimaleseManager.Instance)
         {
             return;
         }
 
         var dialogues = SequenceManager.Instance.GetAllTexts();
+        if (!AnimaleseManager.Instance.isIntitialized)
+        {
+            //wait for AnimaleseManager to initialize
+            var tcs = new TaskCompletionSource<bool>();
+        
+            AnimaleseManager.Instance.onInitialized.AddListener(() =>
+            {
+                tcs.SetResult(true);
+            });
+
+            await tcs.Task;
+        }
         await LoadingBehaviour.Instance.LoadDialogues(dialogues);
         startIntro.Invoke();
     }

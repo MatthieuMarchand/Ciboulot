@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Linq;
 using UnityEditor;
+using UnityEngine.Events;
 
 public class AnimaleseManager : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class AnimaleseManager : MonoBehaviour
     private Dictionary<string, AudioClip> audioCache = new Dictionary<string, AudioClip>();
     private const int MAX_CACHE_SIZE = 100; // cache limit
     private Queue<string> cacheOrder = new Queue<string>();
+    public bool isIntitialized { get; private set; }
+
+    public UnityEvent onInitialized;
     
     public static AnimaleseManager Instance { get; private set; }
 
@@ -77,6 +81,9 @@ public class AnimaleseManager : MonoBehaviour
             jsEngine.Execute($"letterLibraryData[{i}] = {letterLibrary[i]};");
         }
         jsEngine.Execute("animalese.letter_library = letterLibraryData;");
+        
+        isIntitialized = true;
+        onInitialized.Invoke();
     }
 
     public AudioClip TextToSpeech(string text, bool shorten = true, float pitch = 1.0f)

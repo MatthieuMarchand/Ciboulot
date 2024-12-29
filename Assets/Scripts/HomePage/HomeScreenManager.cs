@@ -8,6 +8,8 @@ namespace HomePage
     public class HomeScreenManager : MonoBehaviour
     {
         [SerializeField] private GameObject blackScreen;
+        [SerializeField] private GameObject buttons;
+        [SerializeField] private GameObject credits;
 
         private void Start()
         {
@@ -41,7 +43,17 @@ namespace HomePage
 
         private void OnDestroy()
         {
+            if (!blackScreen)
+            {
+                return;
+            }
             blackScreen.GetComponent<Transition.Transition>().onAnimationOver.RemoveAllListeners();
+        }
+
+        public void ChangeCreditsVisibility(bool isVisible)
+        {
+            buttons.SetActive(!isVisible);
+            credits.SetActive(isVisible);
         }
     }
 }
