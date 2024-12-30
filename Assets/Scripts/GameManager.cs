@@ -26,10 +26,12 @@ public class GameManager : MonoBehaviour
     public BoolEvent checkGameState;
     public UnityEvent endScreen;
     public UnityEvent lifeRemoved;
+    [FormerlySerializedAs("startGame")] public UnityEvent startIntro;
+
+    private bool isPaused;
+    [SerializeField] private GameObject pauseMenu;
     
     public static GameManager Instance { get; private set; }
-    
-    [FormerlySerializedAs("startGame")] public UnityEvent startIntro;
     
 //Getter and setter
 
@@ -96,6 +98,38 @@ public class GameManager : MonoBehaviour
         }
         await LoadingBehaviour.Instance.LoadDialogues(dialogues);
         startIntro.Invoke();
+    }
+
+    private void Update()
+    {
+        if (!Input.GetKeyDown(KeyCode.Escape) || SceneManager.GetActiveScene() != SceneManager.GetSceneByName("GameScene")) return;
+        if (isPaused)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
+        }
+    }
+
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
+    }
+
+    private void Pause()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
 
