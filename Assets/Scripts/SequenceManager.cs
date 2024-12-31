@@ -176,7 +176,6 @@ public class BoolEvent : UnityEvent<bool>
         startChoiceStep.AddListener(StartChoice);
         BoolChoiceStep = new BoolEvent();
         BoolSequenceStep = new BoolEvent();
-
     }
 
     private void OnDestroy()

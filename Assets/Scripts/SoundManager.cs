@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class SoundManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class SoundManager : MonoBehaviour
     [FormerlySerializedAs("soundSource")] [SerializeField] private AudioSource dialogueSource;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private float fadeDuration = .2f;
+
+    [SerializeField] private AudioClip[] musics;
 
     public UnityEvent onDialoguesLoaded;
 
@@ -26,6 +29,26 @@ public class SoundManager : MonoBehaviour
 
         Instance = this; 
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        musicSource.Stop();
+        if (scene.name == "HomeScreen")
+        {
+            musicSource.clip = musics[0];
+        }
+        else if (scene.name == "GameScene")
+        {
+            musicSource.clip = musics[1];
+        }
+        musicSource.Play();
+
     }
 
     //Play a animalese dialogue

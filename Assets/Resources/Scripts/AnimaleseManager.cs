@@ -9,6 +9,7 @@ using System.Collections;
 using System.Linq;
 using UnityEditor;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class AnimaleseManager : MonoBehaviour
 {
@@ -34,19 +35,31 @@ public class AnimaleseManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
     }
 
     void Start()
     {
-        jsEngine = new Engine();
+        try
+        {
+            jsEngine = new Engine();
 
-        TextAsset animaleseJs = Resources.Load<TextAsset>("Scripts/animalese");
-        string animaleseJsCode = animaleseJs.text;
+            TextAsset animaleseJs = Resources.Load<TextAsset>("Scripts/animalese");
+            if (animaleseJs == null)
+            {
+                Debug.LogError("Cannot load animalese.txt!");
+                return;
+            }
         
-        jsEngine.SetValue("log", new Action<object>(Debug.Log));
+            string animaleseJsCode = animaleseJs.text;
+            jsEngine.SetValue("log", new Action<object>(Debug.Log));
         
-        InitializeAnimalese(animaleseJsCode);
+            InitializeAnimalese(animaleseJsCode);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Error initializing Animalese: {e}");
+        }
     }
 
     private void InitializeAnimalese(string jsCode)
@@ -128,6 +141,11 @@ public class AnimaleseManager : MonoBehaviour
         // Generate audio on seperated thread
         var audioData = await Task.Run(() => 
         {
+            if (jsEngine == null)
+            {
+                Debug.LogError("JsEngine is null");
+                return null;
+            }
             var result = jsEngine.Evaluate($"animalese.Animalese('{escapedText}', {shorten.ToString().ToLower()}, {pitch})");
             return result.ToObject() as object[];
         });
@@ -203,5 +221,12 @@ public class AnimaleseManager : MonoBehaviour
 
         audioCache[key] = clip;
         cacheOrder.Enqueue(key);
+    }
+
+    private void OnDestroy()
+    {
+        if (jsEngine == null) return;
+        jsEngine.Dispose();
+        jsEngine = null;
     }
 }

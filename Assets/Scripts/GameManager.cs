@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this; 
-        DontDestroyOnLoad(gameObject);
         
         if (sequenceManager == null)
         {
@@ -132,6 +131,10 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void LoadMenuScene()
+    {
+        SceneManager.LoadScene("HomeScreen");
+    }
 
     private void RemoveLife()
     {

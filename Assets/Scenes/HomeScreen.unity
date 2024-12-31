@@ -545,6 +545,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animaleseWavFile: {fileID: 8300000, guid: d2432abc427dd4049b655cb91623a7b3, type: 3}
+  onInitialized:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &155400707
 Transform:
   m_ObjectHideFlags: 0

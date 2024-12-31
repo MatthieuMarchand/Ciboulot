@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -13,6 +14,7 @@ namespace HomePage
 
         private void Start()
         {
+            Time.timeScale = 1f;
             if (!blackScreen)
             {
                 Debug.LogError("blackscreen is not assigned");

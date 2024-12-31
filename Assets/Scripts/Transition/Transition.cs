@@ -25,11 +25,21 @@ namespace Transition
 
         private void FadeIn()
         {
+            if (!gameObject.activeSelf)
+            {
+                gameObject.SetActive(true);
+            }
+            animator.ResetTrigger("fade_in");
             animator.SetTrigger("fade_in");
         }
         
         public void FadeOut()
         {
+            if (!gameObject.activeSelf)
+            {
+                gameObject.SetActive(true);
+            }
+            animator.ResetTrigger("fade_out");
             animator.SetTrigger("fade_out");
         }
 
@@ -40,6 +50,8 @@ namespace Transition
 
         private void OnDestroy()
         {
+            animator.ResetTrigger("fade_out");
+            animator.ResetTrigger("fade_in");
             if (!GameManager.Instance)
             {
                 return;

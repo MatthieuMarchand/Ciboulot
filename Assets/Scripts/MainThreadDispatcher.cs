@@ -12,7 +12,6 @@ public class MainThreadDispatcher : MonoBehaviour
     {
         if (Instance != null) return;
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void Update()

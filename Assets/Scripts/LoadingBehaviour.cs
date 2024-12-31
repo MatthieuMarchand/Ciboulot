@@ -10,6 +10,7 @@ public class LoadingBehaviour : MonoBehaviour
     [SerializeField] private GameObject loadingScreen;
     [FormerlySerializedAs("progressBar")] [SerializeField] private Image progressImage;
     [SerializeField] private TextMeshProUGUI progressText;
+    public bool isLoading { get; private set; } = false;
     
     public static LoadingBehaviour Instance { get; private set; }
 
@@ -21,17 +22,22 @@ public class LoadingBehaviour : MonoBehaviour
             return;
         }
 
-        Instance = this; 
-        DontDestroyOnLoad(gameObject);
+        Instance = this;
     }
     
     public async Task LoadDialogues(Dictionary<string, bool> dialogues)
     {
-        loadingScreen.SetActive(true);
+        if (loadingScreen)
+        {
+            loadingScreen.SetActive(true);
+        }
         
         int totalDialogues = dialogues.Count;
         int currentDialogue = 0;
-
+        if (isLoading)
+        {
+            
+        }
         foreach (var dialogue in dialogues)
         {
             var pitch = dialogue.Value ? .5f : 1.3f;
@@ -44,14 +50,16 @@ public class LoadingBehaviour : MonoBehaviour
             currentDialogue++;
         }
 
-        // Mise à jour finale
         UpdateLoadingProgress(1f, "Chargement terminé!");
         
-        // Attendre un peu pour montrer le 100%
         await Task.Delay(500);
-        
-        // Cacher l'écran de chargement
+
+        if (!loadingScreen)
+        {
+            return;
+        }
         loadingScreen.SetActive(false);
+        isLoading = false;
     }
     
     private void UpdateLoadingProgress(float progress, string message)
