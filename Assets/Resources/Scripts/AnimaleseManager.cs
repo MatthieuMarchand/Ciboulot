@@ -1,15 +1,9 @@
 using UnityEngine;
-using Jint;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine.Serialization;
 using System.Threading.Tasks;
-using System.Collections;
-using System.Linq;
-using UnityEditor;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class AnimaleseManager : MonoBehaviour
 {
