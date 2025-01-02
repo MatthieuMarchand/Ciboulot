@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         }
 
         var dialogues = SequenceManager.Instance.GetAllTexts();
-        if (!AnimaleseManager.Instance.isIntitialized)
+        if (!AnimaleseManager.Instance.isInitialized)
         {
             //wait for AnimaleseManager to initialize
             var tcs = new TaskCompletionSource<bool>();

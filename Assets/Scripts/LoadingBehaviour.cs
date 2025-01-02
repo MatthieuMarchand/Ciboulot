@@ -34,10 +34,7 @@ public class LoadingBehaviour : MonoBehaviour
         
         int totalDialogues = dialogues.Count;
         int currentDialogue = 0;
-        if (isLoading)
-        {
-            
-        }
+        
         foreach (var dialogue in dialogues)
         {
             var pitch = dialogue.Value ? .5f : 1.3f;

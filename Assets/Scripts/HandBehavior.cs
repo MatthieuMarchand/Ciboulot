@@ -8,28 +8,26 @@ using Image = UnityEngine.UI.Image;
 public class HandBehavior : MonoBehaviour
 {
     [SerializeField] private Sprite[] hands;
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private GameObject leftHand;
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (gameManager && leftHand && rightHand)
+        if (leftHand && rightHand)
             return;
-        gameManager = FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
         rightHand = transform.Find("MainDroite").gameObject;
         rightHand = transform.Find("MainGauche").gameObject;
     }
 
     private void Start()
     {
-        gameManager.lifeRemoved.AddListener(ChangeHandsTexture);
+        GameManager.Instance.lifeRemoved.AddListener(ChangeHandsTexture);
     }
 
     private void ChangeHandsTexture()
     {
-        int lifeNumber = gameManager.GetLives();
+        int lifeNumber = GameManager.Instance.GetLives();
         switch (lifeNumber)
         {
             case 1:
@@ -47,10 +45,9 @@ public class HandBehavior : MonoBehaviour
                 
         }
     }
-    
-    // Update is called once per frame
-    void Update()
+
+    private void OnDestroy()
     {
-        
+        GameManager.Instance.lifeRemoved.RemoveListener(ChangeHandsTexture);
     }
 }

@@ -52,7 +52,7 @@ public class SoundManager : MonoBehaviour
     }
 
     //Play a animalese dialogue
-    public void PlayAnimaleseDialogueFromText(string text, bool isBoss)
+    public async void PlayAnimaleseDialogueFromText(string text, bool isBoss)
     {
         if (text.Length == 0)
         {
@@ -60,7 +60,7 @@ public class SoundManager : MonoBehaviour
         }
 
         float pitch = isBoss ? .5f : 1.3f;
-        AudioClip clip = AnimaleseManager.Instance.TextToSpeech(text, false, pitch);
+        AudioClip clip = await AnimaleseManager.Instance.TextToSpeechAsync(text, false, pitch);
         if (!clip || !dialogueSource || !musicSource)
         {
             return;
