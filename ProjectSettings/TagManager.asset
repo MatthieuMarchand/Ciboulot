@@ -16,6 +16,7 @@ TagManager:
   - AnimationBlackScreen
   - StartButton
   - Hands
+  - Feedback
   layers:
   - Default
   - TransparentFX

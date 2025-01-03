@@ -12,6 +12,7 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private SequenceManager sequenceManager;
     [FormerlySerializedAs("bossAnimation")] [SerializeField] private Animator bossAnimator;
     [FormerlySerializedAs("ciboulotAnimation")] [SerializeField] private Animator ciboulotAnimator;
+    [SerializeField] private Animator feedbackAnimator;
     [SerializeField] private Animator rightHandAnimator;
     [SerializeField] private Animator leftHandAnimator;
     [SerializeField] private Animator animatorBlackScreen;
@@ -31,11 +32,12 @@ public class AnimationManager : MonoBehaviour
             sequenceManager = FindAnyObjectByType<SequenceManager>().GetComponent<SequenceManager>();
         }
 
-        if (bossAnimator == null || ciboulotAnimator == null || animatorBlackScreen == null || rightHandAnimator == null || leftHandAnimator == null)
+        if (bossAnimator == null || ciboulotAnimator == null || feedbackAnimator == null || animatorBlackScreen == null || rightHandAnimator == null || leftHandAnimator == null)
         {
             bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
             ciboulotAnimator = GameObject.FindWithTag("Ciboulot").GetComponent<Animator>();
             animatorBlackScreen = GameObject.FindWithTag("AnimationBlackScreen").GetComponent<Animator>();
+            feedbackAnimator = GameObject.FindWithTag("Feedback").GetComponent<Animator>();
             rightHandAnimator = GameObject.FindWithTag("Hands").transform.Find("MainDroite").GetComponent<Animator>();
             leftHandAnimator = GameObject.FindWithTag("Hands").transform.Find("MainGauche").GetComponent<Animator>();
         }
@@ -70,11 +72,13 @@ public class AnimationManager : MonoBehaviour
     {
         bossAnimator.SetTrigger("boss_good");
         ciboulotAnimator.SetTrigger("ciboulot_good");
+        feedbackAnimator.SetTrigger("feedback_GoodChoice");
     }
     private void BadAnimation()
     {
         bossAnimator.SetTrigger("boss_bad");
         ciboulotAnimator.SetTrigger("ciboulot_bad");
+        feedbackAnimator.SetTrigger("feedback_BadChoice");
     }
     public void EndChoiceAnimationOver()
     {
