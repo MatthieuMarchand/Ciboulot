@@ -233,17 +233,16 @@ public class BoolEvent : UnityEvent<bool>
     private void SetChoiceToPlayerResponses(bool isDefaultChoice, GameObject choiceSelected = null)
     {
         _isTimerActivated = false;
+        var responses = new List<GameObject>(playerResponses);
         if (isDefaultChoice)
         {
-            List<GameObject> listeResponses = new List<GameObject>(playerResponses);
-            listeResponses.Add(currentDefaultChoice);
-            playerResponses = listeResponses.ToArray();
+            responses.Add(currentDefaultChoice);
+            playerResponses = responses.ToArray();
         }
         else
         {
-            List<GameObject> listeResponses = new List<GameObject>(playerResponses);
-            listeResponses.Add(choiceSelected);
-            playerResponses = listeResponses.ToArray();
+            responses.Add(choiceSelected);
+            playerResponses = responses.ToArray();
         }
         CheckNumberOfResponses();
     }

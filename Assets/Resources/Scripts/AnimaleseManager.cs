@@ -78,21 +78,16 @@ public class AnimaleseManager : MonoBehaviour
 
         // Generate audio on seperated thread
         var samples = await Task.Run(() => GenerateAnimalese(text, shorten, pitch));
-
-        AudioClip clip = null;
-
+        
         // Create audio clip on main thread
-        MainThreadDispatcher.Instance.Enqueue(() =>
+        if (samples.Length < 1)
         {
-            if (samples.Length < 1)
-            {
-                return;
-            }
-            clip = AudioClip.Create("AnimalSpeak", samples.Length, 1, 44100, false);
-            clip.SetData(samples, 0);
-            
-            AddToCache(cacheKey, clip);
-        });
+            return null;
+        }
+        var clip = AudioClip.Create("AnimalSpeak", samples.Length, 1, 44100, false);
+        clip.SetData(samples, 0);
+        
+        AddToCache(cacheKey, clip);
 
         return clip;
     }
