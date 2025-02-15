@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public class BoolEvent : UnityEvent<bool>
     {
     }
+
+    private bool isGameStarted = false;
     
     [SerializeField] private int lives;
     [SerializeField] private int sequenceNumber = 0;
@@ -35,6 +37,10 @@ public class GameManager : MonoBehaviour
     
 //Getter and setter
 
+    public bool GetIsGameStarted()
+    {
+        return isGameStarted;
+    }
     public int GetSequenceNumber()
     {
         return sequenceNumber;
@@ -133,6 +139,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadMenuScene()
     {
+        isGameStarted = false;
         SceneManager.LoadScene("HomeScreen");
     }
 
@@ -156,7 +163,9 @@ public class GameManager : MonoBehaviour
         {
             sequenceNumber ++;
             if (sequenceNumber == sequenceManager.GetIssues().Length)
+            {
                 winGame.Invoke();
+            }
             else
                 startNewSequence.Invoke();
         }
@@ -166,6 +175,7 @@ public class GameManager : MonoBehaviour
     private static void OnLoseGame()
     {
         Debug.Log("Game Over");
+        Instance.isGameStarted = false;
         SceneManager.LoadScene("LoseScreen");
     }
 
@@ -177,17 +187,17 @@ public class GameManager : MonoBehaviour
     private static void StartNewSequenceHandler()
     {
         Debug.Log("Starting new sequence...");
+        
     }
     
     private static void StartIntroHandler()
     {
         Debug.Log("Starting Intro...");
-        
     }
     public void StartGameHandler()
     {
         Debug.Log("Starting Game...");
-        GameObject.FindWithTag("StartButton").SetActive(false);
+        Instance.isGameStarted = true;
         startNewSequence.Invoke();
     }
     

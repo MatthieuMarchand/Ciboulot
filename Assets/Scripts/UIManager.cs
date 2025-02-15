@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     
     [SerializeField] private GameObject choiceProgressionbar;
     [SerializeField] private GameObject gameProgressionBar;
+    [SerializeField] private GameObject skipButton;
 
 
     
@@ -60,7 +61,7 @@ public class UIManager : MonoBehaviour
 
 
         if (issueContainer && timerUI && choiceContainer && choice1Container && choice2Container && choice3Container &&
-            recapChoiceContainer && choiceProgressionbar && gameProgressionBar) return;
+            recapChoiceContainer && choiceProgressionbar && gameProgressionBar && skipButton) return;
         issueContainer = GameObject.FindGameObjectWithTag("IssueContainer");
         choiceContainer = GameObject.FindGameObjectWithTag("ChoiceContainer");
         timerUI = GameObject.FindGameObjectWithTag("Timer").gameObject;
@@ -70,6 +71,7 @@ public class UIManager : MonoBehaviour
         recapChoiceContainer = choiceContainer.transform.Find("AllChoice").gameObject;
         choiceProgressionbar = GameObject.FindWithTag("ChoiceProgressionBar");
         gameProgressionBar = GameObject.FindWithTag("GameProgressionBar");
+        skipButton = GameObject.FindWithTag("StartButton");
     }
 
     private void SetUpIntroUI()
@@ -91,12 +93,14 @@ public class UIManager : MonoBehaviour
                 recapChoiceContainer.SetActive(false);
                 choiceContainer.SetActive(false);
                 timerUI.SetActive(false);
+                skipButton.SetActive(true);
                 break;
             case UIType.SetIssue:
                 gameProgressionBar.SetActive(true);
                 choiceContainer.SetActive(false);
                 issueContainer.SetActive(true);
                 timerUI.SetActive(true);
+                skipButton.SetActive(true);
                 SetIssueText(texts);
                 break;
             case UIType.SetChoice:
@@ -106,6 +110,7 @@ public class UIManager : MonoBehaviour
                 choice1Container.SetActive(true);
                 choice2Container.SetActive(true);
                 choice3Container.SetActive(true);
+                skipButton.SetActive(false);
                 if (texts != null)
                 {
                     SetChoicesText(texts[0], texts[1], texts[2]);
@@ -117,6 +122,7 @@ public class UIManager : MonoBehaviour
                 choice1Container.SetActive(false);
                 choice2Container.SetActive(false);
                 choice3Container.SetActive(false);
+                skipButton.SetActive(false);
                 break;
             case UIType.SetRecapPlayersResponses:
                 timerUI.SetActive(false);
@@ -125,6 +131,7 @@ public class UIManager : MonoBehaviour
                 choice2Container.SetActive(false);
                 choice3Container.SetActive(false);
                 recapChoiceContainer.SetActive(true);
+                skipButton.SetActive(false);
                 if (texts != null)
                 {
                     SetRecapPlayerResponsesText(texts[0], texts[1], texts[2]);
@@ -136,6 +143,7 @@ public class UIManager : MonoBehaviour
             case UIType.SetEndGame:
                 gameProgressionBar.SetActive(false);
                 choiceContainer.SetActive(false);
+                skipButton.SetActive(false);
                 break;
         }
     }

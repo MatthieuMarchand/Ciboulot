@@ -200,7 +200,7 @@ public class BoolEvent : UnityEvent<bool>
                 
     }
     
-    private void OnTimerOver()
+    public void OnTimerOver()
     {
         _isTimerActivated = false;
 
