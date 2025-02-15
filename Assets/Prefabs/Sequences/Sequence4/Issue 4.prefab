@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c82b0319db60744be586ac3b651ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 30
+  timer: 60
   issueTexts:
   - "\xC7a n\u2019a pas \xE9t\xE9 \xE9vident de trouver des acteurs pour ce jeu."
   - "On m\u2019a demand\xE9 de trouver des animaux qui parlent..."
