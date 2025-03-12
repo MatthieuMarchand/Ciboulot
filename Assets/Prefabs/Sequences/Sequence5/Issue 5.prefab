@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c82b0319db60744be586ac3b651ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 60
+  timer: 45
   issueTexts:
   - "Pour un autre casting, on avait deux candidats tr\xE8s prometteurs."
   - "Un loup et un mouton, je les avais re\xE7us au restaurant. Le mouton avait pris

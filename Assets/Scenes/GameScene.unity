@@ -692,10 +692,11 @@ MonoBehaviour:
     grand com\xE9dien de notre jeu !"
   - "Pour prouver tes comp\xE9tences humoristiques hors du commun, tu vas devoir
     me faire rire \xE0 partir d\u2019histoire que je vais te raconter."
-  - "A chaque histoire, tu devras cr\xE9er une blague \xE0 partir de ces \xE9l\xE9ments.
-    Mais attention, \xE9coute bien car..."
-  - "Ma deuxi\xE8me passion dans la vie est la torture, alors m\xE9fie toi des mauvaises
-    r\xE9ponses HAHAHAHAHAHA."
+  - "\xC0 chaque histoire, tu devras cr\xE9er une blague qui fait r\xE9f\xE9rence
+    \xE0 ce que je viens de te raconter. Celle-ce se compose en trois parties."
+  - "Si ta blague fait \xE9cho \xE0 mon histoire, tu as gagn\xE9 ! Sinon..."
+  - "Disons que ma deuxi\xE8me passion dans la vie est la torture, alors m\xE9fie
+    toi des mauvaises r\xE9ponses HAHAHAHAHAHA."
 --- !u!1 &262636188
 GameObject:
   m_ObjectHideFlags: 0
